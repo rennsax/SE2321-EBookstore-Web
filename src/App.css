@@ -1,0 +1,47 @@
+body {
+  --fillColor: #5beeac;
+}
+
+.App {
+  text-align: center;
+  /* width: 1000px; */
+}
+
+.App-header {
+  /* background-color: var(--fillColor); */
+  min-height: 80px;
+  width: 1200px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: #000;
+}
+
+.user-info {
+  width: 320px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-family: Monaco;
+}
+
+.main-part {
+  /* background-color: #EEEEEE; */
+  min-height: 600px;
+  width: 1000px;
+  float: left;
+}
+
+.side-bar {
+  min-height: 600px;
+  width: 200px;
+  float: left;
+}
