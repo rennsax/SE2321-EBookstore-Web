@@ -7,7 +7,6 @@ import Collapse from "@mui/material/Collapse";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FaceRetouchingNaturalIcon from
@@ -15,6 +14,9 @@ import FaceRetouchingNaturalIcon from
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+
+import "../css/SideBar.css"
+import { NavLink } from 'react-router-dom';
 
 export function NestedList() {
   const [open, setOpen] = React.useState(true);
@@ -33,30 +35,36 @@ export function NestedList() {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <ListItemButton>
-          <ListItemIcon>
-            <ImportContactsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Books" />
-        </ListItemButton>
+        <NavLink className='page-book' to='/books'>
+          <ListItemButton>
+            <ListItemIcon>
+              <ImportContactsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Books" />
+          </ListItemButton>
+        </NavLink>
 
-        <ListItemButton>
-          <ListItemIcon>
-            <ShoppingCartIcon  />
-          </ListItemIcon>
-          <ListItemText primary="My Cart" />
-        </ListItemButton>
+        <NavLink className='page-cart' to='/cart'>
+          <ListItemButton>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Cart" />
+          </ListItemButton>
+        </NavLink>
 
-        <ListItemButton>
-          <ListItemIcon>
-            <ListAltIcon/>
-          </ListItemIcon>
-          <ListItemText primary="My Orders" />
-        </ListItemButton>
+        <NavLink className='page-order' to='/orders'>
+          <ListItemButton>
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Orders" />
+          </ListItemButton>
+        </NavLink>
 
         <ListItemButton onClick={handleClick}>
           <ListItemIcon>
-            <PersonIcon/>
+            <PersonIcon />
           </ListItemIcon>
           <ListItemText primary="My Profile" />
           {open ? <ExpandLess /> : <ExpandMore />}
@@ -72,7 +80,7 @@ export function NestedList() {
 
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
-                <FavoriteIcon/>
+                <FavoriteIcon />
               </ListItemIcon>
               <ListItemText primary="My Favorite" />
             </ListItemButton>

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import BookList from './BookList'
 import SearchBar from './SearchBar'
 import BookCarousel from './Carousel'
-import Blank from './util'
+import Blank from '../../components/util'
 
-export default class MainPart extends Component {
+export default class BookPage extends Component {
   render() {
     return (
       <div className='main-part'>

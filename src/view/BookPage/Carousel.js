@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import '../css/Carousel.css'
+import '../../css/Carousel.css'
 
 export default class BookCarousel extends Component {
   createItems = (ctx) => {
@@ -23,7 +23,7 @@ export default class BookCarousel extends Component {
   }
 
   render() {
-    const requireContext = require.context("../assets/carousel", true, /^\.\/.*\.jpg$/);
+    const requireContext = require.context("../../assets/carousel", true, /^\.\/.*\.jpg$/);
     return (
       <Carousel showThumbs={false}>
         {this.createItems(requireContext)}

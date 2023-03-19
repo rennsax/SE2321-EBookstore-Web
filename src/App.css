@@ -2,19 +2,10 @@ body {
   --fillColor: #5beeac;
 }
 
-.App {
+.container {
+  width: 1080px;
+  margin: 0 auto;
   text-align: center;
-  /* width: 1000px; */
-}
-
-.App-header {
-  /* background-color: var(--fillColor); */
-  min-height: 80px;
-  width: 1200px;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  color: #000;
 }
 
 .user-info {
@@ -23,25 +14,74 @@ body {
   justify-content: flex-end;
 }
 
+.header {
+  min-height: 100px;
+  display: block;
+  align-items: center;
+  font-size: 20px;
+  color: #000;
+  line-height: 100px;
+}
+
+.header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.header__logo {
+  float: left;
+  margin-right: 20px;
+}
+
+.header__title {
+  float: left;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header__user {
+  float: right;
+}
+
+.header__user__welcome {
+  display: inline-block;
+}
+
+
 .pic-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-h2 {
-  font-family: Monaco;
-}
 
 .main-part {
   /* background-color: #EEEEEE; */
   min-height: 600px;
-  width: 1000px;
+  width: 880px;
   float: left;
+  overflow-x: scroll;
 }
 
 .side-bar {
   min-height: 600px;
   width: 200px;
   float: left;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#face {
+  height: 60px;
+  margin-left: 20px;
+}
+
+#logo {
+  height: 80px;
 }
