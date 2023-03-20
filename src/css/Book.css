@@ -1,0 +1,27 @@
+.book-card {
+  width: 180px;
+  height: 280px;
+  vertical-align: middle;
+  text-align: center;
+  border: 0.5px solid #b69f9f80;
+}
+.book-card__pic > img {
+  height: 200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.book-card__info {
+  padding: 10px;
+}
+.book-card__info__name,
+.book-card__info__price {
+  font: 400 13px "Source Han Serif SC";
+}
+.book-card__info__name {
+  line-height: 15px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.book-card__info__price {
+  height: 25px;
+}

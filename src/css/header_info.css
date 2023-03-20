@@ -1,29 +1,37 @@
 .header {
-  min-height: 100px;
-  font-size: 20px;
+  height: 100px;
   color: #000;
   line-height: 100px;
+  background-color: skyblue;
+}
+.header__title,
+.header__user {
+  height: 100%;
+  font-size: 0;
+  line-height: 100px;
+}
+.header__title *,
+.header__user * {
+  display: inline-block;
+  vertical-align: middle;
 }
 .header__title {
   float: left;
-  display: table;
-  line-height: 100px;
 }
-.header__title * {
-  float: left;
+.header__title__text {
+  font-size: 20px;
 }
 .header__title__logo {
   height: 80px;
-  margin: 10px 20px 10px 0;
+  margin-right: 20px;
 }
 .header__user {
   float: right;
 }
 .header__user__welcome {
-  float: left;
+  font-size: 20px;
 }
 .header__user__avatar {
-  float: right;
   height: 60px;
-  margin: 20px 0 20px 20px;
+  margin-left: 20px;
 }

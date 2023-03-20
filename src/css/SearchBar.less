@@ -1,0 +1,38 @@
+.search_bar {
+  margin: 15px 0;
+  font-size: 0;
+
+  & * {
+    height: 40px;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+  & *:focus-visible {
+    outline: none;
+  }
+
+  &__selector {
+    width: 20%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+  }
+
+  &__input {
+    width: 60%;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px solid black;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  &__button {
+    width: 10%;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 0;
+    border-radius: 0 5px 5px 0;
+  }
+}

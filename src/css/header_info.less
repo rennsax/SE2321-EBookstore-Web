@@ -1,34 +1,42 @@
 .header {
-  min-height: 100px;
-  font-size: 20px;
+  height: 100px;
   color: #000;
   line-height: 100px;
+  background-color: skyblue;
 
-  &__title {
-    float: left;
-    display: table;
+  &__title,
+  &__user {
+    height: 100%;
+    font-size: 0;
     line-height: 100px;
 
     & * {
-      float: left;
+      display: inline-block;
+      vertical-align: middle;
     }
+  }
+
+  &__title {
+    float: left;
+    &__text {
+      font-size: 20px;
+    }
+
     &__logo {
       height: 80px;
-      margin: 10px 20px 10px 0;
+      margin-right: 20px;
     }
   }
 
   &__user {
     float: right;
-
     &__welcome {
-      float: left;
+      font-size: 20px;
     }
 
     &__avatar {
-      float: right;
       height: 60px;
-      margin: 20px 0 20px 20px
+      margin-left: 20px;
     }
   }
 }

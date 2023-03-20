@@ -18,16 +18,20 @@ export default class BookCarousel extends Component {
     }
     res.map((obj) => {
       return (<div>{obj}</div>);
-    })
+    });
     return res;
   }
 
   render() {
     const requireContext = require.context("../../assets/carousel", true, /^\.\/.*\.jpg$/);
     return (
-      <Carousel showThumbs={false}>
-        {this.createItems(requireContext)}
-      </Carousel>
+      <div className="carousel">
+        <div className="carousel_container">
+          <Carousel showThumbs={false}>
+            {this.createItems(requireContext)}
+          </Carousel>
+        </div>
+      </div>
     );
   }
 };

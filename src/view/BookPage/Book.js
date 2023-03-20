@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
+import "../../css/Book.css"
 
 export default class Book extends Component {
   render() {
     const { bookName, picSrc, price } = this.props;
     return (
-      <div className="book-info">
-        <div className="book-pic">
-          <img width="180" height="200" alt={"图片" + bookName} src={picSrc}></img>
+      <div className="book-card">
+        <div className="book-card__pic">
+          <img alt={"book picture of" + bookName} src={picSrc}></img>
         </div>
-        <div className='book-title'>
-          <p>{bookName}</p>
-        </div>
-        <div className='book-price'>
-          <p>{"￥" + price}</p>
+        <div className="book-card__info">
+          <div className="book-card__info__name">
+            {bookName}
+          </div>
+          <div className="book-card__info__price">
+            {"￥" + price}
+          </div>
         </div>
       </div>
     );
@@ -34,7 +37,7 @@ const picSrcs = [
   "http://img3m6.ddimg.cn/23/27/29177006-1_b_8.jpg",
   "http://img3m0.ddimg.cn/49/21/1207935580-1_b_1.jpg"
 ]
-const prices = [180, 30, 60, 100, 240 ,109, 69, 280]
+const prices = [180, 30, 60, 100, 240, 109, 69, 280]
 
 const bookInfo = { bookNames: bookNames, picSrcs: picSrcs, prices: prices }
 

@@ -1,6 +1,6 @@
-import './App.css';
+import './css/App.css';
 import { BrowserRouter } from 'react-router-dom';
-import { NestedList } from './components/SideBar';
+import { SideBar } from './components/SideBar';
 import HeaderInfo from './components/HeaderInfo';
 import CartPage from './view/CartPage';
 import BookPage from './view/BookPage';
@@ -11,9 +11,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="container">
+        <div className="container clearfix">
           <HeaderInfo />
-          <NestedList />
+          <SideBar />
           <Route path="/books" component={BookPage} />
           <Route path="/cart" component={CartPage} />
           <Route path="/orders" component={OrderPage} />

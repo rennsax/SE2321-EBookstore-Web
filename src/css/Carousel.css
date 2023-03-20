@@ -1,12 +1,7 @@
 .carousel-pic {
   height: 300px;
 }
-
-.legend {
-  font-family: 'Source Han Serif SC';
-}
-
-.carousel-root {
-  margin-left: 40px;
-  margin-right: 40px;
+.carousel_container {
+  width: 90%;
+  margin: 20px auto 30px;
 }

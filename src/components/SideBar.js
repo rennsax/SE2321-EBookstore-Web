@@ -18,7 +18,7 @@ import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import "../css/SideBar.css"
 import { NavLink } from 'react-router-dom';
 
-export function NestedList() {
+export function SideBar() {
   const [open, setOpen] = React.useState(true);
 
   const handleClick = () => {
@@ -26,7 +26,7 @@ export function NestedList() {
   };
 
   return (
-    <div className='side-bar'>
+    <div className='sidebar'>
       <List
         sx={{
           width: "100%", maxWidth: 360,

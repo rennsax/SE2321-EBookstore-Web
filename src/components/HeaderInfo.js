@@ -7,7 +7,7 @@ export default class HeaderInfo extends Component {
   render() {
     return (
       <div className="header clearfix" >
-        <div className="header__title clearfix">
+        <div className="header__title">
           <img className="header__title__logo" src={logo} alt='bookstore-logo' />
           <h1 className='header__title__text'>Bookstore</h1>
         </div>
