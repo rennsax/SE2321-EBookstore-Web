@@ -19,7 +19,7 @@ export default class BookList extends Component {
   }
 
   render() {
-    const {numList} = this.props;
+    // const {numList} = this.props;
     return (
       <div className='book-list'>
         {this.createList()}
