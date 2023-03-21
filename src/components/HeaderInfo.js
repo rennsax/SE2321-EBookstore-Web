@@ -6,15 +6,16 @@ import avatar from "../assets/user-avatar.png";
 export default class HeaderInfo extends Component {
   render() {
     return (
-      <div className="header clearfix" >
-        <div className="header__title">
-          <img className="header__title__logo" src={logo} alt='bookstore-logo' />
-          <h1 className='header__title__text'>Bookstore</h1>
+      <div className="header-container clearfix" >
+        <div className="header-container__title">
+          <img className="header-container__title__logo" src={logo} alt='bookstore-logo' />
+          <h1 className='header-container__title__text'>Bookstore</h1>
         </div>
 
-        <div className='header__user'>
-          <h2 className='header__user__welcome'>Hi, Cauchy!</h2>
-          <img className='header__user__avatar' src={avatar} alt='user-avatar' />
+        <div className='header-container__user'>
+          <h2 className='header-container__user__welcome'>Hi, Cauchy!</h2>
+          <img className='header-container__user__avatar' src={avatar} alt='user-avatar' />
+          <div className="header-container__user__clicked"></div>
         </div>
       </div>
     )

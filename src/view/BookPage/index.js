@@ -7,7 +7,7 @@ import '../../css/book_page.css'
 export default class BookPage extends Component {
   render() {
     return (
-      <div className='book-page'>
+      <div className='main-right book-page'>
         <SearchBar/>
         <BookCarousel/>
         <BookList numList={[0, 1, 2, 3]}/>

@@ -1,14 +1,15 @@
-.header {
+@title-font: "Brush Script MT";
+
+.header-container {
+  width: 1080px;
   height: 100px;
   color: #000;
   line-height: 100px;
-  background-color: skyblue;
+  margin: 0 auto;
 
   &__title,
   &__user {
-    height: 100%;
     font-size: 0;
-    line-height: 100px;
 
     & * {
       display: inline-block;
@@ -19,12 +20,13 @@
   &__title {
     float: left;
     &__text {
-      font-size: 20px;
+      font-size: 60px;
+      font-family: @title-font;
     }
 
     &__logo {
       height: 80px;
-      margin-right: 20px;
+      margin: 0 20px;
     }
   }
 
@@ -35,8 +37,11 @@
     }
 
     &__avatar {
-      height: 60px;
-      margin-left: 20px;
+      height: 70px;
+      margin: 0 20px;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

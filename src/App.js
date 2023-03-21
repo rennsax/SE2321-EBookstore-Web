@@ -11,12 +11,16 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="container clearfix">
+        <div className="header">
           <HeaderInfo />
-          <SideBar />
-          <Route path="/books" component={BookPage} />
-          <Route path="/cart" component={CartPage} />
-          <Route path="/orders" component={OrderPage} />
+        </div>
+        <div className="main">
+          <div className="main-container clearfix">
+            <SideBar />
+            <Route path="/books" component={BookPage} />
+            <Route path="/cart" component={CartPage} />
+            <Route path="/orders" component={OrderPage} />
+          </div>
         </div>
       </BrowserRouter>
     </div>
