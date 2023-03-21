@@ -62,7 +62,7 @@ export function SideBar() {
           </ListItemButton>
         </NavLink>
 
-        <ListItemButton onClick={handleClick}>
+        {/* <ListItemButton onClick={handleClick}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
@@ -85,7 +85,7 @@ export function SideBar() {
               <ListItemText primary="My Favorite" />
             </ListItemButton>
           </List>
-        </Collapse>
+        </Collapse> */}
 
         <ListItemButton>
           <ListItemIcon>

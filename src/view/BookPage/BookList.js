@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { bookNumber } from './Book'
-import '../../css/BookList.css'
 
 export default class BookList extends Component {
   createList = () => {

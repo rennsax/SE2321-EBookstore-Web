@@ -1,0 +1,103 @@
+.book-list {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 0 auto 30px;
+}
+
+.book-card {
+  width: 180px;
+  padding: 5px;
+  height: 280px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  // FIXED: must specify `bottom` property
+  bottom: 0;
+  transition: 0.15s all ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    bottom: 3px
+  }
+
+  &__pic {
+    &>img {
+      height: 200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+
+  &__info {
+    padding: 10px;
+
+    &__name,
+    &__price {
+      font: 400 13px "Source Han Serif SC"
+    }
+
+    &__name {
+      line-height: 15px;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+
+    &__price {
+      height: 25px;
+    }
+  }
+}
+
+.carousel-pic {
+  height: 300px;
+}
+.carousel_container {
+  width: 90%;
+  margin: 20px auto 30px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search_bar {
+  margin: 15px 0;
+  font-size: 0;
+  text-align: center;
+
+  & * {
+    height: 40px;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+  & *:focus-visible {
+    outline: none;
+  }
+
+  &__selector {
+    width: 20%;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px 0 0 5px;
+  }
+
+  &__input {
+    width: 60%;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px solid black;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  &__button {
+    width: 10%;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 0;
+    border-radius: 0 5px 5px 0;
+  }
+}

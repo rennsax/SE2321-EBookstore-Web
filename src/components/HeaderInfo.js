@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import "../css/header_info.css";
 import logo from "../assets/bookstore-logo.png";
 import avatar from "../assets/user-avatar.png";
+import "../css/HeaderInfo.css";
 
 export default class HeaderInfo extends Component {
   render() {

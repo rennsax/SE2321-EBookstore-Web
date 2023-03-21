@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import "../../css/Book.css"
 
 export default class Book extends Component {
   render() {
