@@ -4,6 +4,7 @@ import CartHeader from './CartHeader'
 import "../../css/CartPage.css"
 import { LeftArrow } from '../../assets/icons'
 import Checkout from './Checkout'
+import { NavLink } from 'react-router-dom';
 
 import book1 from "../../assets/test/book1.jpg"
 import book2 from "../../assets/test/book2.jpg"
@@ -15,12 +16,14 @@ export default class CartPage extends Component {
     return (
       <div className='cart-page flex-space-between'>
         <div className="cart-page__left">
-          <a className="cart-page__left__back">
-            <LeftArrow />
-            <h4>
-              Continue Shopping
-            </h4>
-          </a>
+          <NavLink to="/books">
+            <div className="cart-page__left__back">
+              <LeftArrow />
+              <h4>
+                Continue Shopping
+              </h4>
+            </div>
+          </NavLink>
           <hr />
           <CartHeader number={2} />
           <BookBuy img={book1} title={"Core Java (I)"}
