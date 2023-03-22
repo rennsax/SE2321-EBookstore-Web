@@ -8,12 +8,12 @@ import Checkout from './Checkout'
 import book1 from "../../assets/test/book1.jpg"
 import book2 from "../../assets/test/book2.jpg"
 
-import avatar from "../../assets/user-avatar.png"
+import avatar from "../../assets/test/Linus.png"
 
 export default class CartPage extends Component {
   render() {
     return (
-      <div className='cart-page main-right flex-space-between'>
+      <div className='cart-page flex-space-between'>
         <div className="cart-page__left">
           <a className="cart-page__left__back">
             <LeftArrow />

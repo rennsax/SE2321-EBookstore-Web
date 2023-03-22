@@ -3,23 +3,8 @@
 .header-container {
   width: 1080px;
   height: 100px;
-  color: #000;
-  line-height: 100px;
-  margin: 0 auto;
-
-  &__title,
-  &__user {
-    font-size: 0;
-
-    & * {
-      display: inline-block;
-      vertical-align: middle;
-    }
-  }
 
   &__title {
-    float: left;
-
     &__text {
       font-size: 60px;
       font-family: @title-font;
@@ -32,19 +17,68 @@
   }
 
   &__user {
-    float: right;
+    margin: 0 20px;
 
-    &__welcome {
-      font-size: 20px;
-    }
+    // &__welcome {
+    //   font-size: 20px;
+    // }
 
     &__avatar {
       height: 70px;
-      margin: 0 20px;
+      transition: all .15s ease-in-out;
 
       &:hover {
         cursor: pointer;
+        opacity: 0.75;
+      }
+
+      &:active {
+        visibility: hidden;
       }
     }
+  }
+}
+
+.profile-bar-constructor {
+  position: relative;
+}
+
+.profile-bar {
+  width: 180px;
+  // height: 250px;
+  background-color: white;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 99;
+  display: none;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  &--display {
+    display: block;
+  }
+
+  &__title {
+    padding: 10px 16px;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.4);
+
+    & div {
+      &:first-child {
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+      &:last-child {
+        font-weight: 800;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.css-1hzuiqy-MuiButtonBase-root-MuiListItemButton-root {
+  &:last-child {
+    border: 0;
   }
 }

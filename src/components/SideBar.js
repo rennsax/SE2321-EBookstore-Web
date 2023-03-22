@@ -3,27 +3,27 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
+// import Collapse from "@mui/material/Collapse";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import PersonIcon from "@mui/icons-material/Person";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FaceRetouchingNaturalIcon from
-  "@mui/icons-material/FaceRetouchingNatural";
+// import ExpandLess from "@mui/icons-material/ExpandLess";
+// import ExpandMore from "@mui/icons-material/ExpandMore";
+// import PersonIcon from "@mui/icons-material/Person";
+// import FavoriteIcon from '@mui/icons-material/Favorite';
+// import FaceRetouchingNaturalIcon from
+//   "@mui/icons-material/FaceRetouchingNatural";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import LogoutIcon from "@mui/icons-material/Logout";
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 
-import "../css/SideBar.css"
 import { NavLink } from 'react-router-dom';
+import "../css/SideBar.css"
 
 export function SideBar() {
   const [open, setOpen] = React.useState(true);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  // const handleClick = () => {
+  //   setOpen(!open);
+  // };
 
   return (
     <div className='sidebar'>
@@ -35,7 +35,7 @@ export function SideBar() {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <NavLink className='page-book' to='/books'>
+        <NavLink className='to-page-book' to='/books'>
           <ListItemButton>
             <ListItemIcon>
               <ImportContactsIcon />
@@ -44,7 +44,7 @@ export function SideBar() {
           </ListItemButton>
         </NavLink>
 
-        <NavLink className='page-cart' to='/cart'>
+        <NavLink className='to-page-cart' to='/cart'>
           <ListItemButton>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -53,7 +53,7 @@ export function SideBar() {
           </ListItemButton>
         </NavLink>
 
-        <NavLink className='page-order' to='/orders'>
+        <NavLink className='to-page-order' to='/orders'>
           <ListItemButton>
             <ListItemIcon>
               <ListAltIcon />

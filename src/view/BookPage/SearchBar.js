@@ -20,7 +20,8 @@ export default class SearchBar extends Component {
           />
           <button className="search_bar__button" type="submit">
             Search
-          </button></form>
+          </button>
+        </form>
       </div>
     )
   }

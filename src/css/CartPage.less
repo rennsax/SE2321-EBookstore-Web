@@ -1,10 +1,13 @@
+@transition-check: all .15s ease-in-out;
+
 .cart-page {
   // flex-space-between
   align-items: stretch;
 
   &__left {
-    width: 500px;
-    padding: 10px;
+    width: 460px;
+    padding: 0;
+    margin-right: 20px;
 
     &>hr {
       margin: 12px auto;
@@ -31,7 +34,7 @@
   }
 
   &__right {
-    width: 380px;
+    width: 320px;
   }
 }
 
@@ -192,7 +195,7 @@
     margin-top: 20px;
     color: white;
     font-size: 18px;
-    transition: all .15s ease-in-out;
+    transition: @transition-check;
 
     &:hover {
       cursor: pointer;
@@ -249,12 +252,12 @@
 
         &:has(> input[type="radio"]:checked) {
           height: 40px;
-          transition: all .15s ease-in-out;
+          transition: @transition-check;
 
           & img {
             height: 40px;
             width: 40px;
-            transition: all .15s ease-in-out;
+            transition: @transition-check;
           }
         }
 

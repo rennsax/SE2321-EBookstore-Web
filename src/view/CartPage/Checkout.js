@@ -48,7 +48,7 @@ export default class Checkout extends Component {
       <form className="pay">
         <div className="pay__header flex-space-between">
           <div className='pay__header__title'><h3>Card details</h3></div>
-          <div className="pay__header__avatar">
+          <div className="pay__header__avatar display-circle">
             <img src={avatar} alt="user-avatar" />
           </div>
         </div>
@@ -85,6 +85,7 @@ export default class Checkout extends Component {
               name='pay_date'
             />
           </label>
+          <div style={{"width": "10px"}}></div>
           <label>
             <div>CVV</div>
             <input className='pay__info__input'
