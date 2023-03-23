@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export default class Book extends Component {
   render() {
-    const { bookName, picSrc, price } = this.props;
+    const { bookName, picSrc, price, bookAbb } = this.props;
     return (
-      <div className="book-card">
-        <div className="book-card__pic">
-          <img alt={"book picture of" + bookName} src={picSrc}></img>
-        </div>
-        <div className="book-card__info">
-          <div className="book-card__info__name">
-            {bookName}
+      <Link to={"/books/" + bookAbb}>
+        <div className="book-card">
+          <div className="book-card__pic">
+            <img alt={"book picture of" + bookName} src={picSrc}></img>
           </div>
-          <div className="book-card__info__price">
-            {"￥" + price}
+          <div className="book-card__info">
+            <div className="book-card__info__name">
+              {bookName}
+            </div>
+            <div className="book-card__info__price">
+              {"￥" + price}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
@@ -35,13 +38,17 @@ const picSrcs = [
   "http://img3m1.ddimg.cn/64/32/25071121-1_b_9.jpg",
   "http://img3m6.ddimg.cn/23/27/29177006-1_b_8.jpg",
   "http://img3m0.ddimg.cn/49/21/1207935580-1_b_1.jpg"
-]
-const prices = [180, 30, 60, 100, 240, 109, 69, 280]
+];
+const prices = [180, 30, 60, 100, 240, 109, 69, 280];
 
-const bookInfo = { bookNames: bookNames, picSrcs: picSrcs, prices: prices }
+const bookInfo = { bookNames: bookNames, picSrcs: picSrcs, prices: prices };
+
+const bookAbb = ["linux", "git", "cpl", "java", "csapp", "python", "data", "diff"];
 
 export function bookNumber(i) {
   return (
-    <Book bookName={bookInfo.bookNames[i]} picSrc={bookInfo.picSrcs[i]} price={bookInfo.prices[i]} />
+    <Book bookName={bookInfo.bookNames[i]} picSrc={bookInfo.picSrcs[i]} price={bookInfo.prices[i]}
+      bookAbb={bookAbb[i]}
+    />
   )
 }

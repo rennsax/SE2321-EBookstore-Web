@@ -12,7 +12,7 @@ import { NavLink } from 'react-router-dom';
 import "../css/SideBar.css"
 
 export function SideBar() {
-  const [open, setOpen] = React.useState(true);
+  // const [open, setOpen] = React.useState(true);
 
   // const handleClick = () => {
   //   setOpen(!open);

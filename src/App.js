@@ -7,6 +7,7 @@ import BookPage from './view/BookPage';
 import OrderPage from './view/OrderPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ProfilePage from './view/ProfilePage';
+import BookDetailPage from './view/BookDetailPage';
 
 
 function App() {
@@ -35,7 +36,8 @@ function App() {
             </div>
             <div className="main__right">
               <Switch>
-                <Route path="/books" component={BookPage} />
+                <Route exact path="/books" component={BookPage} />
+                <Route exact path="/books/linux" component={BookDetailPage}></Route>
                 <Route path="/cart" component={CartPage} />
                 <Route path="/orders" component={OrderPage} />
                 <Route path="/profile" component={ProfilePage} />
