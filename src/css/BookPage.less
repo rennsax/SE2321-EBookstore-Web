@@ -5,9 +5,12 @@
 }
 
 .book-card {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
   width: 180px;
   padding: 5px;
-  height: 280px;
+  height: 320px;
   vertical-align: middle;
   text-align: center;
   border: 1px solid #ddd;
@@ -33,6 +36,10 @@
 
   &__info {
     padding: 10px;
+    min-height: 100px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
 
     &__name,
     &__price {
@@ -40,8 +47,8 @@
     }
 
     &__name {
-      line-height: 15px;
-      height: 30px;
+      // line-height: 15px;
+      // height: 30px;
       margin-bottom: 10px;
     }
 

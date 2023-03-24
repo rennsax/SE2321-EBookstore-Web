@@ -36,11 +36,11 @@ function App() {
             </div>
             <div className="main__right">
               <Switch>
-                <Route exact path="/books" component={BookPage} />
-                <Route exact path="/books/linux" component={BookDetailPage}></Route>
+                <Route path="/books" component={BookPage} />
                 <Route path="/cart" component={CartPage} />
                 <Route path="/orders" component={OrderPage} />
                 <Route path="/profile" component={ProfilePage} />
+                <Route path="/:name" component={BookDetailPage}></Route>
                 <Redirect to="/books" />
               </Switch>
             </div>

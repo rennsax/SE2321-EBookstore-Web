@@ -10,8 +10,7 @@ export default class BookPage extends Component {
       <div className='book-page'>
         <SearchBar/>
         <BookCarousel/>
-        <BookList numList={[0, 1, 2, 3]}/>
-        <BookList numList={[4, 5, 6, 7]}/>
+        <BookList perRow={4}/>
       </div>
     )
   }

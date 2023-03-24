@@ -26,7 +26,7 @@ export default class BookCarousel extends Component {
     return (
       <div className="carousel">
         <div className="carousel_container">
-          <Carousel autoPlay={true} interval={4000} showThumbs={false}>
+          <Carousel autoPlay={true} interval={4000} showThumbs={false} infiniteLoop={true} >
             {this.createItems(requireContext)}
           </Carousel>
         </div>
