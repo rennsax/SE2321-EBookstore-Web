@@ -1,13 +1,14 @@
-import './css/App.css';
+import 'css/App.css';
+
 import { BrowserRouter } from 'react-router-dom';
-import { SideBar } from './components/SideBar';
-import HeaderInfo from './components/HeaderInfo';
-import CartPage from './view/CartPage';
-import BookPage from './view/BookPage';
-import OrderPage from './view/OrderPage';
+import { SideBar } from 'components/SideBar';
+import HeaderInfo from 'components/HeaderInfo';
+import CartPage from 'view/CartPage';
+import BookPage from 'view/BookPage';
+import OrderPage from 'view/OrderPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import ProfilePage from './view/ProfilePage';
-import BookDetailPage from './view/BookDetailPage';
+import ProfilePage from 'view/ProfilePage';
+import BookDetailPage from 'view/BookDetailPage';
 
 
 function App() {

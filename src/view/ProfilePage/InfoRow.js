@@ -1,17 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-export default class InfoRow extends Component {
-  render() {
-    const { infoType, info } = this.props;
-    return (
-      <div className="info-row">
-        <p className="info-row__type">
-          {infoType}
-        </p>
-        <p className="info-row__content">
+export default function InfoRow({ infoType, info }) {
+  const inputBox = (
+    <label>
+      {infoType === "Bio" ? (
+      <textarea cols={20}
+        defaultValue={info}
+        className="info-row__content"
+        style={{ resize: "none", height: "100px" }}
+        name={infoType}
+      />
+      ) : (
+      <input
+        type="text"
+        defaultValue={info}
+        className="info-row__content"
+        name={infoType}
+        />
+      )}
+    </label>
+  )
+
+  return (
+    <div className="info-row">
+      <p className="info-row__type">
+        {infoType}
+      </p>
+      {/* <p className="info-row__content">
           {info}
-        </p>
-      </div>
-    )
-  }
+        </p> */}
+      {/* <input type="text" defaultValue={info} className="info-row__content" /> */}
+      {inputBox}
+    </div>
+  )
 }

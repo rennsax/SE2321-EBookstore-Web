@@ -1,23 +1,21 @@
-import React, { Component } from 'react'
-// import Book, { bookNumber } from './Book'
+import React from 'react'
 import Book from './Book'
 import books from "../../assets/books.json"
 
-export default class BookList extends Component {
-  createList = () => {
-    const { numList } = this.props;
-    let res = [];
-    for (let i = 0; i < 4; ++i) {
-      res.push(bookNumber(numList[i]));
-    }
-    res.map((obj) => {
-      return <div>{obj}</div>;
-    })
-    return res;
-  }
+export default function BookList({ perRow }) {
+  // const createList = () => {
+  //   const { numList } = props;
+  //   let res = [];
+  //   for (let i = 0; i < 4; ++i) {
+  //     res.push(bookNumber(numList[i]));
+  //   }
+  //   res.map((obj) => {
+  //     return <div>{obj}</div>;
+  //   })
+  //   return res;
+  // };
 
-  createItem = () => {
-    const { perRow } = this.props;
+  const createItem = () => {
     const { content } = books;
     let res = [];
     let bookNum = content.length;
@@ -32,7 +30,6 @@ export default class BookList extends Component {
         row.push(
           <Book bookName={title} picSrc={url} price={price} bookAbb={abb} key={abb} />
         )
-        // console.log(row);
         ++book_i;
       }
       res.push(
@@ -44,15 +41,9 @@ export default class BookList extends Component {
     return res;
   };
 
-  render() {
     return (
-      <div className="book-column">
-        {/* <div className='book-list'>
-          {this.createList()}
-        </div> */}
-        {this.createItem()}
-      </div>
-
+      <>
+        {createItem()}
+      </>
     )
-  }
 }

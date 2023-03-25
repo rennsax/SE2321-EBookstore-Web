@@ -9,7 +9,7 @@ import books from "../../assets/books.json"
 
 export default function BookDetailPage(props) {
   const { name } = props.match.params;
-  const bookObj =  (() => {
+  const bookObj = (() => {
     let res = {};
     books.content.every((obj) => {
       if (obj.abb === name) {

@@ -6,7 +6,7 @@ import InfoCard from "./InfoCard"
 export default class ProfilePage extends Component {
   render() {
     return (
-      <div className='profile-page flex-space-between'>
+      <div className='profile-page'>
         <div className="profile-page__left">
           <ProfileCard />
         </div>
