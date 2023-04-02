@@ -1,6 +1,6 @@
 import React from 'react'
-import Book from './Book'
-import books from "../../assets/books.json"
+import BookCard from './BookCard'
+import content from "assets/books.json" // TODO books.json
 
 export default function BookList({ perRow }) {
   // const createList = () => {
@@ -16,7 +16,6 @@ export default function BookList({ perRow }) {
   // };
 
   const createItem = () => {
-    const { content } = books;
     let res = [];
     let bookNum = content.length;
     let book_i = 0;
@@ -28,7 +27,7 @@ export default function BookList({ perRow }) {
           break;
         const {title, url, price, abb} = content[book_i];
         row.push(
-          <Book bookName={title} picSrc={url} price={price} bookAbb={abb} key={abb} />
+          <BookCard bookName={title} picSrc={url} price={price} bookAbb={abb} key={abb} />
         )
         ++book_i;
       }

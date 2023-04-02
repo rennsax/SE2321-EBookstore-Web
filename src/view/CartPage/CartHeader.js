@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class CartHeader extends Component {
-  render() {
-    return (
-      <div className='cart-header'>
-        <div className="cart-header__title">
-          <h4>Your shopping cart</h4>
-        </div>
-        <div className="cart-header__info">
-          <span className='cart-header__info__num'>
-            <span style={{"fontWeight": "700"}}>{this.props.number}</span> book(s)
-          </span>
-          <div className='cart-header__info__sort'>
-            <span>Sort by: </span>
-            <select name="sort_type" id="sort_type">
-              <option value="price">price</option>
-              <option value="alphabet">alphabet</option>
-            </select>
-          </div>
+export default function CartHeader({ number }) {
+  return (
+    <div className='cart-header'>
+      <div className="cart-header__title">
+        <h4>Your shopping cart</h4>
+      </div>
+      <div className="cart-header__info">
+        <span className='cart-header__info__num'>
+          <span style={{ "fontWeight": "700" }}>{number}</span> book(s)
+        </span>
+        <div className='cart-header__info__sort'>
+          <span>Sort by: </span>
+          <select name="sort_type" id="sort_type">
+            <option value="price">price</option>
+            <option value="alphabet">alphabet</option>
+          </select>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }

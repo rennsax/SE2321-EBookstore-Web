@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-import HeaderInfo from '../components/HeaderInfo';
-import { NestedList } from '../components/SideBar';
+import React from 'react'
+import HeaderInfo from 'components/HeaderInfo';
+import { NestedList } from 'components/SideBar';
 
-export default class MainPage extends Component {
-  render() {
-    return (
+export default function MainPage() {
+  return (
     <div className="main-page">
-      <HeaderInfo/>
-      <NestedList/>
+      <HeaderInfo />
+      <NestedList />
     </div>
-    )
-  }
+  )
 }

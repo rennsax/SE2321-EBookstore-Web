@@ -1,6 +1,6 @@
 import React from 'react'
-import avatar from "../../assets/test/Linus.png"
-import { EditPencil } from '../../assets/icons'
+import avatar from "assets/test/Linus.png"
+import { EditPencil } from 'assets/icons'
 
 export default function ProfileCard() {
   return (

@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 
-export default class Book extends Component {
-  render() {
-    const { bookName, picSrc, price, bookAbb } = this.props;
+export default function BookCard({ bookName, picSrc, price, bookAbb }) {
     return (
       <Link to={`${bookAbb}`}>
         <div className="book-card">
@@ -21,7 +19,6 @@ export default class Book extends Component {
         </div>
       </Link>
     );
-  }
 }
 
 // const bookNames = [

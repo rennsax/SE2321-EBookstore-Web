@@ -4,18 +4,18 @@ export default function InfoRow({ infoType, info }) {
   const inputBox = (
     <label>
       {infoType === "Bio" ? (
-      <textarea cols={20}
-        defaultValue={info}
-        className="info-row__content"
-        style={{ resize: "none", height: "100px" }}
-        name={infoType}
-      />
+        <textarea cols={20}
+          defaultValue={info}
+          className="info-row__content"
+          style={{ resize: "none", height: "100px" }}
+          name={infoType}
+        />
       ) : (
-      <input
-        type="text"
-        defaultValue={info}
-        className="info-row__content"
-        name={infoType}
+        <input
+          type="text"
+          defaultValue={info}
+          className="info-row__content"
+          name={infoType}
         />
       )}
     </label>

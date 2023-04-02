@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlagFill, Cart4 } from '../../assets/icons';
+import { FlagFill, Cart4 } from 'assets/icons';
 
 export default function BookInfo({ title, date, authors, price, isbn, intro }) {
   return (

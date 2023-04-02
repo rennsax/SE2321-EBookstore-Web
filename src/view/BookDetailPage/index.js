@@ -1,17 +1,18 @@
-import '../../css/BookDetailPage.css'
+// TODO consider not putting the book detail page in a separate app
+import 'css/BookDetailPage.css'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { LeftArrow } from '../../assets/icons'
+import { LeftArrow } from 'assets/icons'
 
 import BookInfo from './BookInfo'
 
-import books from "../../assets/books.json"
+import content from "assets/books.json" // TODO books.json
 
 export default function BookDetailPage(props) {
   const { name } = props.match.params;
-  const bookObj = (() => {
+  const bookObj = (function () {
     let res = {};
-    books.content.every((obj) => {
+    content.every((obj) => {
       if (obj.abb === name) {
         res = obj;
         return false;
