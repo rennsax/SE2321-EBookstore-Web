@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import ProfileBar from './ProfileBar';
 import logo from "assets/bookstore-logo.png";
@@ -19,9 +19,9 @@ export default function HeaderInfo() {
   return (
     <div className="header-container flex-space-between" >
       <div className="header-container__title flex-space-between">
-        <NavLink to="/books">
+        <Link to="/m/books">
           <img className="header-container__title__logo" src={logo} alt='bookstore-logo' />
-        </NavLink>
+        </Link>
         <h1 className='header-container__title__text'>Bookstore</h1>
       </div>
 

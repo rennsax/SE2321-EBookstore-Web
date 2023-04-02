@@ -26,7 +26,7 @@ export default function BookDetailPage(props) {
   return (
     <div className='bdp'>
       <div className="bdp-top">
-        <Link to="/books">
+        <Link to="/m/books">
           <div className="cart-page__left__back">
             <LeftArrow />
             <h4>

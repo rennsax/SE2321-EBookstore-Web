@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function BookCard({ bookName, picSrc, price, bookAbb }) {
     return (
-      <Link to={`${bookAbb}`}>
+      <Link to={`/m/${bookAbb}`}>
         <div className="book-card">
           <div className="book-card__pic">
             <img alt={"book picture of" + bookName} src={picSrc}></img>

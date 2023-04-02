@@ -15,7 +15,7 @@ export default function CartPage() {
   return (
     <div className='cart-page flex-space-between'>
       <div className="cart-page__left">
-        <NavLink to="/books">
+        <NavLink to="/m/books">
           <div className="cart-page__left__back">
             <LeftArrow />
             <h4>

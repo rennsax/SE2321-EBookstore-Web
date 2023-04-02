@@ -35,7 +35,7 @@ export default function ProfileBar() {
           <div className='profile-bar__title__name'>Linus Torvalds</div>
         </div>
         <Box id="profile-bar__selectors" sx={{ width: "100%" }} onClick={hideProfile} >
-          <NavLink className='to-page-profile' to='/profile'>
+          <NavLink className='to-page-profile' to='/m/profile'>
             <SelectorButton text='Edit Profile'>
               <FaceRetouchingNaturalIcon />
             </SelectorButton>

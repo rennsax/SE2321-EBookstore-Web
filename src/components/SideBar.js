@@ -31,7 +31,7 @@ export function SideBar() {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <Link className='to-page-book' to='/books'>
+        <Link className='to-page-book' to='/m/books'>
           <ListItemButton>
             <ListItemIcon>
               <ImportContactsIcon />
@@ -40,7 +40,7 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-cart' to='/cart'>
+        <Link className='to-page-cart' to='/m/cart'>
           <ListItemButton>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -49,7 +49,7 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-order' to='/orders'>
+        <Link className='to-page-order' to='/m/orders'>
           <ListItemButton>
             <ListItemIcon>
               <ListAltIcon />
@@ -58,12 +58,14 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <ListItemButton>
-          <ListItemIcon>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItemButton>
+        <Link className='to-page-order' to='/login'>
+          <ListItemButton>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </Link>
       </List>
     </div>
   );

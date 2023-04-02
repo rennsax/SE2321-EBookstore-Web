@@ -1,6 +1,6 @@
 import 'css/App.css';
 
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import { SideBar } from 'components/SideBar';
 import HeaderInfo from 'components/HeaderInfo';
 import CartPage from 'view/CartPage';
@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App" onClick={hideProfile}>
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
         <div className="header">
           <HeaderInfo />
         </div>
@@ -37,17 +37,17 @@ function App() {
             </div>
             <div className="main__right">
               <Switch>
-                <Route path="/books" component={BookPage} />
-                <Route path="/cart" component={CartPage} />
-                <Route path="/orders" component={OrderPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/:name" component={BookDetailPage}></Route>
-                <Redirect to="/books" />
+                <Route path="/m/books" component={BookPage} />
+                <Route path="/m/cart" component={CartPage} />
+                <Route path="/m/orders" component={OrderPage} />
+                <Route path="/m/profile" component={ProfilePage} />
+                <Route path="/m/:name" component={BookDetailPage}></Route>
+                <Redirect to="/m/books" />
               </Switch>
             </div>
           </div>
         </div>
-      </BrowserRouter>
+      {/* </BrowserRouter> */}
     </div>
   );
 }
