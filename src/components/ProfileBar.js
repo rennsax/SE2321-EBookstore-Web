@@ -8,7 +8,7 @@ import FaceRetouchingNaturalIcon from
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function SelectorButton({ children, text }) {
   return (
@@ -35,11 +35,11 @@ export default function ProfileBar() {
           <div className='profile-bar__title__name'>Linus Torvalds</div>
         </div>
         <Box id="profile-bar__selectors" sx={{ width: "100%" }} onClick={hideProfile} >
-          <NavLink className='to-page-profile' to='/m/profile'>
+          <Link className='to-page-profile' to='profile'>
             <SelectorButton text='Edit Profile'>
               <FaceRetouchingNaturalIcon />
             </SelectorButton>
-          </NavLink>
+          </Link>
           <SelectorButton text='My Favorite'>
             <FavoriteIcon />
           </SelectorButton>

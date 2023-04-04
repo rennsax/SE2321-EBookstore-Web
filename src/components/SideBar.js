@@ -15,11 +15,6 @@ import { Link } from 'react-router-dom';
 import "css/SideBar.css"
 
 export function SideBar() {
-  // const [open, setOpen] = React.useState(true);
-
-  // const handleClick = () => {
-  //   setOpen(!open);
-  // };
 
   return (
     <div className='sidebar'>
@@ -31,7 +26,7 @@ export function SideBar() {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <Link className='to-page-book' to='/m/books'>
+        <Link className='to-page-book' to='books'>
           <ListItemButton>
             <ListItemIcon>
               <ImportContactsIcon />
@@ -40,7 +35,7 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-cart' to='/m/cart'>
+        <Link className='to-page-cart' to='cart'>
           <ListItemButton>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -49,7 +44,7 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-order' to='/m/orders'>
+        <Link className='to-page-order' to='orders'>
           <ListItemButton>
             <ListItemIcon>
               <ListAltIcon />
@@ -58,7 +53,7 @@ export function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-order' to='/login'>
+        <Link className='to-page-login' to='/login'>
           <ListItemButton>
             <ListItemIcon>
               <LogoutIcon />

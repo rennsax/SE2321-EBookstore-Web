@@ -1,10 +1,11 @@
 import React from 'react'
+
+import BackToBookPage from 'components/BackToBookPage'
 import BookBuy from './BookBuy'
 import CartHeader from './CartHeader'
-import "../../css/CartPage.css"
-import { LeftArrow } from '../../assets/icons'
 import Checkout from './Checkout'
-import { NavLink } from 'react-router-dom';
+
+import "css/CartPage.css"
 
 // TODO the resource should not be saved in test directory
 import book1 from "assets/test/book1.jpg"
@@ -13,16 +14,9 @@ import avatar from "assets/test/Linus.png"
 
 export default function CartPage() {
   return (
-    <div className='cart-page flex-space-between'>
+    <div className='cart-page'>
       <div className="cart-page__left">
-        <NavLink to="/m/books">
-          <div className="cart-page__left__back">
-            <LeftArrow />
-            <h4>
-              Continue Shopping
-            </h4>
-          </div>
-        </NavLink>
+        <BackToBookPage />
         <hr />
         <CartHeader number={2} />
         {/* TODO with back end */}
