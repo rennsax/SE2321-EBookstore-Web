@@ -1,1 +1,60 @@
-.header-container{width:1080px;height:100px}.header-container__title__text{font-size:60px;font-family:"Brush Script MT"}.header-container__title__logo{height:80px;margin:0 20px;cursor:pointer}.header-container__user{margin:0 20px}.header-container__user__avatar{height:70px;transition:all .15s ease-in-out}.header-container__user__avatar:hover{cursor:pointer;opacity:.75}.header-container__user__avatar:active{visibility:hidden}.profile-bar-constructor{position:relative}.profile-bar{width:180px;background-color:white;position:absolute;top:40px;right:0;z-index:99;display:none;border-radius:5px;border:1px solid rgba(0,0,0,0.3);box-shadow:0 0 5px rgba(0,0,0,0.2)}.profile-bar--display{display:block}.profile-bar__title{padding:10px 16px;border-bottom:1.5px solid rgba(0,0,0,0.4)}.profile-bar__title div:first-child{margin-bottom:6px;font-size:14px}.profile-bar__title div:last-child{font-weight:800;font-size:16px}.css-1hzuiqy-MuiButtonBase-root-MuiListItemButton-root:last-child{border:0}
+.header-container {
+  width: 1080px;
+  height: 100px;
+}
+.header-container__title__text {
+  font-size: 60px;
+  font-family: "Brush Script MT";
+}
+.header-container__title__logo {
+  height: 80px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+.header-container__user {
+  margin: 0 20px;
+}
+.header-container__user__avatar {
+  height: 70px;
+  transition: all 0.15s ease-in-out;
+}
+.header-container__user__avatar:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+.header-container__user__avatar:active {
+  visibility: hidden;
+}
+.profile-bar-constructor {
+  position: relative;
+}
+.profile-bar {
+  width: 180px;
+  background-color: white;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 99;
+  display: none;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.profile-bar--display {
+  display: block;
+}
+.profile-bar__title {
+  padding: 10px 16px;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.4);
+}
+.profile-bar__title div:first-child {
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+.profile-bar__title div:last-child {
+  font-weight: 800;
+  font-size: 16px;
+}
+.css-1hzuiqy-MuiButtonBase-root-MuiListItemButton-root:last-child {
+  border: 0;
+}

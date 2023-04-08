@@ -1,1 +1,32 @@
-.header{box-shadow:0 10px 14px rgba(0,0,0,0.15);margin-bottom:20px;position:sticky;top:0;background-color:white;z-index:99;display:flex;justify-content:center}.main{display:flex;justify-content:center}.main__left{width:180px}.main__hr{width:20px}.main__hr hr{height:400px;position:sticky;top:130px;border:0;border-right:1px solid rgba(0,0,0,0.3)}.main__right{width:880px;padding:0 40px;padding-top:20px}
+.header {
+  box-shadow: 0px 10px 14px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+}
+.main {
+  display: flex;
+  justify-content: center;
+}
+.main__left {
+  width: 180px;
+}
+.main__hr {
+  width: 20px;
+}
+.main__hr hr {
+  height: 400px;
+  position: sticky;
+  top: 130px;
+  border: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+.main__right {
+  width: 880px;
+  padding: 0 40px;
+  padding-top: 20px;
+}

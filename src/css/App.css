@@ -1,1 +1,26 @@
-a{text-decoration:none;color:#000}body{min-width:1080px}.clearfix::after{content:"";display:block;clear:both}.display-circle{border-radius:50%;overflow:hidden}.main-container{width:1080px;display:flex;justify-content:space-between}.flex-space-between{display:flex;justify-content:space-between;align-items:center}
+a {
+  text-decoration: none;
+  color: #000;
+}
+body {
+  min-width: 1080px;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.display-circle {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.main-container {
+  width: 1080px;
+  display: flex;
+  justify-content: space-between;
+}
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
