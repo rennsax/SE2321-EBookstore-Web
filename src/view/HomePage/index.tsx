@@ -1,27 +1,34 @@
 import 'css/HomePage.css';
 
 import React, { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Routes, Route, Outlet, useLocation } from 'react-router-dom';
 
 import { SideBar } from 'components/SideBar';
+import CartPage from 'view/CartPage';
+import BookDetailPage from 'view/BookDetailPage';
 import HeaderInfo from 'components/HeaderInfo';
 
 function HomePage() {
 
-  const hideProfile = (e) => {
+  const hideProfile = (e: React.SyntheticEvent | Event) => {
     if (e.target === document.getElementById('active-profile'))
       return;
     let profile = document.getElementById('profile-bar');
-    if (!profile.contains(e.target))
+    if (profile && !profile.contains(e.target as any))
       profile.classList.remove('profile-bar--display');
   };
+
+  const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>([
+    {bookID: "csapp", count: 1},
+    {bookID: "core_java", count: 1}
+  ]);
 
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "instant"
+      behavior: "auto"
     });
   }, [pathname]);
 
@@ -40,6 +47,10 @@ function HomePage() {
           </div>
           <div className="main__right">
             {/* Routes here */}
+            <Routes>
+              <Route path="cart" element={<CartPage booksInCart={booksInCart} setBooksInCart={setBooksInCart} />} />
+              <Route path="bd/:name" element={<BookDetailPage booksInCart={booksInCart} setBooksInCart={setBooksInCart} />} />
+            </Routes>
             <Outlet />
           </div>
         </div>

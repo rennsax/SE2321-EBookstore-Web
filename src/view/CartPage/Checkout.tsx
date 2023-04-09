@@ -2,7 +2,12 @@ import React from 'react'
 import { RightArrow } from 'assets/icons';
 import { cardTypes } from 'assets/card-type';
 
-function CardType({typePic, typeName}) {
+interface CardTypeProps {
+  typePic: string;
+  typeName: string;
+}
+
+function CardType({ typePic, typeName }: CardTypeProps) {
   return (
     <li className="card-type__list__item">
       <label>
@@ -37,7 +42,7 @@ function CardTypeList() {
 }
 
 // TODO use dynamical data
-export default function Checkout({ avatar }) {
+export default function Checkout({ avatar }: { avatar: string }) {
   return (
     <form className="pay">
       <div className="pay__header flex-space-between">

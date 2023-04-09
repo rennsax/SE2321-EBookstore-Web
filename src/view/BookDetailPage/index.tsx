@@ -6,13 +6,14 @@ import BackToBookPage from 'components/BackToBookPage'
 
 import BookInfo from './BookInfo'
 
-import content from "assets/books.json" // TODO books.json
+import bookContentList from "assets/books.json" // TODO books.json
 
-export default function BookDetailPage() {
+
+export default function BookDetailPage({ booksInCart, setBooksInCart }: BooksInCartState) {
   const { name } = useParams();
-  const bookObj = (function () {
-    let res = {};
-    content.every((obj) => {
+  const bookObj = (function (bookContentList: Array<BookContent>) {
+    let res: BookContent | undefined;
+    bookContentList.every((obj) => {
       if (obj.abb === name) {
         res = obj;
         return false;
@@ -20,8 +21,8 @@ export default function BookDetailPage() {
       return true;
     })
     return res;
-  })();
-  const { url, description } = bookObj;
+  })(bookContentList);
+  const { url, description } = bookObj!;
 
   return (
     <div className='bdp'>
@@ -34,7 +35,7 @@ export default function BookDetailPage() {
           <img src={url} alt="Linux" style={{ width: "240px" }} />
         </div>
         <div className="bdp-right">
-          <BookInfo {...bookObj} />
+          <BookInfo {...(bookObj! as BookContent)} booksInCart={booksInCart} setBooksInCart={setBooksInCart} />
         </div>
       </div>
       <hr style={{ border: "0", borderBottom: "1px solid rgba(0,0,0,0.3)", margin: "30px 0" }} />

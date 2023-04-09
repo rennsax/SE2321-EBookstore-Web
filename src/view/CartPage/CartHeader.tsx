@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CartHeader({ number }) {
+export default function CartHeader({ number }: { number: number }) {
   return (
     <div className='cart-header'>
       <div className="cart-header__title">

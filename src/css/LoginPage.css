@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh);
+  font-family: "Source Han Sans SC";
 }
 .form {
   width: 400px;
@@ -14,8 +15,8 @@
   color: gray;
 }
 .form__title {
-  font-size: 40px;
-  margin: 0 0 20px;
+  font-size: 36px;
+  margin: 0 0 40px;
   /* min-width: 200px; */
   /* margin: 0 0 20px; */
   text-align: center;
@@ -52,4 +53,9 @@
   background-color: #3498db;
   color: #fff;
   cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+.form__btn:hover {
+  background-color: #308ac6;
+  border: 2px solid #308ac6;
 }
