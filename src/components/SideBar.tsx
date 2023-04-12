@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 import "css/SideBar.css"
 
-export function SideBar() {
+export default function SideBar() {
 
   return (
     <div className='sidebar'>

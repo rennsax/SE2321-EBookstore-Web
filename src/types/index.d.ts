@@ -23,10 +23,10 @@ interface BooksInCartState {
 interface BookContent {
   title: string;
   url: string;
+  authors: Array<string>;
   price?: number;
   abb: string;
   date?: string;
-  authors: Array<string>;
   isbn?: string;
   intro?: string;
   description?: string;

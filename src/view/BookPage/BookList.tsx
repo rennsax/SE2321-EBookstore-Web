@@ -1,14 +1,12 @@
-import React, { useContext } from 'react'
-import BookCard from './BookCard'
-import { BookInfoListContext } from 'view/HomePage';
+import React, { useContext } from "react";
+import BookCard from "./BookCard";
+import { BookInfoListContext } from "view/HomePage";
 
 export default function BookList({ perRow }: { perRow: number }) {
-
   const bookContentList = useContext(BookInfoListContext);
 
   const createItem = () => {
-    if (bookContentList === undefined)
-      return <></>;
+    if (bookContentList === undefined) return <></>;
     // get book info from back end
 
     let res = [];
@@ -18,12 +16,17 @@ export default function BookList({ perRow }: { perRow: number }) {
     while (book_i < bookNum) {
       let row = [];
       for (let i = 0; i < perRow; ++i) {
-        if (book_i >= bookNum)
-          break;
+        if (book_i >= bookNum) break;
         const { title, url, price, abb } = bookContentList[book_i];
         row.push(
-          <BookCard bookName={title} picSrc={url} price={price} bookAbb={abb} key={abb} />
-        )
+          <BookCard
+            bookName={title}
+            picSrc={url}
+            price={price}
+            bookAbb={abb}
+            key={abb}
+          />
+        );
         ++book_i;
       }
       res.push(
@@ -35,9 +38,5 @@ export default function BookList({ perRow }: { perRow: number }) {
     return res;
   };
 
-  return (
-    <>
-      {createItem()}
-    </>
-  )
+  return <>{createItem()}</>;
 }
