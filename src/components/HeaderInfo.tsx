@@ -8,7 +8,7 @@ import "css/HeaderInfo.css";
 
 export default function HeaderInfo() {
   const showProfile = () => {
-    let profile = document.getElementById("profile-bar");
+    const profile = document.getElementById("profile-bar");
     const classes = profile?.classList;
     if (classes?.contains("profile-bar--display"))
       classes.remove("profile-bar--display");

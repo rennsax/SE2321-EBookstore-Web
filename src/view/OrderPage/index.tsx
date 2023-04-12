@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class OrderPage extends Component {
   render() {
-    return (
-        <h1>This is the page of order.</h1>
-    )
+    return <h1>This is the page of order.</h1>;
   }
 }

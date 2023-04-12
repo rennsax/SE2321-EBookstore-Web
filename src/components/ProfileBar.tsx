@@ -33,7 +33,7 @@ function SelectorButton({
 
 export default function ProfileBar() {
   const hideProfile = () => {
-    let profile = document.getElementById("profile-bar");
+    const profile = document.getElementById("profile-bar");
     profile?.classList?.remove("profile-bar--display");
   };
 

@@ -1,32 +1,31 @@
-import React from 'react'
+import React from "react";
 // UI
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 // router
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-
-import "css/SideBar.css"
+import "css/SideBar.css";
 
 export default function SideBar() {
-
   return (
-    <div className='sidebar'>
+    <div className="sidebar">
       <List
         sx={{
-          width: "100%", maxWidth: 360,
-          bgcolor: "background.paper"
+          width: "100%",
+          maxWidth: 360,
+          bgcolor: "background.paper",
         }}
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <Link className='to-page-book' to='books'>
+        <Link className="to-page-book" to="books">
           <ListItemButton>
             <ListItemIcon>
               <ImportContactsIcon />
@@ -35,7 +34,7 @@ export default function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-cart' to='cart'>
+        <Link className="to-page-cart" to="cart">
           <ListItemButton>
             <ListItemIcon>
               <ShoppingCartIcon />
@@ -44,7 +43,7 @@ export default function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-order' to='orders'>
+        <Link className="to-page-order" to="orders">
           <ListItemButton>
             <ListItemIcon>
               <ListAltIcon />
@@ -53,7 +52,7 @@ export default function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className='to-page-login' to='/login'>
+        <Link className="to-page-login" to="/login">
           <ListItemButton>
             <ListItemIcon>
               <LogoutIcon />

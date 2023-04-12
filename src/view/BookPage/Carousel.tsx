@@ -5,7 +5,7 @@ import carouselBooks from "assets/carousel";
 
 export default function BookCarousel() {
   const createItems = (carouselBooks: string[]) => {
-    let res = [];
+    const res = [];
     for (let i = 0; i < carouselBooks.length; ++i) {
       res.push(
         <img

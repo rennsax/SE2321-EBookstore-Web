@@ -9,12 +9,12 @@ export default function BookList({ perRow }: { perRow: number }) {
     if (bookContentList === undefined) return <></>;
     // get book info from back end
 
-    let res = [];
-    let bookNum = bookContentList.length;
+    const res: JSX.Element[] = [];
+    const bookNum = bookContentList.length;
     let book_i = 0;
 
     while (book_i < bookNum) {
-      let row = [];
+      const row = [];
       for (let i = 0; i < perRow; ++i) {
         if (book_i >= bookNum) break;
         const { title, url, price, abb } = bookContentList[book_i];

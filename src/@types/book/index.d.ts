@@ -1,15 +1,5 @@
-declare module "*.jpg" {
-  const path: string;
-  export default path;
-}
-
-declare module "*.png" {
-  const path: string;
-  export default path;
-}
-
 interface BookInCart {
-  bookID: string; // TODO use uuid to represent a book
+  readonly bookID: string; // TODO use uuid to represent a book
   count: number;
 }
 

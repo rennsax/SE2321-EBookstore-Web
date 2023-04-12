@@ -1,23 +1,26 @@
-import "css/CartPage.css"
-import React from 'react'
+import "css/CartPage.css";
+import React from "react";
 
-import BackToBookPage from 'components/BackToBookPage'
-import BookBuy, {BookBuyProps} from './BookBuy'
-import CartHeader from './CartHeader'
-import Checkout from './Checkout'
+import BackToBookPage from "components/BackToBookPage";
+import BookBuy, { BookBuyProps } from "./BookBuy";
+import CartHeader from "./CartHeader";
+import Checkout from "./Checkout";
 
-import bookContentList from "assets/books.json" // TODO books.json
+import bookContentList from "assets/books.json"; // TODO books.json
 
 // TODO the avatar should not be saved in test directory
-import avatar from "assets/test/Linus.png"
+import avatar from "assets/test/Linus.png";
 
-export default function CartPage({ booksInCart, setBooksInCart } : BooksInCartState) {
-  let bookCountSum: number = 0;
-  booksInCart?.forEach(books => bookCountSum += books.count);
+export default function CartPage({
+  booksInCart,
+  setBooksInCart,
+}: BooksInCartState) {
+  let bookCountSum = 0;
+  booksInCart?.forEach((books) => (bookCountSum += books.count));
 
   const BookBuyList: JSX.Element[] = [];
 
-  booksInCart.forEach(book => {
+  booksInCart.forEach((book) => {
     let res: BookContent | undefined;
     bookContentList.every((obj) => {
       if (obj.abb === book.bookID) {
@@ -25,7 +28,7 @@ export default function CartPage({ booksInCart, setBooksInCart } : BooksInCartSt
         return false;
       }
       return true;
-    })
+    });
     const neededInfo: BookBuyProps = {
       bookID: book.bookID,
       count: book.count,
@@ -34,15 +37,13 @@ export default function CartPage({ booksInCart, setBooksInCart } : BooksInCartSt
       authors: res?.authors,
       price: res?.price,
       booksInCart: booksInCart,
-      setBooksInCart: setBooksInCart
-    }
-    BookBuyList.push(
-      <BookBuy key={book.bookID} {...neededInfo} />
-    )
-  })
+      setBooksInCart: setBooksInCart,
+    };
+    BookBuyList.push(<BookBuy key={book.bookID} {...neededInfo} />);
+  });
 
   return (
-    <div className='cart-page'>
+    <div className="cart-page">
       <div className="cart-page__left">
         <BackToBookPage />
         <hr />
@@ -54,5 +55,5 @@ export default function CartPage({ booksInCart, setBooksInCart } : BooksInCartSt
         <Checkout avatar={avatar} />
       </div>
     </div>
-  )
+  );
 }

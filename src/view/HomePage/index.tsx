@@ -17,8 +17,8 @@ function HomePage() {
   // Profile bar control
   const hideProfile = (e: React.SyntheticEvent | Event) => {
     if (e.target === document.getElementById("active-profile")) return;
-    let profile = document.getElementById("profile-bar");
-    if (profile && !profile.contains(e.target as any))
+    const profile = document.getElementById("profile-bar");
+    if (profile?.contains(e.target as Node))
       profile.classList.remove("profile-bar--display");
   };
 

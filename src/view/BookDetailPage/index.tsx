@@ -25,7 +25,7 @@ export default function BookDetailPage({
     return res;
   })(bookContentList);
   // TODO no non-null assertion
-  const { url, description } = bookObj!;
+  const { url, description } = bookObj as BookContent;
 
   return (
     <div className="bdp">
@@ -45,7 +45,7 @@ export default function BookDetailPage({
         </div>
         <div className="bdp-right">
           <BookInfo
-            {...(bookObj! as BookContent)}
+            {...(bookObj as BookContent)}
             booksInCart={booksInCart}
             setBooksInCart={setBooksInCart}
           />

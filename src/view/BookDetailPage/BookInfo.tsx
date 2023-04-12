@@ -18,10 +18,9 @@ export default function BookInfo({
   const textRef = useRef<HTMLElement>(null);
 
   const handleClick = (e: React.SyntheticEvent | Event): void => {
-    // console.log(booksInCart);
     e.preventDefault();
 
-    const iconClass = iconRef.current!.classList;
+    const iconClass = iconRef?.current?.classList as DOMTokenList;
     // If added before, return
     if (
       iconClass.length >= 2 ||
@@ -29,9 +28,9 @@ export default function BookInfo({
     ) {
       return;
     }
-
     (e.target as HTMLElement).classList.add("book-details__btn--disable");
-    textRef.current!.style.opacity = "0";
+
+    if (textRef.current) textRef.current.style.opacity = "0";
     iconClass.add("book-details__btn__cart--middle");
     new Promise<void>((resolve) => {
       setTimeout(() => {
@@ -41,9 +40,10 @@ export default function BookInfo({
       }, 1000);
     })
       .then(() => {
-        textRef.current!.classList.add("book-details__btn__text--added");
-        textRef.current!.innerText = "Added!";
-        textRef.current!.style.opacity = "100";
+        const textElement = textRef.current as HTMLElement;
+        textElement.classList.add("book-details__btn__text--added");
+        textElement.innerText = "Added!";
+        textElement.style.opacity = "100";
       })
       .then(() => {
         setBooksInCart((previous) => {
