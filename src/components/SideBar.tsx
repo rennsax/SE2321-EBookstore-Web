@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 // UI
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 import "css/SideBar.css";
 
-export default function SideBar() {
+const SideBar = memo(function SideBar() {
   return (
     <div className="sidebar">
       <List
@@ -63,4 +63,6 @@ export default function SideBar() {
       </List>
     </div>
   );
-}
+});
+
+export default SideBar;

@@ -3,50 +3,45 @@ import { useNavigate } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import timer from "utils/timer";
 
 import "css/LoginPage.css";
+
+type AlertTypes = "success" | "error" | "no";
 
 export default function LoginPage() {
   // controlled component
   const [account, saveAccount] = React.useState("");
   const [passwd, savePasswd] = React.useState("");
-  const [isWaiting, toWait] = React.useState<boolean>(false);
-  const [alertType, toAlert] = React.useState<"success" | "error" | null>(null);
+  const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
+  const [alertType, setAlertType] = React.useState<AlertTypes>("no");
   const navigate = useNavigate();
 
-  const handleClick: React.MouseEventHandler = async (e) => {
-    // console.log(document.querySelector("form"));
+  const handleClick: React.MouseEventHandler = (e) => {
     e.preventDefault();
     if (isWaiting) return;
-    toWait(true);
-    setTimeout(() => {
-      toWait(false);
-      if (!(account == "123" && passwd == "123")) {
-        toAlert("error");
-        return;
-      }
-      toAlert("success");
-      setTimeout(() => {
-        toAlert(null);
+    setIsWaiting(true);
+
+    timer(1000) // TODO simulate a POST request
+      .then(() => {
+        setIsWaiting(false);
+        if (!(account == "123" && passwd == "123")) {
+          setAlertType("error");
+          return Promise.reject<string>("login error");
+        }
+        setAlertType("success");
+        return timer(1000);
+      })
+      .then(() => {
         navigate("/home/books");
-      }, 1000);
-    }, 2000);
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("POST", "http://127.0.0.1:8080");
-    // xhr.send("123");
-    // xhr.onreadystatechange = () => {
-    //   if (xhr.readyState === 4) {
-    //     if (xhr.status === 200) {
-    //       const target = document.getElementById("test-target");
-    //       if (target != null)
-    //         target.innerHTML = xhr.response;
-    //     }
-    //   }
-    // };
+      })
+      .catch((reason) => {
+        console.error(reason);
+      });
   };
 
   const endAlertError = (): void => {
-    toAlert(null);
+    setAlertType("no");
   };
 
   return (
@@ -88,7 +83,7 @@ export default function LoginPage() {
         <Snackbar
           open={alertType === "error"}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
           onClose={endAlertError}
           // sx={{height: "20px", width: "200px"}}
         >

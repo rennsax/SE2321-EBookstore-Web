@@ -1,31 +1,36 @@
-// TODO consider not putting the book detail page in a separate app
 import "css/BookDetailPage.css";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BackToBookPage from "components/BackToBookPage";
+import { BookInfoListContext } from "view/HomePage";
+import Skeleton from "@mui/material/Skeleton";
 
 import BookInfo from "./BookInfo";
-
-import bookContentList from "assets/books.json"; // TODO books.json
 
 export default function BookDetailPage({
   booksInCart,
   setBooksInCart,
 }: BooksInCartState) {
-  const { name } = useParams();
+  const { name } = useParams(); // "/home/bd/:name"
+  const bookContentList = useContext(BookInfoListContext);
+  const [loading, setLoading] = useState<boolean>(true);
+
   const bookObj = (function (bookContentList: Array<BookContent>) {
     let res: BookContent | undefined;
-    bookContentList.every((obj) => {
-      if (obj.abb === name) {
-        res = obj;
-        return false;
+    for (const bookContent of bookContentList) {
+      if (bookContent.abb === name) {
+        res = bookContent;
+        break;
       }
-      return true;
-    });
+    }
     return res;
   })(bookContentList);
-  // TODO no non-null assertion
-  const { url, description } = bookObj as BookContent;
+
+  useEffect(() => {
+    setLoading(bookObj === undefined);
+  }, [bookContentList]);
+
+  const { url, description } = bookObj ?? {};
 
   return (
     <div className="bdp">
@@ -41,14 +46,22 @@ export default function BookDetailPage({
       />
       <div className="bdp-main">
         <div className="bdp-left">
-          <img src={url} alt="Linux" style={{ width: "240px" }} />
+          {loading ? (
+            <Skeleton sx={{ height: "200px" }} />
+          ) : (
+            <img src={url} alt="Linux" style={{ width: "240px" }} />
+          )}
         </div>
         <div className="bdp-right">
-          <BookInfo
-            {...(bookObj as BookContent)}
-            booksInCart={booksInCart}
-            setBooksInCart={setBooksInCart}
-          />
+          {loading ? (
+            <Skeleton sx={{ height: "200px" }} />
+          ) : (
+            <BookInfo
+              {...(bookObj as BookContent)}
+              booksInCart={booksInCart}
+              setBooksInCart={setBooksInCart}
+            />
+          )}
         </div>
       </div>
       <hr
@@ -60,7 +73,7 @@ export default function BookDetailPage({
       />
       <div className="bdp-bottom">
         <h3 className="bdp-bottom__title">Book description</h3>
-        {description}
+        {loading ? <></> : description}
       </div>
     </div>
   );

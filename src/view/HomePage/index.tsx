@@ -7,21 +7,21 @@ import SideBar from "components/SideBar";
 import CartPage from "view/CartPage";
 import BookDetailPage from "view/BookDetailPage";
 import HeaderInfo from "components/HeaderInfo";
-import { sendAjax } from "utils/ajax";
+import sendAjax from "utils/ajax";
 
-export const BookInfoListContext = React.createContext<
-  BookContent[] | undefined
->(undefined);
+import configurations from "config/front.json";
+
+export const BookInfoListContext = React.createContext<BookContent[]>([]);
+
+// Profile bar control
+const hideProfile = (e: ButtonEvent) => {
+  if (e.target === document.getElementById("active-profile")) return;
+  const profile = document.getElementById("profile-bar");
+  if (profile?.contains(e.target as Node))
+    profile.classList.remove("profile-bar--display");
+};
 
 function HomePage() {
-  // Profile bar control
-  const hideProfile = (e: React.SyntheticEvent | Event) => {
-    if (e.target === document.getElementById("active-profile")) return;
-    const profile = document.getElementById("profile-bar");
-    if (profile?.contains(e.target as Node))
-      profile.classList.remove("profile-bar--display");
-  };
-
   // state: the books in cart
   const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>([
     { bookID: "csapp", count: 1 },
@@ -38,23 +38,27 @@ function HomePage() {
   }, [pathname]);
 
   // handle: send ajax, receive the json and provide it as a context
-  const [bookContentList, setBookContentList] = React.useState<BookContent[]>();
+  // I used to try to use reducer hook, ending to find that `useReducer` doesn't support async function
+  const [bookInfoList, setBookInfoList] = React.useState<BookContent[]>([]);
+
   useEffect(() => {
-    if (bookContentList !== undefined) {
-      return;
+    let times: number = configurations["ajax.maxTryTimes"];
+    let isSuccess = false;
+    while (!isSuccess && times--) {
+      sendAjax<BookContent[]>("GET", "http://127.0.0.1/books")
+        .then((data) => {
+          setBookInfoList(data); // just update, i.e. alter
+          isSuccess = true;
+        })
+        .catch((reason) => {
+          console.warn(reason);
+        });
     }
-    console.log("send ajax!");
-    sendAjax<BookContent[]>("GET", "http://127.0.0.1:8080/book-info")
-      .then((data) => {
-        setBookContentList(data);
-      })
-      .catch((reason) => {
-        console.warn(reason);
-      });
   }, []);
 
+  console.log("rendered!"); // TODO debug
   return (
-    <BookInfoListContext.Provider value={bookContentList}>
+    <BookInfoListContext.Provider value={bookInfoList}>
       <div className="home" onClick={hideProfile}>
         <div className="header">
           <HeaderInfo />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Trash } from "../../assets/icons";
+import { Trash } from "assets/icons";
 import { Link } from "react-router-dom";
 
 interface BookBuyInfo {

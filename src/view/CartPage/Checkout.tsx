@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { RightArrow } from "assets/icons";
 import { cardTypes } from "assets/card-type";
 
@@ -7,7 +7,7 @@ interface CardTypeProps {
   typeName: string;
 }
 
-function CardType({ typePic, typeName }: CardTypeProps) {
+const CardType = memo(function CardType({ typePic, typeName }: CardTypeProps) {
   return (
     <li className="card-type__list__item">
       <label>
@@ -16,9 +16,9 @@ function CardType({ typePic, typeName }: CardTypeProps) {
       </label>
     </li>
   );
-}
+});
 
-function CardTypeList() {
+const CardTypeList = memo(function CardTypeList() {
   const createList = () => {
     const res = [];
     for (let i = 0; i < 4; ++i)
@@ -38,10 +38,17 @@ function CardTypeList() {
       <ul className="card-type__list">{createList()}</ul>
     </div>
   );
-}
+});
 
-// TODO use dynamical data
-export default function Checkout({ avatar }: { avatar: string }) {
+export default function Checkout({
+  avatar,
+  sumPrice,
+}: {
+  avatar: string;
+  sumPrice: number;
+}) {
+  const shipPrice = 4;
+
   return (
     <form className="pay">
       <div className="pay__header flex-space-between">
@@ -103,19 +110,19 @@ export default function Checkout({ avatar }: { avatar: string }) {
       <hr />
       <div className="pay__result flex-space-between">
         <div>Subtotal</div>
-        <div>$180.00</div>
+        <div>{`$${sumPrice}`}</div>
       </div>
       <div className="pay__result flex-space-between">
         <div>Shipping</div>
-        <div>$4.00</div>
+        <div>{`$${shipPrice}`}</div>
       </div>
       <div className="pay__result flex-space-between">
         <div>Total(Incl. taxes)</div>
-        <div>$184.00</div>
+        <div>{`$${sumPrice + shipPrice}`}</div>
       </div>
 
       <button className="pay__submit flex-space-between">
-        <div>$184.00</div>
+        <div>{`$${sumPrice}`}</div>
         <div className="flex-space-between">
           <div style={{ marginRight: "10px" }}>Checkout</div>
           <RightArrow />

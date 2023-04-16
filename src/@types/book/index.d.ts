@@ -3,7 +3,7 @@ interface BookInCart {
   count: number;
 }
 
-type SetBooksInCartHook = React.Dispatch<React.SetStateAction<BookInCart[]>>
+type SetBooksInCartHook = React.Dispatch<React.SetStateAction<BookInCart[]>>;
 
 interface BooksInCartState {
   booksInCart: BookInCart[];

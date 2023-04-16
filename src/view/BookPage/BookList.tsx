@@ -1,42 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import BookCard from "./BookCard";
 import { BookInfoListContext } from "view/HomePage";
 
 export default function BookList({ perRow }: { perRow: number }) {
   const bookContentList = useContext(BookInfoListContext);
 
-  const createItem = () => {
-    if (bookContentList === undefined) return <></>;
-    // get book info from back end
-
+  const itemList = useMemo(() => {
+    const book_cnt = perRow * 2;
     const res: JSX.Element[] = [];
-    const bookNum = bookContentList.length;
     let book_i = 0;
 
-    while (book_i < bookNum) {
-      const row = [];
+    while (book_i < book_cnt) {
+      const row: JSX.Element[] = [];
       for (let i = 0; i < perRow; ++i) {
-        if (book_i >= bookNum) break;
-        const { title, url, price, abb } = bookContentList[book_i];
         row.push(
           <BookCard
-            bookName={title}
-            picSrc={url}
-            price={price}
-            bookAbb={abb}
-            key={abb}
+            bookContent={bookContentList ? bookContentList[book_i] : undefined}
+            key={`bookPresented${book_i}`} // TODO change the key to uuid
           />
         );
         ++book_i;
       }
       res.push(
-        <div className="book-list" key={`book_list${book_i}`}>
+        <div className="book-list" key={`bookRow${book_i / perRow}`}>
           {row}
         </div>
       );
     }
     return res;
-  };
+  }, [perRow, bookContentList]);
 
-  return <>{createItem()}</>;
+  return <>{itemList}</>;
 }

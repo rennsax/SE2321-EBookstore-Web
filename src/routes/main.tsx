@@ -9,7 +9,7 @@ export default [
     path: "books",
     element: <BookPage />,
   },
-  // TODO What's the order page?
+  // TODO order page?
   {
     path: "orders",
     element: <OrderPage />,
