@@ -4,10 +4,10 @@ import { FlagFill, Cart4 } from "assets/icons";
 type BookInfoProps = BookContent & BooksInCartState;
 
 export default function BookInfo({
-  abb,
+  uuid,
   title,
   date,
-  authors,
+  author,
   price,
   isbn,
   intro,
@@ -48,20 +48,20 @@ export default function BookInfo({
       .then(() => {
         setBooksInCart((previous) => {
           // TODO enable add books multiple time
-          return [...previous, { bookID: abb, count: 1 }];
+          return [...previous, { bookId: uuid, count: 1 }];
         });
       });
   };
 
   const bought: boolean =
-    booksInCart.filter((book) => book.bookID === abb).length !== 0;
+    booksInCart.filter((book) => book.bookId === uuid).length !== 0;
 
   return (
     <div className="book-details">
       <div>
         <h2 className="book-details__title">{title}</h2>
         <h4 className="book-details__author">
-          <span>by</span> <span id="book-author">{authors.join(", ")}</span>
+          <span>by</span> <span id="book-author">{author}</span>
         </h4>
         <p className="book-details__date">Released on {date}</p>
         <p className="book-details__isbn">ISBN: {isbn}</p>

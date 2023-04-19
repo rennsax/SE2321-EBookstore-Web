@@ -27,22 +27,22 @@ export default function CartPage({
   booksInCart.forEach((bookInCart) => {
     let res: BookContent | undefined;
     for (const bookContent of bookContentList) {
-      if (bookContent.abb === bookInCart.bookID) {
+      if (bookContent.uuid === bookInCart.bookId) {
         res = bookContent;
         break;
       }
     }
     const neededInfo: BookBuyProps = {
-      bookID: bookInCart.bookID,
+      bookId: bookInCart.bookId,
       count: bookInCart.count,
-      img: res?.url,
+      picId: res?.picId,
       title: res?.title,
-      authors: res?.authors,
+      author: res?.author,
       price: res?.price,
       booksInCart: booksInCart,
       setBooksInCart: setBooksInCart,
     };
-    BookBuyList.push(<BookBuy key={bookInCart.bookID} {...neededInfo} />);
+    BookBuyList.push(<BookBuy key={bookInCart.bookId} {...neededInfo} />);
     sumPrice += res?.price ?? 0;
   });
 

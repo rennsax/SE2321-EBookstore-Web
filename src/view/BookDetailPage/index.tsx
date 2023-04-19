@@ -4,21 +4,23 @@ import { useParams } from "react-router-dom";
 import BackToBookPage from "components/BackToBookPage";
 import { BookInfoListContext } from "view/HomePage";
 import Skeleton from "@mui/material/Skeleton";
+import HTMLReactParser from "html-react-parser";
 
+import config from "config/front.json";
 import BookInfo from "./BookInfo";
 
 export default function BookDetailPage({
   booksInCart,
   setBooksInCart,
 }: BooksInCartState) {
-  const { name } = useParams(); // "/home/bd/:name"
+  const { uuid } = useParams(); // "/home/bd/:uuid"
   const bookContentList = useContext(BookInfoListContext);
   const [loading, setLoading] = useState<boolean>(true);
 
   const bookObj = (function (bookContentList: Array<BookContent>) {
     let res: BookContent | undefined;
     for (const bookContent of bookContentList) {
-      if (bookContent.abb === name) {
+      if (bookContent.uuid === uuid) {
         res = bookContent;
         break;
       }
@@ -27,10 +29,11 @@ export default function BookDetailPage({
   })(bookContentList);
 
   useEffect(() => {
-    setLoading(bookObj === undefined);
+    // TODO loading condition
+    setLoading(false);
   }, [bookContentList]);
 
-  const { url, description } = bookObj ?? {};
+  const { picId, title, description } = bookObj ?? {};
 
   return (
     <div className="bdp">
@@ -49,7 +52,11 @@ export default function BookDetailPage({
           {loading ? (
             <Skeleton sx={{ height: "200px" }} />
           ) : (
-            <img src={url} alt="Linux" style={{ width: "240px" }} />
+            <img
+              src={`${config["book.picture.url"]}/${picId}.jpg`}
+              alt={title}
+              style={{ width: "240px" }}
+            />
           )}
         </div>
         <div className="bdp-right">
@@ -73,7 +80,7 @@ export default function BookDetailPage({
       />
       <div className="bdp-bottom">
         <h3 className="bdp-bottom__title">Book description</h3>
-        {loading ? <></> : description}
+        {loading ? <></> : HTMLReactParser(description ?? "")}
       </div>
     </div>
   );

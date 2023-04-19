@@ -7,7 +7,8 @@ import SideBar from "components/SideBar";
 import CartPage from "view/CartPage";
 import BookDetailPage from "view/BookDetailPage";
 import HeaderInfo from "components/HeaderInfo";
-import sendAjax from "utils/ajax";
+import myFetch, { FetchProps } from "utils/ajax";
+import timer from "utils/timer";
 
 import configurations from "config/front.json";
 
@@ -23,10 +24,9 @@ const hideProfile = (e: ButtonEvent) => {
 
 function HomePage() {
   // state: the books in cart
-  const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>([
-    { bookID: "csapp", count: 1 },
-    { bookID: "core_java", count: 1 },
-  ]);
+  const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>(
+    configurations["cart.originalBooks"]
+  );
 
   // handle: when switch routes, scroll to the top
   const { pathname } = useLocation();
@@ -43,20 +43,36 @@ function HomePage() {
 
   useEffect(() => {
     let times: number = configurations["ajax.maxTryTimes"];
-    let isSuccess = false;
-    while (!isSuccess && times--) {
-      sendAjax<BookContent[]>("GET", "http://127.0.0.1/books")
-        .then((data) => {
-          setBookInfoList(data); // just update, i.e. alter
-          isSuccess = true;
-        })
-        .catch((reason) => {
-          console.warn(reason);
-        });
-    }
+    const fetchBookPops: FetchProps = {
+      method: "GET",
+      url: "http://localhost:8080/book?number=8",
+    };
+
+    let fetching = true;
+    const requestBook = async () => {
+      while (fetching && times--) {
+        await timer(1000);
+        try {
+          const data: BookContent[] = await myFetch(fetchBookPops).then(
+            (res) => {
+              return res.json();
+            }
+          );
+          setBookInfoList(data);
+          fetching = false;
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    requestBook();
+
+    return () => {
+      fetching = false;
+    };
   }, []);
 
-  console.log("rendered!"); // TODO debug
   return (
     <BookInfoListContext.Provider value={bookInfoList}>
       <div className="home" onClick={hideProfile}>
@@ -84,7 +100,7 @@ function HomePage() {
                   }
                 />
                 <Route
-                  path="bd/:name"
+                  path="bd/:uuid"
                   element={
                     <BookDetailPage
                       booksInCart={booksInCart}

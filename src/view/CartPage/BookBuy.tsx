@@ -2,22 +2,24 @@ import React from "react";
 import { Trash } from "assets/icons";
 import { Link } from "react-router-dom";
 
+import config from "config/front.json";
+
 interface BookBuyInfo {
-  bookID: string;
+  bookId: string;
   count: number;
-  img?: string;
+  picId?: string;
   title?: string;
-  authors?: string[];
+  author?: string;
   price?: number;
 }
 
 export type BookBuyProps = BookBuyInfo & BooksInCartState;
 
 export default function BookBuy({
-  bookID,
-  img,
+  bookId: bookID,
+  picId,
   title,
-  authors,
+  author,
   price,
   count,
   booksInCart,
@@ -25,7 +27,7 @@ export default function BookBuy({
 }: BookBuyProps) {
   const handleDelete = (e: ButtonEvent): void => {
     e.preventDefault();
-    setBooksInCart(booksInCart.filter((book) => book.bookID !== bookID));
+    setBooksInCart(booksInCart.filter((book) => book.bookId !== bookID));
   };
 
   return (
@@ -33,16 +35,17 @@ export default function BookBuy({
       <div className="cart-card__info flex-space-between">
         <div className="cart-card__info__pic">
           <Link to={`/home/bd/${bookID}`}>
-            <img src={img} alt="book1" />
+            <img
+              src={`${config["book.picture.url"]}/${picId}.jpg`}
+              alt="book1"
+            />
           </Link>
         </div>
         <div className="cart-card__info__text flex-space-between">
           <div className="cart-card__info__text__title">
             <h5>{title}</h5>
           </div>
-          <div className="cart-card__info__text__details">
-            {authors?.toString()}
-          </div>
+          <div className="cart-card__info__text__details">{author}</div>
         </div>
       </div>
       <div className="cart-card__right flex-space-between">

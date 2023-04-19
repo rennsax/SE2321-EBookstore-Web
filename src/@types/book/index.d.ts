@@ -1,5 +1,5 @@
 interface BookInCart {
-  readonly bookID: string; // TODO use uuid to represent a book
+  readonly bookId: string; // TODO use uuid to represent a book
   count: number;
 }
 
@@ -11,15 +11,23 @@ interface BooksInCartState {
 }
 
 interface BookContent {
+  uuid: string; // primary key
   title: string;
-  url: string;
-  authors: Array<string>;
-  price?: number;
-  abb: string;
-  date?: string;
-  isbn?: string;
+  author: string;
+  price: number;
+  picId: string;
+  date: string;
+  isbn: string;
+  description: string;
+  // TODO add intro
   intro?: string;
-  description?: string;
+
+  /** @deprecated */
+  url?: string;
+  /** @deprecated */
+  authors?: Array<string>;
+  /** @deprecated */
+  abb?: string;
 }
 
 type ButtonEvent = React.SyntheticEvent | Event;
