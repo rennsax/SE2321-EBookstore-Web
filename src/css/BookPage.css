@@ -49,13 +49,14 @@
   height: 300px;
 }
 .carousel_container {
-  margin: 20px auto 30px;
+  margin: 30px auto;
   border-radius: 8px;
   overflow: hidden;
 }
 .search_bar {
   font-size: 0;
   text-align: center;
+  margin: 0 0 30px;
 }
 .search_bar form {
   height: 44px;

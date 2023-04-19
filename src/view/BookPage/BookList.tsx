@@ -1,9 +1,44 @@
-import React, { useContext, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
+import myFetch, { FetchProps } from "utils/ajax";
+import timer from "utils/timer";
 import BookCard from "./BookCard";
-import { BookInfoListContext } from "view/HomePage";
 
-export default function BookList({ perRow }: { perRow: number }) {
-  const bookContentList = useContext(BookInfoListContext);
+import config from "config/front.json";
+
+export default function BookList() {
+  const perRow = config["bookPage.perRow"];
+
+  const fetchProps: FetchProps = {
+    method: "GET",
+    // Backend: query param `number`
+    url: `${config["book.url"]}?number=${perRow * 2}`,
+  };
+
+  const {
+    isSuccess,
+    data: bookContentList,
+    error,
+  } = useQuery({
+    queryKey: ["bookListInformation", fetchProps],
+    queryFn: async () => {
+      await timer(1000);
+      const data = await myFetch(fetchProps).then((res) => {
+        return res.json();
+      });
+      return data as BookContent[];
+    },
+    retry: config["ajax.retry.maxTimes"],
+    retryDelay: config["ajax.retry.delay"],
+    refetchOnMount: false,
+    onSuccess: () => {
+      console.log("Fetched!");
+    }, // TODO debug
+    onError: () => {
+      console.log(error);
+    },
+  });
+  console.log(bookContentList); // TODO debug
 
   const itemList = useMemo(() => {
     const book_cnt = perRow * 2;
@@ -15,8 +50,8 @@ export default function BookList({ perRow }: { perRow: number }) {
       for (let i = 0; i < perRow; ++i) {
         row.push(
           <BookCard
-            bookContent={bookContentList ? bookContentList[book_i] : undefined}
-            key={`bookPresented${book_i}`} // TODO change the key to uuid
+            bookContent={isSuccess ? bookContentList?.at(book_i) : undefined}
+            key={`bookPresented${book_i}`}
           />
         );
         ++book_i;
@@ -28,7 +63,7 @@ export default function BookList({ perRow }: { perRow: number }) {
       );
     }
     return res;
-  }, [perRow, bookContentList]);
+  }, [perRow, bookContentList, isSuccess]);
 
   return <>{itemList}</>;
 }

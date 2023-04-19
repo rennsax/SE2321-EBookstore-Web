@@ -1,6 +1,9 @@
-import React, { memo } from "react";
-import { RightArrow } from "assets/icons";
 import { cardTypes } from "assets/card-type";
+import { RightArrow } from "assets/icons";
+import { memo, useContext, useRef } from "react";
+import config from "config/front.json";
+import { UserIdContext } from "view/HomePage";
+import myFetch from "utils/ajax";
 
 interface CardTypeProps {
   typePic: string;
@@ -24,7 +27,7 @@ const CardTypeList = memo(function CardTypeList() {
     for (let i = 0; i < 4; ++i)
       res.push(
         <CardType
-          key={String(i)}
+          key={`card_type${i}`}
           typeName={cardTypes[i][0]}
           typePic={cardTypes[i][1]}
         />
@@ -43,11 +46,42 @@ const CardTypeList = memo(function CardTypeList() {
 export default function Checkout({
   avatar,
   sumPrice,
+  setBooksInCart,
 }: {
   avatar: string;
   sumPrice: number;
+  setBooksInCart: SetBooksInCartHook;
 }) {
-  const shipPrice = 4;
+  const shipPrice = config["cart.shipPrice"];
+  const dateRef = useRef<HTMLInputElement>(null);
+  const customerId = useContext(UserIdContext);
+
+  const handleCheckout = async (e: ButtonEvent) => {
+    // TODO handleCheckout
+    e.preventDefault();
+    const dateStr = dateRef.current?.value;
+    if (!dateStr) {
+      alert("Information is not complete!");
+      return;
+    }
+    try {
+      const response: { content: boolean } = await myFetch({
+        method: "GET",
+        url: `${config["order.post.url"]}/?customerId=${customerId}&date=${dateStr}`,
+      }).then((res) => {
+        return res.json();
+      });
+      if (response.content) {
+        alert("Successfully checkout!");
+        setBooksInCart([]);
+      } else {
+        throw "server return false";
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server Error!");
+    }
+  };
 
   return (
     <form className="pay">
@@ -93,6 +127,7 @@ export default function Checkout({
             autoComplete="true"
             type="text"
             name="pay_date"
+            ref={dateRef}
           />
         </label>
         <div style={{ width: "10px" }}></div>
@@ -121,7 +156,11 @@ export default function Checkout({
         <div>{`$${sumPrice + shipPrice}`}</div>
       </div>
 
-      <button className="pay__submit flex-space-between">
+      <button
+        className="pay__submit flex-space-between"
+        onClick={handleCheckout}
+        tabIndex={-1}
+      >
         <div>{`$${sumPrice}`}</div>
         <div className="flex-space-between">
           <div style={{ marginRight: "10px" }}>Checkout</div>

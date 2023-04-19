@@ -1,7 +1,7 @@
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import React, { memo } from "react";
-import { Carousel } from "react-responsive-carousel";
 import carouselBooks from "assets/carousel";
+import { memo } from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const BookCarousel = memo(function BookCarousel() {
   const createItems = (carouselBooks: string[]) => {

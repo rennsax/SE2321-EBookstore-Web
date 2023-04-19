@@ -1,11 +1,10 @@
-import React from "react";
-
 export default function SearchBar() {
   return (
     <div className="search_bar">
       {/* <input type="text" autoComplete="off" className="input-bar" placeholder='search for books'/> */}
-      <form action="https://www.google.com/search">
+      <form action="">
         <select
+          aria-label="select-book-type"
           name="book_type"
           id="book-type-selector"
           className="search_bar__selector"
@@ -20,6 +19,8 @@ export default function SearchBar() {
           name="q"
           autoComplete="off"
           required
+          id="search-books"
+          aria-label="search-books"
         />
         <button className="search_bar__button" type="submit">
           Search

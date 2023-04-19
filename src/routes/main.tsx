@@ -1,4 +1,3 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
 import BookPage from "view/BookPage";
 import OrderPage from "view/OrderPage";

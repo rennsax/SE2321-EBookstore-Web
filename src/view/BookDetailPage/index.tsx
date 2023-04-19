@@ -1,10 +1,10 @@
-import "css/BookDetailPage.css";
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import BackToBookPage from "components/BackToBookPage";
-import { BookInfoListContext } from "view/HomePage";
 import Skeleton from "@mui/material/Skeleton";
+import { useQuery } from "@tanstack/react-query";
+import BackToBookPage from "components/BackToBookPage";
+import "css/BookDetailPage.css";
 import HTMLReactParser from "html-react-parser";
+import { useParams } from "react-router-dom";
+import myFetch, { FetchProps } from "utils/ajax";
 
 import config from "config/front.json";
 import BookInfo from "./BookInfo";
@@ -14,27 +14,26 @@ export default function BookDetailPage({
   setBooksInCart,
 }: BooksInCartState) {
   const { uuid } = useParams(); // "/home/bd/:uuid"
-  const bookContentList = useContext(BookInfoListContext);
-  const [loading, setLoading] = useState<boolean>(true);
 
-  const bookObj = (function (bookContentList: Array<BookContent>) {
-    let res: BookContent | undefined;
-    for (const bookContent of bookContentList) {
-      if (bookContent.uuid === uuid) {
-        res = bookContent;
-        break;
-      }
-    }
-    return res;
-  })(bookContentList);
+  const fetchBookProps: FetchProps = {
+    method: "GET",
+    url: `${config["book.url"]}/${uuid}`,
+  };
 
-  useEffect(() => {
-    // TODO loading condition
-    setLoading(false);
-  }, [bookContentList]);
+  const { data: bookContent, isSuccess } = useQuery<BookContent>({
+    queryKey: [`bookDetails${uuid}`, fetchBookProps],
+    queryFn: async () => {
+      const data = await myFetch(fetchBookProps).then((res) => {
+        return res.json();
+      });
+      return data;
+    },
+    retry: config["ajax.retry.maxTimes"],
+    retryDelay: config["ajax.retry.delay"],
+    refetchOnMount: false,
+  });
 
-  const { picId, title, description } = bookObj ?? {};
-
+  const { picId, title, description } = bookContent ?? {};
   return (
     <div className="bdp">
       <div className="bdp-top">
@@ -49,25 +48,25 @@ export default function BookDetailPage({
       />
       <div className="bdp-main">
         <div className="bdp-left">
-          {loading ? (
-            <Skeleton sx={{ height: "200px" }} />
-          ) : (
+          {isSuccess ? (
             <img
               src={`${config["book.picture.url"]}/${picId}.jpg`}
               alt={title}
               style={{ width: "240px" }}
             />
+          ) : (
+            <Skeleton sx={{ height: "200px" }} />
           )}
         </div>
         <div className="bdp-right">
-          {loading ? (
-            <Skeleton sx={{ height: "200px" }} />
-          ) : (
+          {isSuccess ? (
             <BookInfo
-              {...(bookObj as BookContent)}
+              {...(bookContent as BookContent)}
               booksInCart={booksInCart}
               setBooksInCart={setBooksInCart}
             />
+          ) : (
+            <Skeleton sx={{ height: "200px" }} />
           )}
         </div>
       </div>
@@ -80,7 +79,7 @@ export default function BookDetailPage({
       />
       <div className="bdp-bottom">
         <h3 className="bdp-bottom__title">Book description</h3>
-        {loading ? <></> : HTMLReactParser(description ?? "")}
+        {isSuccess ? HTMLReactParser(description ?? "") : <></>}
       </div>
     </div>
   );

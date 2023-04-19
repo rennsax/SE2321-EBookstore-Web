@@ -1,5 +1,5 @@
 interface BookInCart {
-  readonly bookId: string; // TODO use uuid to represent a book
+  readonly bookId: string;
   count: number;
 }
 
@@ -31,3 +31,12 @@ interface BookContent {
 }
 
 type ButtonEvent = React.SyntheticEvent | Event;
+
+interface CheckoutInfo {
+  customerId: number;
+  date: Date;
+  cardType?: "mastercard" | "visa" | "amex" | "paypal";
+  name?: string;
+  cardNumber?: string;
+  cvv?: string;
+}

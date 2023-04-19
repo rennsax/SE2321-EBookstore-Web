@@ -71,7 +71,7 @@ export default function BookInfo({
         </p>
       </div>
       <div className="flex-space-between">
-        <button className="book-details__btn" type="button">
+        <button className="book-details__btn" type="button" tabIndex={-1}>
           <span>{`$${price}`}</span>
           <span>Buy Now</span>
         </button>
@@ -82,6 +82,7 @@ export default function BookInfo({
           }
           onClick={handleClick}
           type="button"
+          tabIndex={-1}
         >
           {/* <span></span> */}
           <span

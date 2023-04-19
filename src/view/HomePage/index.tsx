@@ -1,18 +1,16 @@
 import "css/HomePage.css";
 
-import React, { useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 
 import SideBar from "components/SideBar";
 import CartPage from "view/CartPage";
 import BookDetailPage from "view/BookDetailPage";
 import HeaderInfo from "components/HeaderInfo";
-import myFetch, { FetchProps } from "utils/ajax";
-import timer from "utils/timer";
 
-import configurations from "config/front.json";
+import config from "config/front.json";
 
-export const BookInfoListContext = React.createContext<BookContent[]>([]);
+export const UserIdContext = createContext<number>(1);
 
 // Profile bar control
 const hideProfile = (e: ButtonEvent) => {
@@ -24,8 +22,9 @@ const hideProfile = (e: ButtonEvent) => {
 
 function HomePage() {
   // state: the books in cart
+  // TODO synchronize with backend
   const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>(
-    configurations["cart.originalBooks"]
+    config["cart.originalBooks"]
   );
 
   // handle: when switch routes, scroll to the top
@@ -37,44 +36,8 @@ function HomePage() {
     });
   }, [pathname]);
 
-  // handle: send ajax, receive the json and provide it as a context
-  // I used to try to use reducer hook, ending to find that `useReducer` doesn't support async function
-  const [bookInfoList, setBookInfoList] = React.useState<BookContent[]>([]);
-
-  useEffect(() => {
-    let times: number = configurations["ajax.maxTryTimes"];
-    const fetchBookPops: FetchProps = {
-      method: "GET",
-      url: "http://localhost:8080/book?number=8",
-    };
-
-    let fetching = true;
-    const requestBook = async () => {
-      while (fetching && times--) {
-        await timer(1000);
-        try {
-          const data: BookContent[] = await myFetch(fetchBookPops).then(
-            (res) => {
-              return res.json();
-            }
-          );
-          setBookInfoList(data);
-          fetching = false;
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    };
-
-    requestBook();
-
-    return () => {
-      fetching = false;
-    };
-  }, []);
-
   return (
-    <BookInfoListContext.Provider value={bookInfoList}>
+    <UserIdContext.Provider value={1}>
       <div className="home" onClick={hideProfile}>
         <div className="header">
           <HeaderInfo />
@@ -114,7 +77,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-    </BookInfoListContext.Provider>
+    </UserIdContext.Provider>
   );
 }
 

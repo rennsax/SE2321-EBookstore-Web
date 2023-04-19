@@ -55,6 +55,7 @@
   border-radius: 5px;
   margin: 16px auto;
   padding: 0 10px;
+  overflow: hidden;
 }
 .cart-card__info {
   width: 260px;
@@ -68,12 +69,13 @@
   width: 64px;
   display: inline-block;
   vertical-align: middle;
+  margin-right: 10px;
 }
 .cart-card__info__text {
   flex-direction: column;
   text-align: left;
   align-items: stretch;
-  width: 180px;
+  width: 200px;
   height: 84px;
   padding: 8px 4px;
 }
@@ -86,7 +88,6 @@
 }
 .cart-card__right {
   width: 160px;
-  height: 40px;
 }
 .cart-card__right__delete {
   display: flex;
@@ -97,6 +98,12 @@
 }
 .cart-card__right__delete:hover {
   cursor: pointer;
+}
+.cart-card__right__num {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
 }
 .pay {
   color: white;
@@ -210,4 +217,18 @@
 .bi-arrow-left-square {
   width: 20px;
   height: 20px;
+}
+.bi-caret-up-fill:hover {
+  cursor: pointer;
+}
+.bi-caret-down-fill:hover {
+  cursor: pointer;
+}
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+[data-text]::after {
+  content: attr(data-text);
 }

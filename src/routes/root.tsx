@@ -1,8 +1,7 @@
-import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import LoginPage from "view/LoginPage";
 import HomePage from "view/HomePage";
+import LoginPage from "view/LoginPage";
 
 import homePageElement from "./main";
 

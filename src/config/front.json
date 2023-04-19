@@ -1,9 +1,14 @@
 {
-  "ajax.maxTryTimes": 3,
+  "ajax.retry.maxTimes": 3,
+  "ajax.retry.delay": 3000,
   "bookPage.perRow": 4,
   "book.picture.url": "http://localhost:8080/images",
   "cart.originalBooks": [
     {"bookId": "a4a8160c-de04-11ed-9b90-4ca34a8ad48b", "count": 1},
     {"bookId": "a4a88790-de04-11ed-9b90-4ca34a8ad48b", "count": 1}
-  ]
+  ],
+  "book.url":  "http://localhost:8080/book",
+  "login.url": "http://localhost:8080/login",
+  "cart.shipPrice": 4,
+  "order.post.url": "http://localhost:8080/order/submit"
 }
