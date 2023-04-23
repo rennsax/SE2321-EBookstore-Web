@@ -17,7 +17,7 @@ export default function BookDetailPage({
 
   const fetchBookProps: FetchProps = {
     method: "GET",
-    url: `${config["book.url"]}/${uuid}`,
+    url: `${config["url.book.info"]}/${uuid}`,
   };
 
   const { data: bookContent, isSuccess } = useQuery<BookContent>({
@@ -50,7 +50,7 @@ export default function BookDetailPage({
         <div className="bdp-left">
           {isSuccess ? (
             <img
-              src={`${config["book.picture.url"]}/${picId}.jpg`}
+              src={`${config["url.book.picture"]}/${picId}.jpg`}
               alt={title}
               style={{ width: "240px" }}
             />

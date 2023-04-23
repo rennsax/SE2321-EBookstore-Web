@@ -26,7 +26,7 @@ export default function BookCard({
         ) : (
           <img
             alt={"Picture of " + title}
-            src={`${config["book.picture.url"]}/${picId}.jpg`}
+            src={`${config["url.book.picture"]}/${picId}.jpg`}
           ></img>
         )}
       </div>

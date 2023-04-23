@@ -1,9 +1,9 @@
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
-import { memo, useContext, useRef } from "react";
 import config from "config/front.json";
-import { UserIdContext } from "view/HomePage";
+import { memo, useContext, useRef } from "react";
 import myFetch from "utils/ajax";
+import { UserIdContext } from "view/HomePage";
 
 interface CardTypeProps {
   typePic: string;

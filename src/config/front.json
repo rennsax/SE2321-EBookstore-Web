@@ -2,13 +2,27 @@
   "ajax.retry.maxTimes": 3,
   "ajax.retry.delay": 3000,
   "bookPage.perRow": 4,
-  "book.picture.url": "http://localhost:8080/images",
   "cart.originalBooks": [
-    {"bookId": "a4a8160c-de04-11ed-9b90-4ca34a8ad48b", "count": 1},
-    {"bookId": "a4a88790-de04-11ed-9b90-4ca34a8ad48b", "count": 1}
+    {
+      "bookId": "a4a8160c-de04-11ed-9b90-4ca34a8ad48b",
+      "count": 1
+    },
+    {
+      "bookId": "a4a88790-de04-11ed-9b90-4ca34a8ad48b",
+      "count": 1
+    }
   ],
-  "book.url":  "http://localhost:8080/book",
   "login.url": "http://localhost:8080/login",
   "cart.shipPrice": 4,
-  "order.post.url": "http://localhost:8080/order/submit"
+  "order.post.url": "http://localhost:8080/order/submit",
+  "book.picture.url": "http://localhost:8080/images",
+  "url.carousel.picture": "http://localhost:8080/carousel",
+  "url.book.picture": "http://localhost:8080/images",
+  "url.book.info": "http://localhost:8080/book",
+  "__url.book.info__": [
+    "url to get basic book info",
+    "/{uuid}: get book by uuid;",
+    "?number=x: get x books' info, x <= 20"
+  ],
+  "url.book.cart.control": "http://localhost:8080/order/current"
 }

@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
 import { FlagFill, Cart4 } from "assets/icons";
+import timer from "utils/timer";
+import myFetch, { FetchProps } from "utils/ajax";
+import config from "config/front.json";
 
 type BookInfoProps = BookContent & BooksInCartState;
 
@@ -11,50 +14,64 @@ export default function BookInfo({
   price,
   isbn,
   intro,
-  booksInCart,
-  setBooksInCart,
-}: BookInfoProps) {
-  const iconRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLElement>(null);
+}: // booksInCart,
+// setBooksInCart,
+BookInfoProps) {
+  const bnt2Ref = useRef<HTMLButtonElement>(null);
 
-  const handleClick = (e: React.SyntheticEvent | Event): void => {
+  const buyBookByUuid = async (uuid: string) => {
+    const buyProp: FetchProps = {
+      method: "GET",
+      url: `${config["url.book.cart.control"]}/${uuid}`,
+    };
+    const res = await myFetch(buyProp).then((res) => {
+      return res.json();
+    });
+    return res;
+  };
+
+  const handleClick = async (e: React.SyntheticEvent | Event) => {
     e.preventDefault();
 
-    const iconClass = iconRef?.current?.classList as DOMTokenList;
+    const btn = bnt2Ref.current as HTMLButtonElement;
+    const iconElement = btn.children[0] as HTMLElement;
+    const textElement = btn.children[1] as HTMLElement;
+
+    const iconClass = iconElement.classList;
     // If added before, return
     if (
       iconClass.length >= 2 ||
-      (e.target as HTMLElement).classList.contains("book-details__btn--disable")
+      btn.classList.contains("book-details__btn--disable")
     ) {
+      console.log("don't click again!");
       return;
     }
-    (e.target as HTMLElement).classList.add("book-details__btn--disable");
+    btn.classList.add("book-details__btn--disable");
 
-    if (textRef.current) textRef.current.style.opacity = "0";
+    textElement.style.opacity = "0";
     iconClass.add("book-details__btn__cart--middle");
-    new Promise<void>((resolve) => {
-      setTimeout(() => {
-        iconClass.remove("book-details__btn__cart--middle");
-        iconClass.add("book-details__btn__cart--end");
-        resolve();
-      }, 1000);
-    })
-      .then(() => {
-        const textElement = textRef.current as HTMLElement;
-        textElement.classList.add("book-details__btn__text--added");
-        textElement.innerText = "Added!";
-        textElement.style.opacity = "100";
-      })
-      .then(() => {
-        setBooksInCart((previous) => {
-          // TODO enable add books multiple time
-          return [...previous, { bookId: uuid, count: 1 }];
-        });
-      });
-  };
+    await timer(1000);
+    iconClass.remove("book-details__btn__cart--middle");
+    iconClass.add("book-details__btn__cart--end");
 
-  const bought: boolean =
-    booksInCart.filter((book) => book.bookId === uuid).length !== 0;
+    const res: SuccessInfo = await buyBookByUuid(uuid);
+    console.log(res.content);
+
+    textElement.classList.add("book-details__btn__text--added");
+    const original_text = textElement.innerText;
+    textElement.innerText = "Added!";
+    textElement.style.opacity = "100";
+    await timer(1000);
+    textElement.style.opacity = "0";
+    await timer(500);
+    textElement.classList.remove("book-details__btn__text--added");
+    iconClass.remove("book-details__btn__cart--end");
+    textElement.innerText = original_text;
+    textElement.style.opacity = "100";
+
+    await timer(1000);
+    btn.classList.remove("book-details__btn--disable");
+  };
 
   return (
     <div className="book-details">
@@ -77,32 +94,17 @@ export default function BookInfo({
         </button>
         <div style={{ width: "16px" }}></div>
         <button
-          className={
-            "book-details__btn" + (bought ? " book-details__btn--disable" : "")
-          }
+          className={"book-details__btn"}
           onClick={handleClick}
           type="button"
           tabIndex={-1}
+          ref={bnt2Ref}
         >
           {/* <span></span> */}
-          <span
-            className={
-              "book-details__btn__cart" +
-              (bought ? " book-details__btn__cart--end" : "")
-            }
-            ref={iconRef}
-          >
+          <span className={"book-details__btn__cart"}>
             <Cart4 />
           </span>
-          <span
-            ref={textRef}
-            className={
-              "book-details__btn__text" +
-              (bought ? " book-details__btn__text--added" : "")
-            }
-          >
-            {!bought ? "Add to cart" : "Added!"}
-          </span>
+          <span className={"book-details__btn__text"}>{"Add to cart"}</span>
         </button>
       </div>
     </div>

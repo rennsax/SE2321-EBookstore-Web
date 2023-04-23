@@ -1,0 +1,3 @@
+type SuccessInfo = {
+  content: boolean;
+};

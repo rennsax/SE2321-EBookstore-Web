@@ -12,7 +12,7 @@ export default function BookList() {
   const fetchProps: FetchProps = {
     method: "GET",
     // Backend: query param `number`
-    url: `${config["book.url"]}?number=${perRow * 2}`,
+    url: `${config["url.book.info"]}?number=${perRow * 2}`,
   };
 
   const {

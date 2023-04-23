@@ -9,7 +9,7 @@ import Checkout from "./Checkout";
 // TODO the avatar should not be saved in test directory
 import avatar from "assets/test/Linus.png";
 import myFetch from "utils/ajax";
-import BookBuyCard from "./BookBuy";
+import BookBuyCard from "./BookBuyCard";
 
 export default function CartPage({
   booksInCart,
@@ -26,7 +26,7 @@ export default function CartPage({
       queryFn: async () => {
         const data = await myFetch({
           method: "GET",
-          url: `${config["book.url"]}/${book.bookId}`,
+          url: `${config["url.book.info"]}/${book.bookId}`,
         }).then((res) => {
           return res.json();
         });

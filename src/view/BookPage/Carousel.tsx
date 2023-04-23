@@ -1,18 +1,19 @@
-import carouselBooks from "assets/carousel";
+import config from "config/front.json";
 import { memo } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const BookCarousel = memo(function BookCarousel() {
-  const createItems = (carouselBooks: string[]) => {
+  const createItems = (sourceUrl: string) => {
     const res: JSX.Element[] = [];
-    for (let i = 0; i < carouselBooks.length; ++i) {
+    // TODO fixed number?
+    for (let i = 0; i < 4; ++i) {
       res.push(
         <img
           className="carousel-pic"
           alt={"carousel picture" + new Number(i).toString()}
           key={"carousel picture" + new Number(i).toString()}
-          src={carouselBooks[i]}
+          src={`${sourceUrl}/book${i + 1}.jpg`}
         />
       );
     }
@@ -28,7 +29,7 @@ const BookCarousel = memo(function BookCarousel() {
           showThumbs={false}
           infiniteLoop={true}
         >
-          {createItems(carouselBooks)}
+          {createItems(config["url.carousel.picture"])}
         </Carousel>
       </div>
     </div>

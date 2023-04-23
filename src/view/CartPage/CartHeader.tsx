@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function CartHeader({ number }: { number: number }) {
   return (
     <div className="cart-header">

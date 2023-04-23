@@ -1,12 +1,12 @@
 import "css/HomePage.css";
 
 import React, { createContext, useEffect } from "react";
-import { Routes, Route, Outlet, useLocation } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 
-import SideBar from "components/SideBar";
-import CartPage from "view/CartPage";
-import BookDetailPage from "view/BookDetailPage";
 import HeaderInfo from "components/HeaderInfo";
+import SideBar from "components/SideBar";
+import BookDetailPage from "view/BookDetailPage";
+import CartPage from "view/CartPage";
 
 import config from "config/front.json";
 
