@@ -1,17 +1,17 @@
-interface BookInCart {
-  readonly bookId: string;
-  count: number;
+interface BookOrdered {
+  readonly uuid: string;
+  quantity: number;
 }
 
-type SetBooksInCartHook = React.Dispatch<React.SetStateAction<BookInCart[]>>;
+type SetBooksInCartHook = React.Dispatch<React.SetStateAction<BookOrdered[]>>;
 
 interface BooksInCartState {
-  booksInCart: BookInCart[];
+  booksInCart: BookOrdered[];
   setBooksInCart: SetBooksInCartHook;
 }
 
-interface BookContent {
-  uuid: string; // primary key
+interface Book {
+  readonly uuid: string; // primary key
   title: string;
   author: string;
   price: number;

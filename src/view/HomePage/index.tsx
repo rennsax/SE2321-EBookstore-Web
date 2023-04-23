@@ -23,7 +23,7 @@ const hideProfile = (e: ButtonEvent) => {
 function HomePage() {
   // state: the books in cart
   // TODO synchronize with backend
-  const [booksInCart, setBooksInCart] = React.useState<BookInCart[]>(
+  const [booksInCart, setBooksInCart] = React.useState<BookOrdered[]>(
     config["cart.originalBooks"]
   );
 

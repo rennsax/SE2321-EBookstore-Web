@@ -11,9 +11,6 @@ import "css/LoginPage.css";
 import { useRef } from "react";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
-type LoginResult = {
-  content: boolean;
-};
 
 export default function LoginPage() {
   // uncontrolled component
@@ -44,10 +41,10 @@ export default function LoginPage() {
       },
     };
     try {
-      const response: LoginResult = await myFetch(fetchProps).then((res) => {
+      const response: SuccessInfo = await myFetch(fetchProps).then((res) => {
         return res.json();
       });
-      if (response.content === true) {
+      if (response.flag === true) {
         setAlertType("success");
         await timer(1000);
         navigate("/home/books");

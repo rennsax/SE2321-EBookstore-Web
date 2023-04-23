@@ -11,8 +11,8 @@ export default function BookList() {
 
   const fetchProps: FetchProps = {
     method: "GET",
-    // Backend: query param `number`
-    url: `${config["url.book.info"]}?number=${perRow * 2}`,
+    // Backend: query param `limit`
+    url: `${config["url.book.info"]}?limit=${perRow * 2}`,
   };
 
   const {
@@ -26,7 +26,7 @@ export default function BookList() {
       const data = await myFetch(fetchProps).then((res) => {
         return res.json();
       });
-      return data as BookContent[];
+      return data as Book[];
     },
     retry: config["ajax.retry.maxTimes"],
     retryDelay: config["ajax.retry.delay"],

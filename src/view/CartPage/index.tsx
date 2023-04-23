@@ -19,14 +19,14 @@ export default function CartPage({
   const queries: QueryOptions[] = [];
 
   booksInCart.forEach((book) => {
-    bookCountSum += book.count;
+    bookCountSum += book.quantity;
     // set queries
     queries.push({
-      queryKey: ["bookInCart", book.bookId],
+      queryKey: ["bookInCart", book.uuid],
       queryFn: async () => {
         const data = await myFetch({
           method: "GET",
-          url: `${config["url.book.info"]}/${book.bookId}`,
+          url: `${config["url.book.info"]}/${book.uuid}`,
         }).then((res) => {
           return res.json();
         });
@@ -37,7 +37,7 @@ export default function CartPage({
     });
   });
 
-  const results = useQueries<BookContent[]>({
+  const results = useQueries<Book[]>({
     queries: queries,
   });
 
@@ -48,11 +48,11 @@ export default function CartPage({
   results.forEach((res, i) => {
     const { data, isSuccess } = res;
     if (isSuccess) {
-      sumPrice += booksInCart[i].count * (data as BookContent).price;
+      sumPrice += booksInCart[i].quantity * (data as Book).price;
       bookBuyElements.push(
         <BookBuyCard
-          bookContent={data as BookContent}
-          count={booksInCart[i].count}
+          bookContent={data as Book}
+          count={booksInCart[i].quantity}
           booksInCart={booksInCart}
           setBooksInCart={setBooksInCart}
           key={`bookCartCard${i}`}

@@ -64,23 +64,34 @@ export default function Checkout({
       alert("Information is not complete!");
       return;
     }
-    try {
-      const response: { content: boolean } = await myFetch({
-        method: "GET",
-        url: `${config["order.post.url"]}/?customerId=${customerId}&date=${dateStr}`,
-      }).then((res) => {
-        return res.json();
-      });
-      if (response.content) {
-        alert("Successfully checkout!");
-        setBooksInCart([]);
-      } else {
-        throw "server return false";
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Server Error!");
-    }
+    const res = await myFetch({
+      method: "POST",
+      url: `${config["url.checkout"]}`,
+      params: {
+        orderId: 2,
+      },
+    }).then((res) => {
+      return res.json();
+    });
+    alert("Successfully checkout!");
+    setBooksInCart([]);
+    // try {
+    //   const response: { content: boolean } = await myFetch({
+    //     method: "GET",
+    //     url: `${config["order.post.url"]}/?customerId=${customerId}&date=${dateStr}`,
+    //   }).then((res) => {
+    //     return res.json();
+    //   });
+    //   if (response.content) {
+    //     alert("Successfully checkout!");
+    //     setBooksInCart([]);
+    //   } else {
+    //     throw "server return false";
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    //   alert("Server Error!");
+    // }
   };
 
   return (

@@ -2,11 +2,7 @@ import Skeleton from "@mui/material/Skeleton";
 import config from "config/front.json";
 import { useNavigate } from "react-router-dom";
 
-export default function BookCard({
-  bookContent,
-}: {
-  bookContent?: BookContent;
-}) {
+export default function BookCard({ bookContent }: { bookContent?: Book }) {
   const navigate = useNavigate();
   /* if no bookContent is provided, return a skeleton */
   const isLoading = bookContent === undefined;

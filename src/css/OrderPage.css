@@ -1,0 +1,47 @@
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+.order-item__left {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.order-item__right {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 18px;
+}
+.order-item__pic-container {
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  margin-right: 20px;
+}
+.order-item__pic {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+.order-item__info {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  max-width: 300px;
+  padding: 10px 0;
+}
+.order-item__info__title {
+  font-size: 20px;
+}
+.order-item__info__author {
+  margin: 0;
+}

@@ -4,7 +4,7 @@ import timer from "utils/timer";
 import myFetch, { FetchProps } from "utils/ajax";
 import config from "config/front.json";
 
-type BookInfoProps = BookContent & BooksInCartState;
+type BookInfoProps = Book & BooksInCartState;
 
 export default function BookInfo({
   uuid,
@@ -55,7 +55,7 @@ BookInfoProps) {
     iconClass.add("book-details__btn__cart--end");
 
     const res: SuccessInfo = await buyBookByUuid(uuid);
-    console.log(res.content);
+    console.log(res.flag);
 
     textElement.classList.add("book-details__btn__text--added");
     const original_text = textElement.innerText;

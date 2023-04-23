@@ -20,7 +20,7 @@ export default function BookDetailPage({
     url: `${config["url.book.info"]}/${uuid}`,
   };
 
-  const { data: bookContent, isSuccess } = useQuery<BookContent>({
+  const { data: bookContent, isSuccess } = useQuery<Book>({
     queryKey: [`bookDetails${uuid}`, fetchBookProps],
     queryFn: async () => {
       const data = await myFetch(fetchBookProps).then((res) => {
@@ -61,7 +61,7 @@ export default function BookDetailPage({
         <div className="bdp-right">
           {isSuccess ? (
             <BookInfo
-              {...(bookContent as BookContent)}
+              {...(bookContent as Book)}
               booksInCart={booksInCart}
               setBooksInCart={setBooksInCart}
             />

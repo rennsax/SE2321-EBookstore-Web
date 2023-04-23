@@ -1,3 +1,3 @@
 type SuccessInfo = {
-  content: boolean;
+  readonly flag: boolean;
 };

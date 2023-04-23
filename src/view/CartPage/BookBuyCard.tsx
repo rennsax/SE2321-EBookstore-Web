@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import config from "config/front.json";
 
 interface BookBuyInfo {
-  bookContent: BookContent;
+  bookContent: Book;
   count: number;
 }
 
@@ -20,14 +20,14 @@ export default function BookBuyCard({
 
   const handleDelete = (e: ButtonEvent): void => {
     e.preventDefault();
-    setBooksInCart(booksInCart.filter((book) => book.bookId !== uuid));
+    setBooksInCart(booksInCart.filter((book) => book.uuid !== uuid));
   };
 
   const handleIncrease = (): void => {
     const booksInCartNew = [...booksInCart];
     for (const book of booksInCartNew) {
-      if (book.bookId === uuid) {
-        book.count += 1;
+      if (book.uuid === uuid) {
+        book.quantity += 1;
         break;
       }
     }
@@ -37,12 +37,12 @@ export default function BookBuyCard({
   const handleDecrease = (): void => {
     const booksInCartNew = [...booksInCart];
     for (const book of booksInCartNew) {
-      if (book.bookId === uuid) {
-        book.count -= 1;
+      if (book.uuid === uuid) {
+        book.quantity -= 1;
         break;
       }
     }
-    setBooksInCart(booksInCartNew.filter((book) => book.count > 0));
+    setBooksInCart(booksInCartNew.filter((book) => book.quantity > 0));
   };
 
   return (
