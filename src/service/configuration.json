@@ -1,0 +1,4 @@
+{
+  "ajax.retry.maxTimes": 3,
+  "ajax.retry.delay": 3000
+}

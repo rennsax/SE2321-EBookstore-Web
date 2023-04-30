@@ -1,11 +1,10 @@
-import React from "react";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 import { Link } from "react-router-dom";
 
@@ -39,7 +38,7 @@ export default function ProfileBar() {
 
   return (
     <div className="profile-bar-constructor">
-      <div className="profile-bar" id="profile-bar">
+      <div className="profile-bar profile-bar--display" id="profile-bar">
         <div className="profile-bar__title">
           <div>Welcome,</div>
           <div className="profile-bar__title__name">Linus Torvalds</div>

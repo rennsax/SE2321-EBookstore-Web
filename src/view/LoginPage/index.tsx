@@ -3,16 +3,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import myFetch, { FetchProps } from "utils/ajax";
 import timer from "utils/timer";
 
-import config from "config/front.json";
 import "css/LoginPage.css";
 import { useRef } from "react";
+import login from "service/LoginServer";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
 
-export default function LoginPage() {
+export default function LoginPage({
+  setAccount,
+}: {
+  setAccount: (accountNew: string) => void;
+}) {
   // uncontrolled component
   const accountInputRef = useRef<HTMLInputElement>(null);
   const passwdInputRef = useRef<HTMLInputElement>(null);
@@ -28,33 +31,25 @@ export default function LoginPage() {
     }
     setIsWaiting(true);
 
-    const account = accountInputRef.current?.value;
-    const passwd = passwdInputRef.current?.value;
+    const account = accountInputRef.current?.value as string;
+    const passwd = passwdInputRef.current?.value as string;
 
     await timer(1000);
-    const fetchProps: FetchProps = {
-      method: "POST",
-      url: config["login.url"],
-      params: {
-        account: account,
-        passwd: passwd,
-      },
-    };
-    try {
-      const response: SuccessInfo = await myFetch(fetchProps).then((res) => {
-        return res.json();
-      });
-      if (response.flag === true) {
+    const loginResult = await login(account, passwd);
+    switch (loginResult) {
+      case "response error":
+        setAlertType("response error");
+        break;
+      case "ok":
         setAlertType("success");
         await timer(1000);
         navigate("/home/books");
-      } else {
+        setAccount(account);
+        break;
+      case "wrong":
         setAlertType("login error");
-      }
-    } catch (err) {
-      console.error(err);
-      setAlertType("response error");
     }
+
     setIsWaiting(false);
   };
 

@@ -1,44 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
-import myFetch, { FetchProps } from "utils/ajax";
 import timer from "utils/timer";
 import BookCard from "./BookCard";
 
 import config from "config/front.json";
+import { getBookListForDisplay } from "service/BookService";
 
 export default function BookList() {
   const perRow = config["bookPage.perRow"];
-
-  const fetchProps: FetchProps = {
-    method: "GET",
-    // Backend: query param `limit`
-    url: `${config["url.book.info"]}?limit=${perRow * 2}`,
-  };
 
   const {
     isSuccess,
     data: bookContentList,
     error,
   } = useQuery({
-    queryKey: ["bookListInformation", fetchProps],
+    queryKey: ["bookListInformation", perRow],
     queryFn: async () => {
       await timer(1000);
-      const data = await myFetch(fetchProps).then((res) => {
-        return res.json();
-      });
+      const data = await getBookListForDisplay(perRow * 2);
       return data as Book[];
     },
     retry: config["ajax.retry.maxTimes"],
     retryDelay: config["ajax.retry.delay"],
     refetchOnMount: false,
-    onSuccess: () => {
-      console.log("Fetched!");
-    }, // TODO debug
     onError: () => {
       console.log(error);
     },
   });
-  console.log(bookContentList); // TODO debug
 
   const itemList = useMemo(() => {
     const book_cnt = perRow * 2;

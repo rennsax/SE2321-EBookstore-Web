@@ -1,4 +1,3 @@
-import React from "react";
 import InfoRow from "./InfoRow";
 
 export default function InfoCard() {
@@ -11,7 +10,6 @@ export default function InfoCard() {
   const infoRows = (() => {
     const infoEle: JSX.Element[] = [];
     infoList.forEach((info_e) => {
-      // console.log({...info_e});
       infoEle.push(<InfoRow {...info_e} key={info_e["infoType"]} />);
       infoEle.push(<hr key={info_e["infoType"] + "_hr"} />);
     });

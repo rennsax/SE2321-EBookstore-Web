@@ -1,18 +1,21 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import HomePage from "view/HomePage";
-import LoginPage from "view/LoginPage";
+// import LoginPage from "view/LoginPage";
 
 import homePageElement from "./main";
 
+/**
+ * @deprecated
+ */
 const router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
+  // {
+  //   path: "/login",
+  //   element: <LoginPage />,
+  // },
   {
     path: "/home/*",
-    element: <HomePage />,
+    element: <HomePage account="1"/>,
     children: homePageElement,
   },
   // TODO do it on your server (probably the best solution)

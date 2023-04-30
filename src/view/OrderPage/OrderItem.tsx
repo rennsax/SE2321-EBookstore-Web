@@ -3,7 +3,6 @@ import myFetch from "utils/ajax";
 import config from "config/front.json";
 
 export default function OrderItem({ uuid, quantity }: BookOrdered) {
-  console.log(uuid, quantity);
   const { data, isSuccess } = useQuery({
     queryKey: [uuid, "orderItem"],
     queryFn: async () => {
@@ -19,7 +18,6 @@ export default function OrderItem({ uuid, quantity }: BookOrdered) {
 
   if (isSuccess) {
     const { title, picId, price, author } = data;
-    console.log(data);
     return (
       <div className="order-item">
         <div className="order-item__left">

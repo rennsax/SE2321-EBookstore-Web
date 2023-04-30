@@ -4,15 +4,12 @@ import BackToBookPage from "components/BackToBookPage";
 import "css/BookDetailPage.css";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import myFetch, { FetchProps } from "utils/ajax";
+import myFetch from "utils/ajax";
 
 import config from "config/front.json";
 import BookInfo from "./BookInfo";
 
-export default function BookDetailPage({
-  booksInCart,
-  setBooksInCart,
-}: BooksInCartState) {
+export default function BookDetailPage() {
   const { uuid } = useParams(); // "/home/bd/:uuid"
 
   const fetchBookProps: FetchProps = {
@@ -60,11 +57,7 @@ export default function BookDetailPage({
         </div>
         <div className="bdp-right">
           {isSuccess ? (
-            <BookInfo
-              {...(bookContent as Book)}
-              booksInCart={booksInCart}
-              setBooksInCart={setBooksInCart}
-            />
+            <BookInfo {...(bookContent as Book)} />
           ) : (
             <Skeleton sx={{ height: "200px" }} />
           )}

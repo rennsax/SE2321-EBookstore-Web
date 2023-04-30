@@ -1,19 +1,21 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import ProfileBar from "./ProfileBar";
 import logo from "assets/bookstore-logo.png";
 import avatar from "assets/test/Linus.png";
 import "css/HeaderInfo.css";
+import { useState } from "react";
+import ProfileBar from "./ProfileBar";
 
 export default function HeaderInfo() {
-  const showProfile = () => {
-    const profile = document.getElementById("profile-bar");
-    const classes = profile?.classList;
-    if (classes?.contains("profile-bar--display"))
-      classes.remove("profile-bar--display");
-    else classes?.add("profile-bar--display");
-  };
+  const [showProfile, setShowProfile] = useState<boolean>(false);
+
+  // const showProfile = () => {
+  //   const profile = document.getElementById("profile-bar");
+  //   const classes = profile?.classList;
+  //   if (classes?.contains("profile-bar--display"))
+  //     classes.remove("profile-bar--display");
+  //   else classes?.add("profile-bar--display");
+  // };
 
   const navigate = useNavigate();
 
@@ -32,12 +34,15 @@ export default function HeaderInfo() {
       <div className="header-container__user flex-space-between">
         <img
           className="header-container__user__avatar display-circle"
-          onClick={showProfile}
+          // onClick={showProfile}
+          onClick={() => {
+            setShowProfile((isShow) => !isShow);
+          }}
           src={avatar}
           alt="user-avatar"
           id="active-profile"
         />
-        <ProfileBar />
+        {showProfile ? <ProfileBar /> : <></>}
       </div>
     </div>
   );

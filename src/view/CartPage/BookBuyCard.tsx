@@ -2,47 +2,41 @@ import { CaretDown, CaretUp, Trash } from "assets/icons";
 import { Link } from "react-router-dom";
 
 import config from "config/front.json";
+import { updateOrderItem } from "service/OrderService";
+import { UserInfoContext } from "view/HomePage";
+import { useContext } from "react";
 
 interface BookBuyInfo {
-  bookContent: Book;
-  count: number;
+  book: Book;
+  quantity: number;
 }
 
-export type BookBuyProps = BookBuyInfo & BooksInCartState;
+export type BookBuyProps = BookBuyInfo & {
+  refetch: () => void;
+};
 
-export default function BookBuyCard({
-  count,
-  bookContent,
-  booksInCart,
-  setBooksInCart,
-}: BookBuyProps) {
-  const { uuid, picId, author, title, price } = bookContent;
+export default function BookBuyCard({ quantity, book, refetch }: BookBuyProps) {
+  const { uuid, picId, author, title, price } = book;
+
+  const orderId = useContext(UserInfoContext)?.orderId as number;
 
   const handleDelete = (e: ButtonEvent): void => {
     e.preventDefault();
-    setBooksInCart(booksInCart.filter((book) => book.uuid !== uuid));
+    updateOrderItem(orderId, uuid, -quantity).then(() => {
+      refetch();
+    });
   };
 
   const handleIncrease = (): void => {
-    const booksInCartNew = [...booksInCart];
-    for (const book of booksInCartNew) {
-      if (book.uuid === uuid) {
-        book.quantity += 1;
-        break;
-      }
-    }
-    setBooksInCart(booksInCartNew);
+    updateOrderItem(orderId, uuid, 1).then(() => {
+      refetch();
+    });
   };
 
   const handleDecrease = (): void => {
-    const booksInCartNew = [...booksInCart];
-    for (const book of booksInCartNew) {
-      if (book.uuid === uuid) {
-        book.quantity -= 1;
-        break;
-      }
-    }
-    setBooksInCart(booksInCartNew.filter((book) => book.quantity > 0));
+    updateOrderItem(orderId, uuid, -1).then(() => {
+      refetch();
+    });
   };
 
   return (
@@ -68,7 +62,7 @@ export default function BookBuyCard({
           <div className="icon-container" onClick={handleIncrease}>
             <CaretUp />
           </div>
-          <span data-text={count}></span>
+          <span data-text={quantity}></span>
           <div className="icon-container" onClick={handleDecrease}>
             <CaretDown />
           </div>

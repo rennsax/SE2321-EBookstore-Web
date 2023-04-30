@@ -1,9 +1,7 @@
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
 import config from "config/front.json";
-import { memo, useContext, useRef } from "react";
-import myFetch from "utils/ajax";
-import { UserIdContext } from "view/HomePage";
+import { memo, useRef } from "react";
 
 interface CardTypeProps {
   typePic: string;
@@ -46,15 +44,12 @@ const CardTypeList = memo(function CardTypeList() {
 export default function Checkout({
   avatar,
   sumPrice,
-  setBooksInCart,
 }: {
   avatar: string;
   sumPrice: number;
-  setBooksInCart: SetBooksInCartHook;
 }) {
   const shipPrice = config["cart.shipPrice"];
   const dateRef = useRef<HTMLInputElement>(null);
-  const customerId = useContext(UserIdContext);
 
   const handleCheckout = async (e: ButtonEvent) => {
     // TODO handleCheckout
@@ -64,17 +59,6 @@ export default function Checkout({
       alert("Information is not complete!");
       return;
     }
-    const res = await myFetch({
-      method: "POST",
-      url: `${config["url.checkout"]}`,
-      params: {
-        orderId: 2,
-      },
-    }).then((res) => {
-      return res.json();
-    });
-    alert("Successfully checkout!");
-    setBooksInCart([]);
     // try {
     //   const response: { content: boolean } = await myFetch({
     //     method: "GET",

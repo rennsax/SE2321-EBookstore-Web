@@ -1,61 +1,66 @@
-import { QueryOptions, useQueries } from "@tanstack/react-query";
+import { UseQueryOptions, useQueries, useQuery } from "@tanstack/react-query";
 import "css/CartPage.css";
 
 import BackToBookPage from "components/BackToBookPage";
-import config from "config/front.json";
 import CartHeader from "./CartHeader";
 import Checkout from "./Checkout";
 
 // TODO the avatar should not be saved in test directory
 import avatar from "assets/test/Linus.png";
-import myFetch from "utils/ajax";
+import { useContext } from "react";
+import { createQueryOptionsBookOrdered } from "service/BookService";
+import { getBookOrderedList } from "service/OrderService";
+import { UserInfoContext } from "view/HomePage";
 import BookBuyCard from "./BookBuyCard";
 
-export default function CartPage({
-  booksInCart,
-  setBooksInCart,
-}: BooksInCartState) {
+export default function CartPage() {
+  /**
+   * Tool state, children components can use the state
+   * to notify the parent component, triggering a re-render.
+   */
+  console.log("rendered!");
+
   let bookCountSum = 0;
-  const queries: QueryOptions[] = [];
+  const queries: UseQueryOptions<Book>[] = [];
+  const orderId = useContext(UserInfoContext)?.orderId;
 
-  booksInCart.forEach((book) => {
-    bookCountSum += book.quantity;
-    // set queries
-    queries.push({
-      queryKey: ["bookInCart", book.uuid],
-      queryFn: async () => {
-        const data = await myFetch({
-          method: "GET",
-          url: `${config["url.book.info"]}/${book.uuid}`,
-        }).then((res) => {
-          return res.json();
-        });
-        return data;
-      },
-      retry: config["ajax.retry.maxTimes"],
-      retryDelay: config["ajax.retry.delay"],
+  const { data: bookOrderedList, isSuccess: isGetOrderListSuccess, refetch: refetchOrder } = useQuery({
+    queryKey: ["bookOrderedList", orderId],
+    queryFn: async () => {
+      if (orderId === undefined) {
+        throw new Error("The order's id isn't provided.");
+      }
+      return await getBookOrderedList(orderId);
+    },
+  });
+
+  if (isGetOrderListSuccess) {
+    console.log(bookOrderedList);
+    bookOrderedList.forEach((bookOrdered) => {
+      bookCountSum += bookOrdered.quantity;
+      // set queries
+      queries.push(
+        createQueryOptionsBookOrdered(bookOrdered.uuid, isGetOrderListSuccess)
+      );
     });
-  });
+  }
 
-  const results = useQueries<Book[]>({
-    queries: queries,
-  });
-
+  const results = useQueries<UseQueryOptions<Book>[]>({ queries });
   const bookBuyElements: JSX.Element[] = [];
   // TODO use a more precise way
   let sumPrice = 0;
-  let allIsSuccess = true;
+  let allIsSuccess = isGetOrderListSuccess;
+
   results.forEach((res, i) => {
     const { data, isSuccess } = res;
-    if (isSuccess) {
-      sumPrice += booksInCart[i].quantity * (data as Book).price;
+    if (isSuccess && isGetOrderListSuccess) {
+      sumPrice += bookOrderedList[i].quantity * data.price;
       bookBuyElements.push(
         <BookBuyCard
-          bookContent={data as Book}
-          count={booksInCart[i].quantity}
-          booksInCart={booksInCart}
-          setBooksInCart={setBooksInCart}
+          book={data}
+          quantity={bookOrderedList[i].quantity}
           key={`bookCartCard${i}`}
+          refetch={() => {refetchOrder()}}
         />
       );
     }
@@ -67,15 +72,10 @@ export default function CartPage({
         <BackToBookPage />
         <hr />
         <CartHeader number={bookCountSum} />
-        {/* TODO with back end */}
         {allIsSuccess ? bookBuyElements : <></>}
       </div>
       <div className="cart-page__right">
-        <Checkout
-          avatar={avatar}
-          sumPrice={sumPrice}
-          setBooksInCart={setBooksInCart}
-        />
+        <Checkout avatar={avatar} sumPrice={sumPrice} />
       </div>
     </div>
   );

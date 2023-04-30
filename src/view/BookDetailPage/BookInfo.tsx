@@ -1,10 +1,10 @@
-import React, { useRef } from "react";
-import { FlagFill, Cart4 } from "assets/icons";
+import { Cart4, FlagFill } from "assets/icons";
+import React, { useContext, useRef } from "react";
+import { updateOrderItem } from "service/OrderService";
 import timer from "utils/timer";
-import myFetch, { FetchProps } from "utils/ajax";
-import config from "config/front.json";
+import { UserInfoContext } from "view/HomePage";
 
-type BookInfoProps = Book & BooksInCartState;
+type BookInfoProps = Book;
 
 export default function BookInfo({
   uuid,
@@ -14,20 +14,16 @@ export default function BookInfo({
   price,
   isbn,
   intro,
-}: // booksInCart,
-// setBooksInCart,
-BookInfoProps) {
+}: BookInfoProps) {
   const bnt2Ref = useRef<HTMLButtonElement>(null);
+  const orderId = useContext(UserInfoContext)?.orderId;
 
-  const buyBookByUuid = async (uuid: string) => {
-    const buyProp: FetchProps = {
-      method: "GET",
-      url: `${config["url.book.cart.control"]}/${uuid}`,
-    };
-    const res = await myFetch(buyProp).then((res) => {
-      return res.json();
-    });
-    return res;
+  const buyBookByUuid = async (uuid: string): Promise<boolean> => {
+    if (orderId === undefined) {
+      return false;
+    }
+    await updateOrderItem(orderId, uuid, 1);
+    return true;
   };
 
   const handleClick = async (e: React.SyntheticEvent | Event) => {
@@ -54,8 +50,9 @@ BookInfoProps) {
     iconClass.remove("book-details__btn__cart--middle");
     iconClass.add("book-details__btn__cart--end");
 
-    const res: SuccessInfo = await buyBookByUuid(uuid);
-    console.log(res.flag);
+    // TODO handle exception
+    // eslint-disable-next-line
+    const buyOk = await buyBookByUuid(uuid);
 
     textElement.classList.add("book-details__btn__text--added");
     const original_text = textElement.innerText;
