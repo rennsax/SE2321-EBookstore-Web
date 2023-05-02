@@ -49,3 +49,39 @@
   display: block;
   margin: 25vh auto 0;
 }
+.order-card {
+  width: 230px;
+  height: 260px;
+  margin: 30px 10px;
+  background: url("../assets/background/paper.svg") no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.order-card__info {
+  width: 140px;
+  position: relative;
+  left: 60px;
+  top: 46px;
+  font-size: 18px;
+}
+.order-card__number {
+  font-size: 22px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.order-card__number > span {
+  vertical-align: middle;
+}
+.order-card__time {
+  margin-bottom: 10px;
+}
+.order-card__state {
+  color: #219ebc;
+}
+.order-card-list {
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}

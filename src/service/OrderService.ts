@@ -9,7 +9,7 @@ export async function getBookOrderedList(
     url: `${api.order}/${orderId}`,
     method: "GET",
   };
-  const data: OrderInfo = await myFetch(props).then((res) => {
+  const data = await myFetch(props).then((res) => {
     return res.json();
   });
   return data.bookOrderedList;
@@ -24,6 +24,10 @@ export async function getAllOrderInfo(userId: number): Promise<OrderInfo[]> {
   const data = await myFetch(props).then((res) => {
     return res.json();
   });
+  // eslint-disable-next-line
+  data.forEach((orderInfo: any) => {
+    orderInfo.time = new Date(orderInfo.time);
+  })
   return data;
 }
 
@@ -32,7 +36,7 @@ export async function updateOrderItem(
   orderId: number,
   uuid: string,
   quantity: number
-) {
+): Promise<void> {
   const props: FetchProps = {
     url: `${api.order}/${orderId}`,
     method: "PATCH",
@@ -45,7 +49,7 @@ export async function updateOrderItem(
 }
 
 /** Submit a "pending" order */
-export async function checkoutOrder(orderId: number) {
+export async function checkoutOrder(orderId: number): Promise<void> {
   const props: FetchProps = {
     url: `${api["order.submit"]}`,
     method: "POST",

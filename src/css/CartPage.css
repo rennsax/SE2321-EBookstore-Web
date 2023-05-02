@@ -80,7 +80,7 @@
   padding: 8px 4px;
 }
 .cart-card__info__text h5 {
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
 }
 .cart-card__info__text__details {
@@ -88,6 +88,7 @@
 }
 .cart-card__right {
   width: 160px;
+  user-select: none;
 }
 .cart-card__right__delete {
   display: flex;
@@ -109,7 +110,7 @@
   color: white;
   font-size: 14px;
   padding: 12px;
-  background-color: #00F;
+  background-color: #00f;
   border-radius: 8px;
 }
 .pay__header {

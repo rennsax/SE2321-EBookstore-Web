@@ -4,6 +4,8 @@
   align-items: center;
   height: calc(100vh);
   font-family: "Source Han Sans SC";
+  background-image: url("../assets/background/sea.jpg");
+  background-size: cover;
 }
 .form {
   width: 400px;

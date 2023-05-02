@@ -9,13 +9,15 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 // router
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "css/SideBar.css";
 import useAuth from "utils/auth";
+import Box from "@mui/material/Box";
 
 const SideBar = memo(function SideBar() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <List
@@ -54,19 +56,19 @@ const SideBar = memo(function SideBar() {
           </ListItemButton>
         </Link>
 
-        <Link className="to-page-login" to="/login">
-          <ListItemButton onClick={
-            () => {
+        <Box className="to-page-login">
+          <ListItemButton
+            onClick={() => {
               logout();
-              console.log("logout")
-            }
-          }>
+              navigate("/login");
+            }}
+          >
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItemButton>
-        </Link>
+        </Box>
       </List>
     </div>
   );

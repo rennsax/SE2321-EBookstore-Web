@@ -8,15 +8,13 @@ import timer from "utils/timer";
 import "css/LoginPage.css";
 import { useRef } from "react";
 import login from "service/LoginServer";
+import useAuth from "utils/auth";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
 
-export default function LoginPage({
-  setAccount,
-}: {
-  setAccount: (accountNew: string) => void;
-}) {
+export default function LoginPage() {
   // uncontrolled component
+  const { login: authorize } = useAuth();
   const accountInputRef = useRef<HTMLInputElement>(null);
   const passwdInputRef = useRef<HTMLInputElement>(null);
   const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
@@ -43,8 +41,8 @@ export default function LoginPage({
       case "ok":
         setAlertType("success");
         await timer(1000);
+        authorize(account);
         navigate("/home/books");
-        setAccount(account);
         break;
       case "wrong":
         setAlertType("login error");

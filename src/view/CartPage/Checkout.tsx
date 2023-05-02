@@ -11,8 +11,7 @@ import { RightArrow } from "assets/icons";
 import config from "config/front.json";
 import { memo, useContext, useEffect, useRef, useState } from "react";
 import { checkoutOrder } from "service/OrderService";
-import { UserInfoContext } from "view/HomePage";
-
+import { RefetchUserInfoContext, UserInfoContext } from "view/HomePage";
 
 interface CardTypeProps {
   typePic: string;
@@ -53,7 +52,7 @@ const CardTypeList = memo(function CardTypeList() {
 });
 
 export default function Checkout({
-  avatar,
+  // avatar,
   sumPrice,
 }: {
   avatar: string;
@@ -64,12 +63,15 @@ export default function Checkout({
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const orderId = useContext(UserInfoContext)?.orderId;
+  // TODO try to use a more elegant way
+  const updateCart = useContext(RefetchUserInfoContext) as () => void;
 
   const handleCheckout = async () => {
     if (orderId === undefined) {
       setAlertOpen(true);
     } else {
       await checkoutOrder(orderId);
+      updateCart();
       setDialogOpen(false);
     }
   };
@@ -79,8 +81,7 @@ export default function Checkout({
       return;
     }
     setDialogOpen(false);
-  }, [alertOpen])
-
+  }, [alertOpen]);
 
   const handleClickCheckout = (e: ButtonEvent) => {
     e.preventDefault();
@@ -95,9 +96,10 @@ export default function Checkout({
         <div className="pay__header__title">
           <h3>Card details</h3>
         </div>
-        <div className="pay__header__avatar display-circle">
+        {/* TODO use avatar */}
+        {/* <div className="pay__header__avatar display-circle">
           <img src={avatar} alt="user-avatar" />
-        </div>
+        </div> */}
       </div>
       <CardTypeList />
       <div className="pay__info">
@@ -207,21 +209,21 @@ export default function Checkout({
           </Button>
         </DialogActions>
       </Dialog>
-        <Snackbar
-          open={alertOpen}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          autoHideDuration={2000}
+      <Snackbar
+        open={alertOpen}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={2000}
+        onClose={() => setAlertOpen(false)}
+      >
+        <Alert
+          elevation={4}
+          severity="error"
+          sx={{ width: "100%" }}
           onClose={() => setAlertOpen(false)}
         >
-          <Alert
-            elevation={4}
-            severity="error"
-            sx={{ width: "100%" }}
-            onClose={() => setAlertOpen(false)}
-          >
-            An error occurs. Please retry later.
-          </Alert>
-        </Snackbar>
+          An error occurs. Please retry later.
+        </Alert>
+      </Snackbar>
     </form>
   );
 }

@@ -83,7 +83,7 @@ export default function CartPage() {
         )}
       </div>
       <div className="cart-page__right">
-        <Checkout avatar={avatar} sumPrice={sumPrice} />
+        <Checkout avatar={avatar} sumPrice={sumPrice}/>
       </div>
     </div>
   );
