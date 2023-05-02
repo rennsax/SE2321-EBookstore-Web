@@ -1,15 +1,17 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router-dom";
+import BookDetailPage from "view/BookDetailPage";
 import BookPage from "view/BookPage";
+import CartPage from "view/CartPage";
 import OrderPage from "view/OrderPage";
 import ProfilePage from "view/ProfilePage";
 
-export default [
+const routeElements: RouteObject[] = [
   {
     path: "books",
     element: <BookPage />,
   },
   {
-    path: "orders",
+    path: "orders/*",
     element: <OrderPage />,
   },
   {
@@ -17,7 +19,17 @@ export default [
     element: <ProfilePage />,
   },
   {
+    path: "cart",
+    element: <CartPage />,
+  },
+  {
+    path: "bd/:uuid",
+    element: <BookDetailPage />,
+  },
+  {
     path: "",
     element: <Navigate to="books" />,
   },
 ];
+
+export default routeElements;

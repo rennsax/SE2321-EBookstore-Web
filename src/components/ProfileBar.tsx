@@ -30,24 +30,26 @@ function SelectorButton({
   );
 }
 
-export default function ProfileBar() {
-  const hideProfile = () => {
-    const profile = document.getElementById("profile-bar");
-    profile?.classList?.remove("profile-bar--display");
-  };
+export default function ProfileBar({
+  setShowProfile,
+}: {
+  setShowProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 
   return (
     <div className="profile-bar-constructor">
-      <div className="profile-bar profile-bar--display" id="profile-bar">
+      <div
+        className="profile-bar profile-bar--display"
+        id="profile-bar"
+        onClick={() => {
+          setShowProfile(false);
+        }}
+      >
         <div className="profile-bar__title">
           <div>Welcome,</div>
           <div className="profile-bar__title__name">Linus Torvalds</div>
         </div>
-        <Box
-          id="profile-bar__selectors"
-          sx={{ width: "100%" }}
-          onClick={hideProfile}
-        >
+        <Box id="profile-bar__selectors" sx={{ width: "100%" }}>
           <Link className="to-page-profile" to="profile">
             <SelectorButton text="Edit Profile">
               <FaceRetouchingNaturalIcon />

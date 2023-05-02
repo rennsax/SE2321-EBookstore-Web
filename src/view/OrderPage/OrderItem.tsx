@@ -1,30 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import myFetch from "utils/ajax";
-import config from "config/front.json";
+import { getBookByUuid } from "service/BookService";
+import api from "service/api.json";
 
 export default function OrderItem({ uuid, quantity }: BookOrdered) {
-  const { data, isSuccess } = useQuery({
+  const { data: book, isSuccess } = useQuery({
     queryKey: [uuid, "orderItem"],
     queryFn: async () => {
-      const data: Book = await myFetch({
-        method: "GET",
-        url: `${config["url.book.info"]}/${uuid}`,
-      }).then(async (res) => {
-        return await res.json();
-      });
-      return data;
+      return await getBookByUuid(uuid);
     },
   });
 
   if (isSuccess) {
-    const { title, picId, price, author } = data;
+    const { title, picId, price, author } = book;
     return (
       <div className="order-item">
         <div className="order-item__left">
           <div className="order-item__pic-container">
             <img
               className="order-item__pic"
-              src={`${config["url.book.picture"]}/${picId}.jpg`}
+              src={`${api["book.picture"]}/${picId}.jpg`}
               alt=""
             />
           </div>

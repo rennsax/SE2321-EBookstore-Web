@@ -1,5 +1,5 @@
 interface UserInfo {
-  readonly userId: number;
+  readonly id: number;
   orderId: number;
 }
 

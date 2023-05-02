@@ -3,20 +3,14 @@ import { useNavigate } from "react-router-dom";
 import logo from "assets/bookstore-logo.png";
 import avatar from "assets/test/Linus.png";
 import "css/HeaderInfo.css";
-import { useState } from "react";
 import ProfileBar from "./ProfileBar";
 
-export default function HeaderInfo() {
-  const [showProfile, setShowProfile] = useState<boolean>(false);
+type HeaderInfoProps = {
+  showProfile: boolean;
+  setShowProfile: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  // const showProfile = () => {
-  //   const profile = document.getElementById("profile-bar");
-  //   const classes = profile?.classList;
-  //   if (classes?.contains("profile-bar--display"))
-  //     classes.remove("profile-bar--display");
-  //   else classes?.add("profile-bar--display");
-  // };
-
+export default function HeaderInfo({showProfile, setShowProfile} : HeaderInfoProps) {
   const navigate = useNavigate();
 
   return (
@@ -34,7 +28,6 @@ export default function HeaderInfo() {
       <div className="header-container__user flex-space-between">
         <img
           className="header-container__user__avatar display-circle"
-          // onClick={showProfile}
           onClick={() => {
             setShowProfile((isShow) => !isShow);
           }}
@@ -42,7 +35,7 @@ export default function HeaderInfo() {
           alt="user-avatar"
           id="active-profile"
         />
-        {showProfile ? <ProfileBar /> : <></>}
+        {showProfile ? <ProfileBar setShowProfile={setShowProfile}/> : null}
       </div>
     </div>
   );

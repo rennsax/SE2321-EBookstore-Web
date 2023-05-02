@@ -45,3 +45,7 @@
 .order-item__info__author {
   margin: 0;
 }
+.order-page--loading > .MuiCircularProgress-root {
+  display: block;
+  margin: 25vh auto 0;
+}

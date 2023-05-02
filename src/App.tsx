@@ -13,11 +13,13 @@ import HomePage from "view/HomePage";
 
 import homePageElement from "routes/main";
 import LoginPage from "view/LoginPage";
+import { NeedAuthorized } from "utils/auth";
 const queryClient = new QueryClient();
 
 function App() {
   // TODO To persist the login status
-  const [account, setAccount] = useState<string>("cauchy@gmail.com");
+  // const [account, setAccount] = useState<string>("cauchy@gmail.com");
+  const [account, setAccount] = useState<string>("");
 
   const router = createBrowserRouter([
     {
@@ -25,8 +27,13 @@ function App() {
       element: <LoginPage setAccount={setAccount} />,
     },
     {
-      path: "/home/*",
-      element: <HomePage account={account} />,
+      path: "/home",
+      element: (
+        <NeedAuthorized>
+          <HomePage account={account} setAccount={setAccount} />
+        </NeedAuthorized>
+      ),
+      // element: <HomePage account={account} setAccount={setAccount} />,
       children: homePageElement,
     },
     // TODO do it on your server (probably the best solution)

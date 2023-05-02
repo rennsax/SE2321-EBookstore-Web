@@ -1,6 +1,7 @@
 import myFetch from "utils/ajax";
 import api from "./api.json";
 
+/** Get all ordered books of an order. */
 export async function getBookOrderedList(
   orderId: number
 ): Promise<BookOrdered[]> {
@@ -14,7 +15,8 @@ export async function getBookOrderedList(
   return data.bookOrderedList;
 }
 
-export async function getAllOrderInfo(userId: number): Promise<OrderInfo> {
+/** Get all order information of an user */
+export async function getAllOrderInfo(userId: number): Promise<OrderInfo[]> {
   const props: FetchProps = {
     url: `${api.order}?userId=${userId}`,
     method: "GET",
@@ -25,6 +27,7 @@ export async function getAllOrderInfo(userId: number): Promise<OrderInfo> {
   return data;
 }
 
+/** Update the items of an order */
 export async function updateOrderItem(
   orderId: number,
   uuid: string,
@@ -36,6 +39,18 @@ export async function updateOrderItem(
     params: {
       uuid,
       quantity,
+    },
+  };
+  await myFetch(props);
+}
+
+/** Submit a "pending" order */
+export async function checkoutOrder(orderId: number) {
+  const props: FetchProps = {
+    url: `${api["order.submit"]}`,
+    method: "POST",
+    params: {
+      orderId
     },
   };
   await myFetch(props);

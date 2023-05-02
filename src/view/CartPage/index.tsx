@@ -12,19 +12,18 @@ import { createQueryOptionsBookOrdered } from "service/BookService";
 import { getBookOrderedList } from "service/OrderService";
 import { UserInfoContext } from "view/HomePage";
 import BookBuyCard from "./BookBuyCard";
+import { CircularProgress } from "@mui/material";
 
 export default function CartPage() {
-  /**
-   * Tool state, children components can use the state
-   * to notify the parent component, triggering a re-render.
-   */
-  console.log("rendered!");
-
   let bookCountSum = 0;
   const queries: UseQueryOptions<Book>[] = [];
   const orderId = useContext(UserInfoContext)?.orderId;
 
-  const { data: bookOrderedList, isSuccess: isGetOrderListSuccess, refetch: refetchOrder } = useQuery({
+  const {
+    data: bookOrderedList,
+    isSuccess: isGetOrderListSuccess,
+    refetch: refetchOrder,
+  } = useQuery({
     queryKey: ["bookOrderedList", orderId],
     queryFn: async () => {
       if (orderId === undefined) {
@@ -35,7 +34,6 @@ export default function CartPage() {
   });
 
   if (isGetOrderListSuccess) {
-    console.log(bookOrderedList);
     bookOrderedList.forEach((bookOrdered) => {
       bookCountSum += bookOrdered.quantity;
       // set queries
@@ -60,7 +58,9 @@ export default function CartPage() {
           book={data}
           quantity={bookOrderedList[i].quantity}
           key={`bookCartCard${i}`}
-          refetch={() => {refetchOrder()}}
+          refetch={() => {
+            refetchOrder();
+          }}
         />
       );
     }
@@ -72,7 +72,15 @@ export default function CartPage() {
         <BackToBookPage />
         <hr />
         <CartHeader number={bookCountSum} />
-        {allIsSuccess ? bookBuyElements : <></>}
+        {allIsSuccess ? (
+          bookBuyElements
+        ) : (
+          <CircularProgress
+            size={60}
+            sx={{ display: "block", margin: "100px auto 0" }}
+            color="info"
+          />
+        )}
       </div>
       <div className="cart-page__right">
         <Checkout avatar={avatar} sumPrice={sumPrice} />

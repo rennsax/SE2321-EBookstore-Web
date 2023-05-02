@@ -1,19 +1,21 @@
-import React, { memo } from "react";
+import { memo } from "react";
 // UI
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import ListAltIcon from "@mui/icons-material/ListAlt";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
 // router
 import { Link } from "react-router-dom";
 
 import "css/SideBar.css";
+import useAuth from "utils/auth";
 
 const SideBar = memo(function SideBar() {
+  const { logout } = useAuth();
   return (
     <div className="sidebar">
       <List
@@ -53,7 +55,12 @@ const SideBar = memo(function SideBar() {
         </Link>
 
         <Link className="to-page-login" to="/login">
-          <ListItemButton>
+          <ListItemButton onClick={
+            () => {
+              logout();
+              console.log("logout")
+            }
+          }>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>

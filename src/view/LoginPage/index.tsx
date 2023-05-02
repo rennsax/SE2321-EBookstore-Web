@@ -102,7 +102,6 @@ export default function LoginPage({
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           autoHideDuration={2000}
           onClose={endAlertError}
-          // sx={{height: "20px", width: "200px"}}
         >
           <Alert
             elevation={4}
@@ -116,7 +115,6 @@ export default function LoginPage({
         <Snackbar
           open={alertType === "success"}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          // sx={{height: "20px", width: "200px"}}
         >
           <Alert elevation={4} severity="success" sx={{ width: "100%" }}>
             Login successfully!
@@ -127,7 +125,6 @@ export default function LoginPage({
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           autoHideDuration={2000}
           onClose={endAlertError}
-          // sx={{height: "20px", width: "200px"}}
         >
           <Alert
             elevation={4}

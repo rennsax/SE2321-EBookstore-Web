@@ -1,7 +1,18 @@
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Snackbar from "@mui/material/Snackbar";
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
 import config from "config/front.json";
-import { memo, useRef } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
+import { checkoutOrder } from "service/OrderService";
+import { UserInfoContext } from "view/HomePage";
+
 
 interface CardTypeProps {
   typePic: string;
@@ -50,33 +61,33 @@ export default function Checkout({
 }) {
   const shipPrice = config["cart.shipPrice"];
   const dateRef = useRef<HTMLInputElement>(null);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
+  const orderId = useContext(UserInfoContext)?.orderId;
 
-  const handleCheckout = async (e: ButtonEvent) => {
-    // TODO handleCheckout
-    e.preventDefault();
-    const dateStr = dateRef.current?.value;
-    if (!dateStr) {
-      alert("Information is not complete!");
+  const handleCheckout = async () => {
+    if (orderId === undefined) {
+      setAlertOpen(true);
+    } else {
+      await checkoutOrder(orderId);
+      setDialogOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (alertOpen === true) {
       return;
     }
-    // try {
-    //   const response: { content: boolean } = await myFetch({
-    //     method: "GET",
-    //     url: `${config["order.post.url"]}/?customerId=${customerId}&date=${dateStr}`,
-    //   }).then((res) => {
-    //     return res.json();
-    //   });
-    //   if (response.content) {
-    //     alert("Successfully checkout!");
-    //     setBooksInCart([]);
-    //   } else {
-    //     throw "server return false";
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   alert("Server Error!");
-    // }
+    setDialogOpen(false);
+  }, [alertOpen])
+
+
+  const handleClickCheckout = (e: ButtonEvent) => {
+    e.preventDefault();
+    setDialogOpen(true);
   };
+
+  const totalPrice = sumPrice + shipPrice;
 
   return (
     <form className="pay">
@@ -148,12 +159,12 @@ export default function Checkout({
       </div>
       <div className="pay__result flex-space-between">
         <div>Total(Incl. taxes)</div>
-        <div>{`$${sumPrice + shipPrice}`}</div>
+        <div>{`$${totalPrice}`}</div>
       </div>
 
       <button
         className="pay__submit flex-space-between"
-        onClick={handleCheckout}
+        onClick={handleClickCheckout}
         tabIndex={-1}
       >
         <div>{`$${sumPrice}`}</div>
@@ -162,6 +173,55 @@ export default function Checkout({
           <RightArrow />
         </div>
       </button>
+      <Dialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure to checkout?"}
+        </DialogTitle>
+        <DialogContent className="co-dialog">
+          <DialogContentText id="alert-dialog-description">
+            You need to pay
+            <span className="co-dialog__price">${totalPrice}</span>
+            for this order.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setDialogOpen(false)}
+            sx={{ textTransform: "none" }}
+            variant="outlined"
+          >
+            Let me consider...
+          </Button>
+          <Button
+            onClick={handleCheckout}
+            autoFocus
+            sx={{ textTransform: "none" }}
+            variant="outlined"
+          >
+            Checkout!
+          </Button>
+        </DialogActions>
+      </Dialog>
+        <Snackbar
+          open={alertOpen}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          autoHideDuration={2000}
+          onClose={() => setAlertOpen(false)}
+        >
+          <Alert
+            elevation={4}
+            severity="error"
+            sx={{ width: "100%" }}
+            onClose={() => setAlertOpen(false)}
+          >
+            An error occurs. Please retry later.
+          </Alert>
+        </Snackbar>
     </form>
   );
 }
