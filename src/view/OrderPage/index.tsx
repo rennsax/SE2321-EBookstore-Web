@@ -6,7 +6,7 @@ import "css/OrderPage.css";
 import { useContext } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { getAllOrderInfo } from "service/OrderService";
-import config from "service/configuration.json";
+import { defaultQueryOptions } from "service/queryOptions";
 import { UserInfoContext } from "view/HomePage";
 import OrderCard from "./OrderCard";
 import OrderInfo from "./OrderInfo";
@@ -25,8 +25,7 @@ export default function OrderPage() {
       if (userId === undefined) throw new Error("userId isn't provided yet");
       return await getAllOrderInfo(userId);
     },
-    retry: config["ajax.retry.maxTimes"],
-    retryDelay: config["ajax.retry.delay"],
+    ...defaultQueryOptions,
   });
 
   const { pathname } = useLocation();

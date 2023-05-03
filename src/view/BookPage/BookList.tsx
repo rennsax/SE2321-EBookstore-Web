@@ -5,6 +5,7 @@ import BookCard from "./BookCard";
 
 import config from "config/front.json";
 import { getBookListForDisplay } from "service/BookService";
+import { defaultQueryOptions } from "service/queryOptions";
 
 export default function BookList() {
   const perRow = config["bookPage.perRow"];
@@ -17,12 +18,9 @@ export default function BookList() {
     queryKey: ["bookListInformation", perRow],
     queryFn: async () => {
       await timer(1000);
-      const data = await getBookListForDisplay(perRow * 2);
-      return data as Book[];
+      return await getBookListForDisplay(perRow * 2);
     },
-    retry: config["ajax.retry.maxTimes"],
-    retryDelay: config["ajax.retry.delay"],
-    refetchOnMount: false,
+    ...defaultQueryOptions,
     onError: () => {
       console.log(error);
     },
