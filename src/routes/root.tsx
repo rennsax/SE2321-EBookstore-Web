@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { RequireAuthorized } from "utils/auth";
+import RequireAuthorized from "components/RequireAuthorized";
 import HomePage from "view/HomePage";
 import LoginPage from "view/LoginPage";
 import homePageElement from "routes/main";

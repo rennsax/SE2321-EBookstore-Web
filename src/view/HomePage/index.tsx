@@ -8,7 +8,7 @@ import SideBar from "components/SideBar";
 
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "service/UserServer";
-import useAuth from "utils/auth";
+import useAuth from "utils/useAuth";
 
 export const UserInfoContext = createContext<UserInfo | undefined>(undefined);
 export const RefetchUserInfoContext = createContext<(() => void) | undefined>(

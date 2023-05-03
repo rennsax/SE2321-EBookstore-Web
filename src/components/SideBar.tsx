@@ -12,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Link, useNavigate } from "react-router-dom";
 
 import "css/SideBar.css";
-import useAuth from "utils/auth";
+import useAuth from "utils/useAuth";
 import Box from "@mui/material/Box";
 
 const SideBar = memo(function SideBar() {

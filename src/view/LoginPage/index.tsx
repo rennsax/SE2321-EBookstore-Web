@@ -7,8 +7,7 @@ import MySnackBar from "components/MySnackBar";
 import "css/LoginPage.css";
 import { useRef } from "react";
 import login from "service/LoginServer";
-import useAppContext from "utils/appContext";
-import useAuth from "utils/auth";
+import useAuth from "utils/useAuth";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
 
@@ -17,8 +16,7 @@ export default function LoginPage() {
   const accountInputRef = useRef<HTMLInputElement>(null);
   const passwdInputRef = useRef<HTMLInputElement>(null);
 
-  const { showPleaseLogin, setShowPleaseLogin } = useAppContext();
-  const { login: authorize } = useAuth();
+  const { authed, login: authorize } = useAuth();
 
   const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   const [alertType, setAlertType] = React.useState<AlertTypes>("no");
@@ -45,7 +43,6 @@ export default function LoginPage() {
         setAlertType("success");
         await timer(1000);
         authorize(account);
-        navigate("/home/books");
         break;
       case "wrong":
         setAlertType("login error");
@@ -55,8 +52,18 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
+    if (authed) {
+      navigate("/home/books", {replace: true})
+    }
     accountInputRef.current?.focus();
-  }, []);
+  });
+
+  // useEffect(() => {
+  //   console.log(authed)
+  //   if (authed === true) {
+  //     navigate("/home/books");
+  //   }
+  // }, [authed, navigate]);
 
   const endAlertError = (): void => {
     setAlertType("no");
@@ -119,12 +126,12 @@ export default function LoginPage() {
         >
           Server response error!
         </MySnackBar>
-        <MySnackBar
+        {/* <MySnackBar
           open={showPleaseLogin}
           onClose={() => setShowPleaseLogin(false)}
         >
           Please first login!
-        </MySnackBar>
+        </MySnackBar> */}
       </div>
     </>
   );
