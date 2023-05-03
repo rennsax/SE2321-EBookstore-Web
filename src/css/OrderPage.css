@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 200px;
+  height: 160px;
   padding: 10px;
   margin: 20px 0;
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -20,7 +20,9 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   padding: 10px 0;
-  font-size: 18px;
+  font-size: 16px;
+  margin-right: 16px;
+  text-align: right;
 }
 .order-item__pic-container {
   height: 100%;
@@ -37,13 +39,24 @@
   flex-flow: column nowrap;
   justify-content: space-between;
   max-width: 300px;
-  padding: 10px 0;
+  padding: 20px 0;
 }
 .order-item__info__title {
   font-size: 20px;
 }
 .order-item__info__author {
   margin: 0;
+  font-weight: normal;
+}
+.order-item__price__total {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.order-item__price__unit {
+  color: gray;
+}
+.order-item__qty {
+  color: gray;
 }
 .order-page--loading > .MuiCircularProgress-root {
   display: block;
@@ -58,9 +71,9 @@
   background-size: contain;
 }
 .order-card__info {
-  width: 140px;
+  width: 146px;
   position: relative;
-  left: 60px;
+  left: 54px;
   top: 46px;
   font-size: 18px;
 }
@@ -84,4 +97,14 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+.order-info__id {
+  margin: 20px 0;
+  font-size: 36px;
+}
+.order-info__date {
+  font-size: 20px;
+}
+.order-info__date > span:first-child {
+  color: gray;
 }

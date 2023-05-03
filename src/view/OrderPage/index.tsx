@@ -74,7 +74,7 @@ export default function OrderPage() {
         <h4>Cauchy</h4>
         <Link to="/home/orders">All Orders</Link>
         {/^\d+$/.test(nowOrderId) ? (
-          <h5 style={{ margin: 0 }}>{nowOrderId}</h5>
+          <h5 style={{ margin: 0 }}>{`ID ${nowOrderId}`}</h5>
         ) : null}
       </Breadcrumbs>
       <Routes>{routerElementList}</Routes>

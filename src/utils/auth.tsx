@@ -1,27 +1,10 @@
-import React, { createContext } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
-
-type AuthInfo = {
-  authed: boolean;
-  account: string;
-};
-
-type AuthContextType = [
-  AuthInfo,
-  React.Dispatch<React.SetStateAction<AuthInfo>>
-];
-
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined
-);
+import useAppContext from "./appContext";
 
 /** An authorized context, record current user account */
 export default function useAuth() {
-  const authContent = React.useContext(AuthContext);
-  if (authContent === undefined) {
-    throw "no authorized context is provided!";
-  }
-  const [authInfo, setAuthInfo] = authContent;
+  const { authInfo, setAuthInfo } = useAppContext();
 
   // TODO a question: why a callback take effects?
   return {
@@ -49,9 +32,16 @@ export default function useAuth() {
   };
 }
 
-export const RequireAuthorized: React.FC<{ children: React.ReactNode; fallBack?: string; }> = ({
-  children, fallBack
-}) => {
+export const RequireAuthorized: React.FC<{
+  children: React.ReactNode;
+  fallBack?: string;
+}> = ({ children, fallBack }) => {
   const { authed } = useAuth();
-  return authed ? <>{children}</> : <Navigate to={fallBack ?? "/login"} replace />;
+  const { setShowPleaseLogin } = useAppContext();
+
+  if (authed) {
+    return <>{children}</>;
+  }
+  setShowPleaseLogin(true);
+  return <Navigate to={fallBack ?? "/login"} replace />;
 };

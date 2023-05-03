@@ -1,22 +1,25 @@
-import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar from "@mui/material/Snackbar";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import timer from "utils/timer";
 
+import MySnackBar from "components/MySnackBar";
 import "css/LoginPage.css";
 import { useRef } from "react";
 import login from "service/LoginServer";
+import useAppContext from "utils/appContext";
 import useAuth from "utils/auth";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
 
 export default function LoginPage() {
   // uncontrolled component
-  const { login: authorize } = useAuth();
   const accountInputRef = useRef<HTMLInputElement>(null);
   const passwdInputRef = useRef<HTMLInputElement>(null);
+
+  const { showPleaseLogin, setShowPleaseLogin } = useAppContext();
+  const { login: authorize } = useAuth();
+
   const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   const [alertType, setAlertType] = React.useState<AlertTypes>("no");
   const navigate = useNavigate();
@@ -60,80 +63,69 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="form-container">
-      <form className="form" autoComplete="on">
-        <h2 className="form__title">Welcome!</h2>
-        <div className="form__control">
-          <label htmlFor="account" className="form__label">
-            Account
-          </label>
-          <input
-            type="email"
-            id="account"
-            placeholder="Your Account"
-            className="form__input"
-            ref={accountInputRef}
-          />
-        </div>
-        <div className="form__control">
-          <label htmlFor="passwd" className="form__label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="passwd"
-            placeholder="Your Password"
-            className="form__input"
-            ref={passwdInputRef}
-          />
-        </div>
-        <button
-          type="submit"
-          onClick={handleClick}
-          className="form__btn"
-          tabIndex={-1}
-        >
-          {isWaiting ? <CircularProgress color="inherit" /> : "Log in"}
-        </button>
-        <Snackbar
+    <>
+      <div className="form-container">
+        <form className="form" autoComplete="on">
+          <h2 className="form__title">Welcome!</h2>
+          <div className="form__control">
+            <label htmlFor="account" className="form__label">
+              Account
+            </label>
+            <input
+              type="email"
+              id="account"
+              placeholder="Your Account"
+              className="form__input"
+              ref={accountInputRef}
+            />
+          </div>
+          <div className="form__control">
+            <label htmlFor="passwd" className="form__label">
+              Password
+            </label>
+            <input
+              type="password"
+              id="passwd"
+              placeholder="Your Password"
+              className="form__input"
+              ref={passwdInputRef}
+            />
+          </div>
+          <button
+            type="submit"
+            onClick={handleClick}
+            className="form__btn"
+            tabIndex={-1}
+          >
+            {isWaiting ? <CircularProgress color="inherit" /> : "Log in"}
+          </button>
+        </form>
+      </div>
+      <div className="login-page__snackbar">
+        <MySnackBar
           open={alertType === "login error"}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          autoHideDuration={2000}
           onClose={endAlertError}
+          alertType="error"
         >
-          <Alert
-            elevation={4}
-            severity="error"
-            sx={{ width: "100%" }}
-            onClose={endAlertError}
-          >
-            Wrong account/password!
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={alertType === "success"}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert elevation={4} severity="success" sx={{ width: "100%" }}>
-            Login successfully!
-          </Alert>
-        </Snackbar>
-        <Snackbar
+          Wrong account/password!
+        </MySnackBar>
+        <MySnackBar open={alertType === "success"}>
+          Login successfully!
+        </MySnackBar>
+        <MySnackBar
           open={alertType === "response error"}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          autoHideDuration={2000}
           onClose={endAlertError}
+          alertType="error"
         >
-          <Alert
-            elevation={4}
-            severity="error"
-            sx={{ width: "100%" }}
-            onClose={endAlertError}
-          >
-            Server response error!
-          </Alert>
-        </Snackbar>
-      </form>
-    </div>
+          Server response error!
+        </MySnackBar>
+        <MySnackBar
+          open={showPleaseLogin}
+          onClose={() => setShowPleaseLogin(false)}
+        >
+          Please first login!
+        </MySnackBar>
+      </div>
+    </>
   );
 }
