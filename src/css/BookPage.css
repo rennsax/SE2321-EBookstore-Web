@@ -1,4 +1,10 @@
+.book-page {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
 .book-list {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin: 0 auto 30px;
@@ -7,6 +13,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+  overflow-y: hidden;
   width: 180px;
   padding: 5px;
   height: 320px;
@@ -57,6 +64,7 @@
   font-size: 0;
   text-align: center;
   margin: 0 0 30px;
+  width: 100%;
 }
 .search_bar form {
   height: 44px;

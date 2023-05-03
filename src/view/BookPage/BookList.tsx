@@ -1,30 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
-import timer from "utils/timer";
 import BookCard from "./BookCard";
 
 import config from "config/front.json";
-import { getBookListForDisplay } from "service/BookService";
-import { defaultQueryOptions } from "service/queryOptions";
 
-export default function BookList() {
+export default function BookList({isSuccess, bookContentList}: {isSuccess: boolean, bookContentList: Book[] | undefined }) {
+
   const perRow = config["bookPage.perRow"];
-
-  const {
-    isSuccess,
-    data: bookContentList,
-    error,
-  } = useQuery({
-    queryKey: ["bookListInformation", perRow],
-    queryFn: async () => {
-      await timer(1000);
-      return await getBookListForDisplay(perRow * 2);
-    },
-    ...defaultQueryOptions,
-    onError: () => {
-      console.log(error);
-    },
-  });
 
   const itemList = useMemo(() => {
     const book_cnt = perRow * 2;

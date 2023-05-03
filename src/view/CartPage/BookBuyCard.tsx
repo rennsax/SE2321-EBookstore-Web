@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 import config from "config/front.json";
 import { updateOrderItem } from "service/OrderService";
-import { UserInfoContext } from "view/HomePage";
-import { useContext } from "react";
+import useUserInfo from "utils/useUserInfo";
 
 interface BookBuyInfo {
   book: Book;
@@ -18,7 +17,7 @@ export type BookBuyProps = BookBuyInfo & {
 export default function BookBuyCard({ quantity, book, refetch }: BookBuyProps) {
   const { uuid, picId, author, title, price } = book;
 
-  const orderId = useContext(UserInfoContext)?.orderId as number;
+  const { orderId } = useUserInfo();
 
   const handleDelete = (e: ButtonEvent): void => {
     e.preventDefault();

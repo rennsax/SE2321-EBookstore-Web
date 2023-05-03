@@ -1,17 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
 import logo from "assets/bookstore-logo.png";
-import avatar from "assets/test/Linus.png";
+// import avatar from "assets/test/Linus.png";
 import "css/HeaderInfo.css";
 import ProfileBar from "./ProfileBar";
+import useUserInfo from "utils/useUserInfo";
+import api from "service/api.json";
 
 type HeaderInfoProps = {
   showProfile: boolean;
   setShowProfile: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
-export default function HeaderInfo({showProfile, setShowProfile} : HeaderInfoProps) {
+export default function HeaderInfo({
+  showProfile,
+  setShowProfile,
+}: HeaderInfoProps) {
   const navigate = useNavigate();
+  const { avatarId } = useUserInfo();
+  const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
 
   return (
     <div className="header-container flex-space-between">
@@ -35,7 +42,7 @@ export default function HeaderInfo({showProfile, setShowProfile} : HeaderInfoPro
           alt="user-avatar"
           id="active-profile"
         />
-        {showProfile ? <ProfileBar setShowProfile={setShowProfile}/> : null}
+        {showProfile ? <ProfileBar setShowProfile={setShowProfile} /> : null}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import "css/LoginPage.css";
 import { useRef } from "react";
 import login from "service/LoginServer";
 import useAuth from "utils/useAuth";
+import useAppContext from "utils/useAppContext";
 
 type AlertTypes = "success" | "login error" | "no" | "response error";
 
@@ -17,6 +18,7 @@ export default function LoginPage() {
   const passwdInputRef = useRef<HTMLInputElement>(null);
 
   const { authed, login: authorize } = useAuth();
+  const [, dispatch] = useAppContext();
 
   const [isWaiting, setIsWaiting] = React.useState<boolean>(false);
   const [alertType, setAlertType] = React.useState<AlertTypes>("no");
@@ -55,15 +57,13 @@ export default function LoginPage() {
     if (authed) {
       navigate("/home/books", {replace: true})
     }
-    accountInputRef.current?.focus();
   });
 
-  // useEffect(() => {
-  //   console.log(authed)
-  //   if (authed === true) {
-  //     navigate("/home/books");
-  //   }
-  // }, [authed, navigate]);
+  useEffect(() => {
+    dispatch({
+      bookPage: () => 1
+    })
+  }, [dispatch]);
 
   const endAlertError = (): void => {
     setAlertType("no");

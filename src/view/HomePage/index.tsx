@@ -1,19 +1,17 @@
 import "css/HomePage.css";
 
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import HeaderInfo from "components/HeaderInfo";
 import SideBar from "components/SideBar";
 
+import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfo } from "service/UserServer";
 import useAuth from "utils/useAuth";
+import { UserInfoContext } from "utils/useUserInfo";
 
-export const UserInfoContext = createContext<UserInfo | undefined>(undefined);
-export const RefetchUserInfoContext = createContext<(() => void) | undefined>(
-  undefined
-);
 
 function HomePage() {
   // handle: when switching routes, scroll to the top
@@ -29,7 +27,11 @@ function HomePage() {
     });
   }, [pathname]);
 
-  const { data: userInfo, refetch: refetchUserInfo } = useQuery({
+  const {
+    data: userInfo,
+    isSuccess,
+    refetch: refetchUserInfo,
+  } = useQuery({
     queryKey: ["userInfo", account],
     queryFn: async () => {
       return await getUserInfo(account);
@@ -42,9 +44,19 @@ function HomePage() {
     setShowProfile,
   };
 
+  if (!isSuccess) {
+    return <CircularProgress />;
+  }
+
   return (
-    <RefetchUserInfoContext.Provider value={() => refetchUserInfo()}>
-      <UserInfoContext.Provider value={userInfo}>
+    <UserInfoContext.Provider
+      value={[
+        userInfo,
+        () => {
+          refetchUserInfo();
+        },
+      ]}
+    >
         <div
           className="home"
           onClick={() => {
@@ -68,8 +80,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </UserInfoContext.Provider>
-    </RefetchUserInfoContext.Provider>
+    </UserInfoContext.Provider>
   );
 }
 

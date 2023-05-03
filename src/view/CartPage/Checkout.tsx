@@ -9,9 +9,9 @@ import Snackbar from "@mui/material/Snackbar";
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
 import config from "config/front.json";
-import { memo, useContext, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { checkoutOrder } from "service/OrderService";
-import { RefetchUserInfoContext, UserInfoContext } from "view/HomePage";
+import useUserInfo from "utils/useUserInfo";
 
 interface CardTypeProps {
   typePic: string;
@@ -62,9 +62,7 @@ export default function Checkout({
   const dateRef = useRef<HTMLInputElement>(null);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
-  const orderId = useContext(UserInfoContext)?.orderId;
-  // TODO try to use a more elegant way
-  const updateCart = useContext(RefetchUserInfoContext) as () => void;
+  const { orderId, refetch: updateCart } = useUserInfo();
 
   const handleCheckout = async () => {
     if (orderId === undefined) {

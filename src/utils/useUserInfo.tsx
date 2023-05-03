@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 type UserInfoContextType = [UserInfo, () => void];
 
-const UserInfoContext = createContext<UserInfoContextType | undefined>(
+export const UserInfoContext = createContext<UserInfoContextType | undefined>(
   undefined
 );
 

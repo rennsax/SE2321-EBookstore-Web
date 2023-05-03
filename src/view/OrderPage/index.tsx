@@ -3,11 +3,10 @@ import { CircularProgress } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { useQuery } from "@tanstack/react-query";
 import "css/OrderPage.css";
-import { useContext } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { getAllOrderInfo } from "service/OrderService";
 import { defaultQueryOptions } from "service/queryOptions";
-import { UserInfoContext } from "view/HomePage";
+import useUserInfo from "utils/useUserInfo";
 import OrderCard from "./OrderCard";
 import OrderInfo from "./OrderInfo";
 
@@ -17,7 +16,7 @@ const getOrderIdFromLocation = (location: string): string => {
 };
 
 export default function OrderPage() {
-  const userId = useContext(UserInfoContext)?.id;
+  const { id: userId, name } = useUserInfo();
 
   const { data: orderInfoList, isSuccess } = useQuery({
     queryKey: ["order", userId],
@@ -70,7 +69,7 @@ export default function OrderPage() {
         aria-label="breadcrumb"
         sx={{ fontSize: "18px" }}
       >
-        <h4>Cauchy</h4>
+        <h4>{name}</h4>
         <Link to="/home/orders">All Orders</Link>
         {/^\d+$/.test(nowOrderId) ? (
           <h5 style={{ margin: 0 }}>{`ID ${nowOrderId}`}</h5>

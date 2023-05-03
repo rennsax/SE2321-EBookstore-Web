@@ -8,7 +8,8 @@ export const globalState = {
   authInfo: {
     authed: false,
     account: "",
-  }
+  },
+  bookPage: 1
 };
 
 export const AppContext = createContext<AppLabContextType | undefined>(undefined);

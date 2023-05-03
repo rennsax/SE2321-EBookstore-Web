@@ -7,6 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 import { Link } from "react-router-dom";
+import useUserInfo from "utils/useUserInfo";
 
 function SelectorButton({
   children,
@@ -35,6 +36,7 @@ export default function ProfileBar({
 }: {
   setShowProfile: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const { name } = useUserInfo();
 
   return (
     <div className="profile-bar-constructor">
@@ -47,7 +49,7 @@ export default function ProfileBar({
       >
         <div className="profile-bar__title">
           <div>Welcome,</div>
-          <div className="profile-bar__title__name">Linus Torvalds</div>
+          <div className="profile-bar__title__name">{name}</div>
         </div>
         <Box id="profile-bar__selectors" sx={{ width: "100%" }}>
           <Link className="to-page-profile" to="profile">

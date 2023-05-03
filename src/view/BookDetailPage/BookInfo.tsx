@@ -1,8 +1,8 @@
 import { Cart4, FlagFill } from "assets/icons";
-import React, { useContext, useRef } from "react";
+import React, { useRef } from "react";
 import { updateOrderItem } from "service/OrderService";
 import timer from "utils/timer";
-import { UserInfoContext } from "view/HomePage";
+import useUserInfo from "utils/useUserInfo";
 
 type BookInfoProps = Book;
 
@@ -16,7 +16,7 @@ export default function BookInfo({
   intro,
 }: BookInfoProps) {
   const bnt2Ref = useRef<HTMLButtonElement>(null);
-  const orderId = useContext(UserInfoContext)?.orderId;
+  const {orderId} = useUserInfo();
 
   const buyBookByUuid = async (uuid: string): Promise<boolean> => {
     if (orderId === undefined) {

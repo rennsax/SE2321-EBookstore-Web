@@ -5,19 +5,18 @@ import BackToBookPage from "components/BackToBookPage";
 import CartHeader from "./CartHeader";
 import Checkout from "./Checkout";
 
-// TODO the avatar should not be saved in test directory
-import avatar from "assets/test/Linus.png";
-import { useContext } from "react";
+import { CircularProgress } from "@mui/material";
 import { createQueryOptionsBookOrdered } from "service/BookService";
 import { getBookOrderedList } from "service/OrderService";
-import { UserInfoContext } from "view/HomePage";
+import useUserInfo from "utils/useUserInfo";
 import BookBuyCard from "./BookBuyCard";
-import { CircularProgress } from "@mui/material";
+import api from "service/api.json";
 
 export default function CartPage() {
   let bookCountSum = 0;
   const queries: UseQueryOptions<Book>[] = [];
-  const orderId = useContext(UserInfoContext)?.orderId;
+  const { avatarId, orderId } = useUserInfo();
+  const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
 
   const {
     data: bookOrderedList,
@@ -83,7 +82,7 @@ export default function CartPage() {
         )}
       </div>
       <div className="cart-page__right">
-        <Checkout avatar={avatar} sumPrice={sumPrice}/>
+        <Checkout avatar={avatar} sumPrice={sumPrice} />
       </div>
     </div>
   );

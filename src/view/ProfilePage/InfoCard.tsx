@@ -1,11 +1,18 @@
+import useAppContext from "utils/useAppContext";
 import InfoRow from "./InfoRow";
 
-export default function InfoCard() {
+export default function InfoCard({ name }: { name: string }) {
+  const [
+    {
+      authInfo: { account },
+    },
+  ] = useAppContext();
+
   const infoList = [
-    { infoType: "Full Name", info: "Linus Torvalds" },
-    { infoType: "Email", info: "123@gmail.com" },
+    { infoType: "Full Name", info: name },
+    { infoType: "Email", info: account},
     { infoType: "Phone", info: "(097) 234-7890" },
-    { infoType: "Bio", info: "Hi, I'm the creator of Linux." },
+    { infoType: "Bio", info: "" },
   ];
   const infoRows = (() => {
     const infoEle: JSX.Element[] = [];

@@ -3,9 +3,12 @@ import myFetch from "utils/ajax";
 import api from "./api.json";
 import config from "./configuration.json";
 
-export async function getBookListForDisplay(limit: number): Promise<Book[]> {
+export async function getBookListForDisplay(
+  limit: number,
+  offset?: number
+): Promise<Book[]> {
   const props: FetchProps = {
-    url: `${api["book.info"]}?limit=${limit}`,
+    url: `${api["book.info"]}?limit=${limit}&offset=${offset ?? 0}`,
     method: "GET",
   };
   const data: Book[] = await myFetch(props).then((res) => {
@@ -25,7 +28,10 @@ export async function getBookByUuid(uuid: string): Promise<Book> {
   return data;
 }
 
-export function createQueryOptionsBookOrdered(uuid: string, enabled: boolean): UseQueryOptions<Book> {
+export function createQueryOptionsBookOrdered(
+  uuid: string,
+  enabled: boolean
+): UseQueryOptions<Book> {
   return {
     queryKey: ["bookInCart", uuid],
     queryFn: async () => {
@@ -33,6 +39,6 @@ export function createQueryOptionsBookOrdered(uuid: string, enabled: boolean): U
     },
     retry: config["ajax.retry.maxTimes"],
     retryDelay: config["ajax.retry.delay"],
-    enabled
+    enabled,
   };
 }
