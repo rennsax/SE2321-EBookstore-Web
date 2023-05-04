@@ -6,8 +6,8 @@ import { Dispatch, Reducer, ReducerAction, createContext, useContext } from "rea
 /** Global variable states are defined here */
 export const globalState = {
   authInfo: {
-    authed: false,
-    account: "",
+    authed: true,
+    account: "cauchy@gmail.com",
   },
   bookPage: 1
 };

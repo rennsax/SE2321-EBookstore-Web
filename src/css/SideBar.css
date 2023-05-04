@@ -2,3 +2,6 @@
   position: sticky;
   top: 120px;
 }
+.sidebar .MuiList-root {
+  background-color: transparent;
+}

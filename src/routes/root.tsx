@@ -3,11 +3,12 @@ import RequireAuthorized from "components/RequireAuthorized";
 import HomePage from "view/HomePage";
 import LoginPage from "view/LoginPage";
 import homePageElement from "routes/main";
+import LoginPageLab from "view/LoginPage/LoginPageLab";
 
 export default [
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <LoginPageLab />,
   },
   {
     path: "/home",

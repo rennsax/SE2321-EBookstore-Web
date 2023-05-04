@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
 }
+.cart-page select {
+  background-color: transparent;
+}
 .cart-page__left {
   width: 460px;
   padding: 0;
@@ -53,6 +56,7 @@
   height: 84px;
   box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
+  background-color: #fff;
   margin: 16px auto;
   padding: 0 10px;
   overflow: hidden;
