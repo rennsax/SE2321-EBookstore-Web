@@ -6,9 +6,10 @@ import { Dispatch, Reducer, ReducerAction, createContext, useContext } from "rea
 /** Global variable states are defined here */
 export const globalState = {
   authInfo: {
-    authed: true,
-    account: "cauchy@gmail.com",
+    authed: false,
+    account: "",
   },
+  /** The current page selected. */
   bookPage: 1
 };
 

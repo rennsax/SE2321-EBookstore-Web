@@ -14,14 +14,19 @@ export default function MySnackBar({
   onClose,
   children,
   alertType,
-  autoHideDuration
+  autoHideDuration,
 }: MySnackBarProps) {
   return (
     <Snackbar
       open={open}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       autoHideDuration={autoHideDuration ?? 2000}
-      onClose={onClose}
+      onClose={(e, r) => {
+        if (r == "clickaway" || onClose === undefined) {
+          return;
+        }
+        onClose();
+      }}
     >
       <Alert
         elevation={4}
