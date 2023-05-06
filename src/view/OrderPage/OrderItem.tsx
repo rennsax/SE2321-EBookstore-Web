@@ -3,7 +3,7 @@ import { getBookByUuid } from "service/BookService";
 import api from "service/api.json";
 import { Link } from "react-router-dom";
 
-export default function OrderItem({ uuid, quantity }: BookOrdered) {
+export default function OrderItem({ uuid, quantity, totalBudget }: BookOrdered) {
   const { data: book, isSuccess } = useQuery({
     queryKey: [uuid, "orderItem"],
     queryFn: async () => {
@@ -34,7 +34,7 @@ export default function OrderItem({ uuid, quantity }: BookOrdered) {
         </div>
         <div className="order-item__right">
           <div className="order-item__price">
-            <p className="order-item__price__total">{`Cost: $${price * quantity}`}</p>
+            <p className="order-item__price__total">{`Cost: $${totalBudget}`}</p>
             <p className="order-item__price__unit">{`Unit price: $${price}`}</p>
           </div>
           <span className="order-item__qty">{`qty: ${quantity}`}</span>

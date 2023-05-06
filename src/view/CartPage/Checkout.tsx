@@ -8,7 +8,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from "@mui/material/Snackbar";
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
-import config from "config/front.json";
 import { memo, useEffect, useRef, useState } from "react";
 import { checkoutOrder } from "service/OrderService";
 import useUserInfo from "utils/useUserInfo";
@@ -53,12 +52,13 @@ const CardTypeList = memo(function CardTypeList() {
 
 export default function Checkout({
   // avatar,
-  sumPrice,
+  sumBudget,
 }: {
   avatar: string;
-  sumPrice: number;
+  sumBudget: string;
 }) {
-  const shipPrice = config["cart.shipPrice"];
+  // const shipPrice = config["cart.shipPrice"];
+  // TODO ship price
   const dateRef = useRef<HTMLInputElement>(null);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
@@ -85,8 +85,6 @@ export default function Checkout({
     e.preventDefault();
     setDialogOpen(true);
   };
-
-  const totalPrice = sumPrice + shipPrice;
 
   return (
     <form className="pay">
@@ -151,15 +149,15 @@ export default function Checkout({
       <hr />
       <div className="pay__result flex-space-between">
         <div>Subtotal</div>
-        <div>{`$${sumPrice}`}</div>
+        <div>{`$${sumBudget}`}</div>
       </div>
       <div className="pay__result flex-space-between">
         <div>Shipping</div>
-        <div>{`$${shipPrice}`}</div>
+        <div>{"0.00"}</div>
       </div>
       <div className="pay__result flex-space-between">
         <div>Total(Incl. taxes)</div>
-        <div>{`$${totalPrice}`}</div>
+        <div>{`$${sumBudget}`}</div>
       </div>
 
       <button
@@ -167,7 +165,7 @@ export default function Checkout({
         onClick={handleClickCheckout}
         tabIndex={-1}
       >
-        <div>{`$${sumPrice}`}</div>
+        <div>{`$${sumBudget}`}</div>
         <div className="flex-space-between">
           <div style={{ marginRight: "10px" }}>Checkout</div>
           <RightArrow />
@@ -185,7 +183,7 @@ export default function Checkout({
         <DialogContent className="co-dialog">
           <DialogContentText id="alert-dialog-description">
             You need to pay
-            <span className="co-dialog__price">${totalPrice}</span>
+            <span className="co-dialog__price">${sumBudget}</span>
             for this order.
           </DialogContentText>
         </DialogContent>

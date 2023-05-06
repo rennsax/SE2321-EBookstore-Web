@@ -1,33 +1,21 @@
-interface BookOrdered {
+type BookOrdered = {
   readonly uuid: string;
-  quantity: number;
+  readonly quantity: number;
+  // TODO represent on front-end
+  readonly totalBudget: string;
 }
 
-type SetBooksInCartHook = React.Dispatch<React.SetStateAction<BookOrdered[]>>;
-
-interface BooksInCartState {
-  booksInCart: BookOrdered[];
-  setBooksInCart: SetBooksInCartHook;
-}
-
-interface Book {
+type Book = {
   readonly uuid: string; // primary key
   title: string;
   author: string;
-  price: number;
+  price: string;
   picId: string;
   date: string;
   isbn: string;
   description: string;
   // TODO add intro
   intro?: string;
-
-  /** @deprecated */
-  url?: string;
-  /** @deprecated */
-  authors?: Array<string>;
-  /** @deprecated */
-  abb?: string;
 }
 
 type ButtonEvent = React.SyntheticEvent | Event;

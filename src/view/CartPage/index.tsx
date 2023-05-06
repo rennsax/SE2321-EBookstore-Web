@@ -7,7 +7,7 @@ import Checkout from "./Checkout";
 
 import { CircularProgress } from "@mui/material";
 import { createQueryOptionsBookOrdered } from "service/BookService";
-import { getBookOrderedList } from "service/OrderService";
+import { getOrderInfo } from "service/OrderService";
 import useUserInfo from "utils/useUserInfo";
 import BookBuyCard from "./BookBuyCard";
 import api from "service/api.json";
@@ -19,8 +19,8 @@ export default function CartPage() {
   const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
 
   const {
-    data: bookOrderedList,
-    isSuccess: isGetOrderListSuccess,
+    data: orderInfo,
+    isSuccess: isGetOrderSuccess,
     refetch: refetchOrder,
   } = useQuery({
     queryKey: ["bookOrderedList", orderId],
@@ -28,30 +28,32 @@ export default function CartPage() {
       if (orderId === undefined) {
         throw new Error("The order's id isn't provided.");
       }
-      return await getBookOrderedList(orderId);
+      return await getOrderInfo(orderId);
     },
   });
 
-  if (isGetOrderListSuccess) {
-    bookOrderedList.forEach((bookOrdered) => {
-      bookCountSum += bookOrdered.quantity;
-      // set queries
-      queries.push(
-        createQueryOptionsBookOrdered(bookOrdered.uuid, isGetOrderListSuccess)
-      );
-    });
-  }
+  const { bookOrderedList } = orderInfo ?? { bookOrderedList: [] };
+
+  bookOrderedList.forEach((bookOrdered) => {
+    bookCountSum += bookOrdered.quantity;
+    // set queries
+    queries.push(
+      createQueryOptionsBookOrdered(bookOrdered.uuid, isGetOrderSuccess)
+    );
+  });
 
   const results = useQueries<UseQueryOptions<Book>[]>({ queries });
+
+  if (!isGetOrderSuccess) {
+    return null;
+  }
+
   const bookBuyElements: JSX.Element[] = [];
-  // TODO use a more precise way
-  let sumPrice = 0;
-  let allIsSuccess = isGetOrderListSuccess;
+  let allIsSuccess = true;
 
   results.forEach((res, i) => {
     const { data, isSuccess } = res;
-    if (isSuccess && isGetOrderListSuccess) {
-      sumPrice += bookOrderedList[i].quantity * data.price;
+    if (isSuccess && isGetOrderSuccess) {
       bookBuyElements.push(
         <BookBuyCard
           book={data}
@@ -65,6 +67,9 @@ export default function CartPage() {
     }
     allIsSuccess &&= isSuccess;
   });
+
+  console.log(orderInfo);
+
   return (
     <div className="cart-page">
       <div className="cart-page__left">
@@ -82,7 +87,7 @@ export default function CartPage() {
         )}
       </div>
       <div className="cart-page__right">
-        <Checkout avatar={avatar} sumPrice={sumPrice} />
+        <Checkout avatar={avatar} sumBudget={orderInfo.sumBudget} />
       </div>
     </div>
   );

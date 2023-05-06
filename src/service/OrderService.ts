@@ -2,9 +2,9 @@ import myFetch from "utils/ajax";
 import api from "./api.json";
 
 /** Get all ordered books of an order. */
-export async function getBookOrderedList(
+export async function getOrderInfo(
   orderId: number
-): Promise<BookOrdered[]> {
+): Promise<OrderInfo> {
   const props: FetchProps = {
     url: `${api.order}/${orderId}`,
     method: "GET",
@@ -12,7 +12,7 @@ export async function getBookOrderedList(
   const data = await myFetch(props).then((res) => {
     return res.json();
   });
-  return data.bookOrderedList;
+  return data;
 }
 
 /** Get all order information of an user */

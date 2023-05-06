@@ -10,6 +10,7 @@ type OrderState = "PENDING" | "TRANSPORTING" | "COMPLETE";
 type OrderInfo = {
   readonly id: number;
   readonly time: Date;
+  readonly sumBudget: string;
   readonly state: OrderState;
   readonly bookOrderedList: BookOrdered[];
 }
