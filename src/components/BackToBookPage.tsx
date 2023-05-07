@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { LeftArrow } from "assets/icons";
+import { Link } from "react-router-dom";
 
 export default function BackToBookPage() {
   return (

@@ -68,8 +68,6 @@ export default function CartPage() {
     allIsSuccess &&= isSuccess;
   });
 
-  console.log(orderInfo);
-
   return (
     <div className="cart-page">
       <div className="cart-page__left">

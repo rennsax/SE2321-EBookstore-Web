@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "css/App.css";
 import { RouterProvider } from "react-router-dom";
 
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import rootRoutes from "routes/root";
@@ -19,9 +19,6 @@ export default function App() {
   const [state, dispatch] = useReducer(globalReducer, globalState);
 
   console.log("App rendered!");
-  useEffect(() => {
-    console.log(state)
-  }, [state])
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
