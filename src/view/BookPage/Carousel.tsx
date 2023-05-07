@@ -1,7 +1,7 @@
-import config from "config/front.json";
 import { memo } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import api from "service/api.json";
 
 const BookCarousel = memo(function BookCarousel() {
   const createItems = (sourceUrl: string) => {
@@ -29,7 +29,7 @@ const BookCarousel = memo(function BookCarousel() {
           showThumbs={false}
           infiniteLoop={true}
         >
-          {createItems(config["url.carousel.picture"])}
+          {createItems(api["carousel.picture"])}
         </Carousel>
       </div>
     </div>

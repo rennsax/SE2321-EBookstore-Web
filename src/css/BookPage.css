@@ -10,6 +10,7 @@
   margin: 0 auto 30px;
 }
 .book-card {
+  background-color: #fff;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
@@ -56,7 +57,7 @@
   height: 300px;
 }
 .carousel_container {
-  margin: 30px auto;
+  margin-bottom: 30px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -70,6 +71,11 @@
   height: 44px;
   display: flex;
   justify-content: center;
+}
+.search_bar form input,
+.search_bar form select,
+.search_bar form button {
+  background-color: transparent;
 }
 .search_bar * {
   font-size: 16px;

@@ -92,7 +92,7 @@ export default function Checkout({
         <div className="pay__header__title">
           <h3>Card details</h3>
         </div>
-        {/* TODO use avatar */}
+        {/* @deprecated */}
         {/* <div className="pay__header__avatar display-circle">
           <img src={avatar} alt="user-avatar" />
         </div> */}
@@ -205,6 +205,8 @@ export default function Checkout({
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* TODO use my snackbar */}
       <Snackbar
         open={alertOpen}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

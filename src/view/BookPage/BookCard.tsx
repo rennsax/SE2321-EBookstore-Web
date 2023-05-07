@@ -1,6 +1,6 @@
 import Skeleton from "@mui/material/Skeleton";
-import config from "config/front.json";
 import { useNavigate } from "react-router-dom";
+import api from "service/api.json";
 
 export default function BookCard({ bookContent }: { bookContent?: Book }) {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function BookCard({ bookContent }: { bookContent?: Book }) {
         ) : (
           <img
             alt={"Picture of " + title}
-            src={`${config["url.book.picture"]}/${picId}.jpg`}
+            src={`${api["book.picture"]}/${picId}.jpg`}
           ></img>
         )}
       </div>

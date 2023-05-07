@@ -1,7 +1,7 @@
 import { CaretDown, CaretUp, Trash } from "assets/icons";
 import { Link } from "react-router-dom";
 
-import config from "config/front.json";
+import api from "service/api.json";
 import { updateOrderItem } from "service/OrderService";
 import useUserInfo from "utils/useUserInfo";
 
@@ -44,7 +44,7 @@ export default function BookBuyCard({ quantity, book, refetch }: BookBuyProps) {
         <div className="cart-card__info__pic">
           <Link to={`/home/bd/${uuid}`}>
             <img
-              src={`${config["book.picture.url"]}/${picId}.jpg`}
+              src={`${api["book.picture"]}/${picId}.jpg`}
               alt="book1"
             />
           </Link>

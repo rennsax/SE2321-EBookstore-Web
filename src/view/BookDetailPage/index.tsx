@@ -4,27 +4,22 @@ import BackToBookPage from "components/BackToBookPage";
 import "css/BookDetailPage.css";
 import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
-import myFetch from "utils/ajax";
 
 import config from "config/front.json";
+import { getBookByUuid } from "service/BookService";
+import api from "service/api.json";
 import BookInfo from "./BookInfo";
 
 export default function BookDetailPage() {
-  const { uuid } = useParams(); // "/home/bd/:uuid"
-
-  const fetchBookProps: FetchProps = {
-    method: "GET",
-    url: `${config["url.book.info"]}/${uuid}`,
-  };
+  const { uuid } = useParams<{ uuid: string }>(); // "/home/bd/:uuid"
 
   const { data: bookContent, isSuccess } = useQuery<Book>({
-    queryKey: [`bookDetails${uuid}`, fetchBookProps],
+    queryKey: [`bookDetails${uuid}`, uuid],
     queryFn: async () => {
-      const data = await myFetch(fetchBookProps).then((res) => {
-        return res.json();
-      });
+      const data = await getBookByUuid(uuid as string);
       return data;
     },
+    // TODO use default params
     retry: config["ajax.retry.maxTimes"],
     retryDelay: config["ajax.retry.delay"],
     refetchOnMount: false,
@@ -47,7 +42,7 @@ export default function BookDetailPage() {
         <div className="bdp-left">
           {isSuccess ? (
             <img
-              src={`${config["url.book.picture"]}/${picId}.jpg`}
+              src={`${api["book.picture"]}/${picId}.jpg`}
               alt={title}
               style={{ width: "240px" }}
             />

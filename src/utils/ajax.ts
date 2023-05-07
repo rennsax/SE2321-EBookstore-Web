@@ -19,6 +19,20 @@ const myFetch = async function myFetch(props: FetchProps) {
 
 export default myFetch;
 
+/**
+ * Tool function to check the response status.
+ *
+ * @param response
+ * @returns if the response denotes success, return the data.
+ * @throws "response error!" if the response denotes failure.
+ */
+export async function checkResponse<T>(response: Response): Promise<T> {
+  if (response.status < 200 || response.status >= 300) {
+    throw "response error!";
+  }
+  return await response.json();
+}
+
 /** @deprecated */
 type SendAjaxFun = <T>(method: Method, url: string) => Promise<T>;
 

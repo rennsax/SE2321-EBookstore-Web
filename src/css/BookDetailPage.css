@@ -5,7 +5,7 @@
 }
 .bdp-bottom {
   padding-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .bdp-bottom__title {
   font-size: 24px;
@@ -25,6 +25,7 @@
 }
 .book-details__title {
   font-size: 26px;
+  margin-bottom: 20px;
 }
 .book-details__author {
   font-size: 16px;

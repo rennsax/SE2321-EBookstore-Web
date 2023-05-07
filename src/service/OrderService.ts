@@ -1,5 +1,6 @@
 import myFetch from "utils/ajax";
 import api from "./api.json";
+import { checkResponse } from "utils/ajax";
 
 /** Get all ordered books of an order. */
 export async function getOrderInfo(
@@ -9,8 +10,8 @@ export async function getOrderInfo(
     url: `${api.order}/${orderId}`,
     method: "GET",
   };
-  const data = await myFetch(props).then((res) => {
-    return res.json();
+  const data: OrderInfo = await myFetch(props).then((res) => {
+    return checkResponse(res);
   });
   return data;
 }
