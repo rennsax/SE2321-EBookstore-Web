@@ -9,6 +9,7 @@ export const globalState = {
     authed: false,
     account: "",
   },
+  /** The current page selected. */
   bookPage: 1
 };
 
