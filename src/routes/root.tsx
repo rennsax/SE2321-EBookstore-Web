@@ -1,9 +1,8 @@
-import { Navigate } from "react-router-dom";
 import RequireAuthorized from "components/RequireAuthorized";
-import HomePage from "view/HomePage";
-import LoginPage from "view/LoginPage";
+import { Navigate } from "react-router-dom";
 import homePageElement from "routes/main";
-import LoginPageLab from "view/LoginPage/LoginPageLab";
+import HomePage from "view/HomePage";
+import LoginPageLab from "view/LoginPage";
 
 export default [
   {

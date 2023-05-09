@@ -1,8 +1,9 @@
 import { Alert, AlertColor } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
+import { useState } from "react";
 
 type MySnackBarProps = {
-  open: boolean;
+  open?: boolean;
   onClose?: () => void;
   children?: React.ReactNode;
   alertType?: AlertColor;
@@ -10,12 +11,14 @@ type MySnackBarProps = {
 };
 
 export default function MySnackBar({
-  open,
+  open: defaultOpen,
   onClose,
   children,
   alertType,
   autoHideDuration,
 }: MySnackBarProps) {
+  const [open, setOpen] = useState(defaultOpen ?? true);
+
   return (
     <Snackbar
       open={open}
@@ -25,6 +28,7 @@ export default function MySnackBar({
         if (r == "clickaway" || onClose === undefined) {
           return;
         }
+        setOpen(false);
         onClose();
       }}
     >
@@ -32,7 +36,10 @@ export default function MySnackBar({
         elevation={4}
         severity={alertType}
         sx={{ width: "100%" }}
-        onClose={onClose}
+        onClose={() => {
+          setOpen(false);
+          if (onClose) onClose();
+        }}
       >
         {children}
       </Alert>

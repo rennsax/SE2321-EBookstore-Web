@@ -20,38 +20,45 @@ type LoginPageSnackBarProps = {
 
 const AlertSnackBar: React.FC<LoginPageSnackBarProps> = ({
   alertType,
-  endAlertError,
+  endAlertError, // set alert type to "no"
 }) => {
+
+  const handleOnClose: () => void = () => {
+    setTimeout(() => {
+      endAlertError();
+    }, 1000)
+  }
+
   switch (alertType) {
     case "success":
-      return <MySnackBar open>Login successfully!</MySnackBar>;
+      return <MySnackBar>Login successfully!</MySnackBar>;
     case "login error":
       return (
-        <MySnackBar open onClose={endAlertError} alertType="error">
+        <MySnackBar onClose={handleOnClose} alertType="error">
           Wrong account/password!
         </MySnackBar>
       );
     case "response error":
       return (
-        <MySnackBar open onClose={endAlertError} alertType="error">
+        <MySnackBar onClose={handleOnClose} alertType="error">
           Server response error!
         </MySnackBar>
       );
     case "incomplete":
       return (
-        <MySnackBar open onClose={endAlertError} alertType="warning">
+        <MySnackBar onClose={handleOnClose} alertType="warning">
           Please fill all information first!
         </MySnackBar>
       );
     case "invalid email":
       return (
-        <MySnackBar open onClose={endAlertError} alertType="warning">
+        <MySnackBar onClose={handleOnClose} alertType="warning">
           Please input a valid email address!
         </MySnackBar>
       );
     case "repeat error":
       return (
-        <MySnackBar open onClose={endAlertError} alertType="warning">
+        <MySnackBar onClose={handleOnClose} alertType="warning">
           Passwords are not identical!
         </MySnackBar>
       )

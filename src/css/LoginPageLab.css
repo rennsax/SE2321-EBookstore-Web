@@ -108,7 +108,7 @@ body:has(.login-box) {
 }
 .login-box__window__btn:hover {
   box-shadow: 6px 6px 10px #d1d1d1, -6px -6px 10px #e9e9e9;
-  transform: scale(0.96);
+  transform: scale(0.99);
   transition: 0.25s;
 }
 .login-box__container {
@@ -201,7 +201,7 @@ body:has(.login-box) {
 }
 .login-box__form__btn:hover {
   box-shadow: 6px 6px 10px #d1d1d1, -6px -6px 10px #e9e9e9;
-  transform: scale(0.96);
+  transform: scale(0.99);
   transition: 0.25s;
 }
 .login-box__switch {
@@ -213,4 +213,7 @@ body:has(.login-box) {
 }
 .login-box__switch--r {
   left: 400px;
+}
+.login-page__process {
+  color: #4b70e2 !important;
 }
