@@ -46,5 +46,11 @@
     "eslint": "^8.38.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "resolutions": {
+    "postcss": "^8.1.0",
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-syntax-flow": "^7.14.5",
+    "@babel/plugin-transform-react-jsx": "^7.14.9"
   }
 }

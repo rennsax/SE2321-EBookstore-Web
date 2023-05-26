@@ -1,0 +1,144 @@
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 160px;
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+
+  &__left {
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  &__right {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 16px;
+    margin-right: 16px;
+    text-align: right;
+  }
+  &__pic-container {
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    margin-right: 20px;
+  }
+  &__pic {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__info {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    max-width: 300px;
+    padding: 20px 0;
+    &__title {
+      font-size: 20px;
+    }
+
+    &__author {
+      margin: 0;
+      font-weight: normal;
+    }
+  }
+
+  &__price {
+    &__total {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    &__unit {
+      color: gray;
+    }
+  }
+
+  &__qty {
+    color: gray;
+  }
+}
+
+.order-page {
+  &--loading {
+    & > .MuiCircularProgress-root {
+      display: block;
+      margin: 25vh auto 0;
+    }
+  }
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 10%;
+    top: 20px
+  }
+}
+
+@af: cubic-bezier(0.175, 0.885, 0.32, 1.2);
+// @af: ease-in-out;
+
+.order-card {
+  width: 230px;
+  height: 260px;
+  margin: 30px 10px;
+  background: url("../assets/background/paper.svg") no-repeat;
+  background-position: center;
+  background-size: contain;
+  animation: 1.5s @af floatUp;
+  position: relative;
+  top: 0;
+
+  &__info {
+    width: 146px;
+    position: relative;
+    left: 54px;
+    top: 46px;
+    font-size: 18px;
+  }
+  &__number {
+    font-size: 22px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 14px;
+    & > span {
+      vertical-align: middle;
+    }
+  }
+  &__time {
+    margin-bottom: 10px;
+  }
+
+  &__state {
+    color: #219ebc;
+  }
+}
+
+.order-card-list {
+  margin: 0 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.order-info {
+  &__id {
+    margin: 20px 0;
+    font-size: 36px;
+  }
+  &__date {
+    font-size: 20px;
+    > span:first-child {
+      color: gray;
+    }
+  }
+}
+
+// order-item-list

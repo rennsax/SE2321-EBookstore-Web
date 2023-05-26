@@ -1,0 +1,44 @@
+@import url(./global.less);
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: @back-color;
+  // background: url(../assets/background/bookstore-background.png) no-repeat;
+  // background-size: contain;
+}
+// Reset Begin
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+// Reset End
+
+body {
+  min-width: @min-view-width;
+  // background-color: #eee;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.display-circle {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.main-container {
+  width: @min-view-width;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

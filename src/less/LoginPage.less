@@ -1,0 +1,243 @@
+@bg-color: #f2f5f7;
+@color1: #d1d1d1;
+@color2: #e9e9e9;
+@btn-color: #4b70e2;
+@shell-width: 1000px;
+@con-height: 600px;
+@con-width: 600px;
+@window-width: @shell-width - @con-width;
+@shell-class: login-box; // selector for login-box
+@secondary-color: gray;
+// selector for login and register
+@login-box-a: login-box__container__a; // login
+@login-box-b: login-box__container__b; // register
+
+// namespace for mixin
+#global() {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn {
+    width: 180px;
+    height: 50px;
+    border-radius: 25px;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    background-color: @btn-color;
+    color: @color2;
+    box-shadow: 8px 8px 16px @color1, -8px -8px 16px @color2;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 6px 6px 10px @color1, -6px -6px 10px @color2;
+      transform: scale(0.99);
+      transition: 0.25s;
+    }
+  }
+  .title {
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 72px;
+  }
+  .transition {
+    transition: all cubic-bezier(.52,.21,.2,.88) 1.25s;
+  }
+}
+
+body:has(.@{shell-class}) {
+  #global.container();
+  width: 100%;
+  min-width: auto;
+  background-color: @bg-color;
+  user-select: none;
+}
+
+@media screen and (max-width: 1399.98px) {
+  .login-box {
+    transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 1199.98px) {
+  .@{shell-class} {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .@{shell-class} {
+    transform: scale(0.7);
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .@{shell-class} {
+    transform: scale(0.6);
+  }
+}
+
+.@{shell-class} {
+  #global.container();
+  height: @con-height;
+  width: @shell-width;
+  box-shadow: 10px 10px 10px @color1, -10px -10px 10px @color2;
+
+  &__window {
+    #global.container();
+    padding: 20px;
+    width: @window-width;
+    height: 100%;
+    background-color: @bg-color;
+    position: relative;
+    z-index: 999;
+    #global.transition();
+
+    &__content {
+      #global.container();
+      flex-flow: column nowrap;
+      height: 100%;
+      width: @window-width;
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+      #global.transition();
+
+      &--display {
+        opacity: 100;
+        z-index: 999;
+      }
+    }
+
+    &--r {
+      box-shadow: -6px 0px 10px @color1;
+      right: 0;
+    }
+
+    &--l {
+      box-shadow: 6px 0px 10px @color1;
+      right: @con-width;
+    }
+
+    &__container {
+      #global.container();
+      width: 80%;
+
+      &__title {
+        #global.title();
+        font-size: 28px;
+        letter-spacing: 1.1px;
+        text-align: center;
+      }
+
+      &__hint {
+        color: @secondary-color;
+        text-align: center;
+      }
+    }
+    &__btn {
+      #global.btn();
+      margin-top: 20px;
+    }
+  }
+
+  &__container {
+    #global.container();
+    padding: 20px;
+    width: @con-width;
+    height: 100%;
+    background-color: @bg-color;
+    border: none;
+    position: absolute;
+    #global.transition();
+
+    &__a {
+      opacity: 100%;
+      z-index: 100;
+      &--r {
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+    &__b {
+      opacity: 0;
+      z-index: -1;
+      &--r {
+        opacity: 100%;
+        z-index: 100;
+      }
+    }
+  }
+
+  &__form {
+    #global.container();
+    flex-flow: column nowrap;
+    width: 100%;
+    height: 100%;
+
+    &__main {
+      #global.container();
+      flex-flow: column nowrap;
+      height: 220px;
+    }
+
+    &__title {
+      #global.title();
+    }
+
+    &__motto {
+      margin-bottom: 30px;
+      font-size: 16px;
+      color: @secondary-color;
+      font-family: "Zapfino";
+    }
+
+    &__input {
+      width: 350px;
+      height: 60px;
+      margin: 6px 0;
+      padding-left: 24px;
+      font-size: 22px;
+      border: none;
+      outline: none;
+      transition: 0.25s ease;
+      border-radius: 8px;
+      background-color: @bg-color;
+      box-shadow: inset 2px 2px 4px @color1, inset -2px -2px 4px @color2;
+    }
+
+    &__link {
+      font-size: 16px;
+      margin-top: 24px;
+      border-bottom: 1px solid #a0a5a8;
+    }
+
+    &__btn {
+      #global.btn();
+    }
+  }
+
+  &__switch {
+    position: relative;
+    width: @con-width;
+    height: 100%;
+    left: 0;
+    #global.transition();
+
+    &--r {
+      left: @window-width;
+    }
+  }
+}
+
+.login-page {
+  &__process {
+    color: @btn-color !important;
+  }
+}
