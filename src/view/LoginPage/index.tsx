@@ -4,7 +4,7 @@ import timer from "utils/timer";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import "css/LoginPageLab.css";
+import "css/LoginPage.css";
 import { ReactEventHandler, useRef, useState } from "react";
 import login from "service/LoginServer";
 import useAppContext from "utils/useAppContext";

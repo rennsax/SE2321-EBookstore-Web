@@ -1,8 +1,5 @@
-import "css/LoginPageLab.css";
 import React from "react";
-
 import MySnackBar from "components/MySnackBar";
-import "css/LoginPage.css";
 
 export type AlertType =
   | "success"
