@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 import { Navigate } from "react-router-dom";
 import useAuth from "utils/useAuth";
 
 const RequireAuthorized: React.FC<{
   children: React.ReactNode;
   fallBack?: string;
-}> = ({ children, fallBack }) => {
-  const { authed } = useAuth();
+  super?: boolean;
+}> = ({ children, fallBack = "/login", super: needSuper = false }) => {
+  const { authed, isSuper } = useAuth();
 
   // TODO Ask back-end, show require logging in
-  if (authed) {
+  if (authed && (!needSuper || isSuper)) {
     return <>{children}</>;
   }
-  return <Navigate to={fallBack ?? "/login"} replace />;
+  return <Navigate to={fallBack} replace />;
 };
 
 export default RequireAuthorized;

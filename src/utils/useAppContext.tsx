@@ -1,5 +1,6 @@
 /**
  * This file create a hook `useAppContext`, used to share states globally.
+ * Usage: if you want to register a global variable, just change the variable `globalState`.
  */
 import { Dispatch, Reducer, ReducerAction, createContext, useContext } from "react";
 
@@ -8,6 +9,7 @@ export const globalState = {
   authInfo: {
     authed: false,
     account: "",
+    isSuper: false,
   },
   /** The current page selected. */
   bookPage: 1

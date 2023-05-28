@@ -11,10 +11,10 @@ import useAppContext from "utils/useAppContext";
 import useAuth from "utils/useAuth";
 import AlertSnackBar, { AlertType } from "./AlertSnackBar";
 
-export default function LoginPageLab() {
+export default function LoginPage() {
   // whether the window is on the right
   const [isRight, setIsRight] = useState(true);
-  const { authed, login: authorize } = useAuth();
+  const { authed, isSuper, login: authorize } = useAuth();
   const [, dispatch] = useAppContext();
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<AlertType>("no");
@@ -33,7 +33,11 @@ export default function LoginPageLab() {
       bookPage: () => 1,
     });
     if (authed) {
-      navigate("/home/books", { replace: true });
+      if (isSuper) {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/home/books", { replace: true });
+      }
     }
   });
 
@@ -63,30 +67,44 @@ export default function LoginPageLab() {
 
     e.preventDefault();
 
+    // Lock login server
     setIsWaiting(true);
 
     const account = loginAccountRef.current?.value as string;
     const passwd = loginPasswdRef.current?.value as string;
 
+    // Complete?
     if (!checkComplete(account) || !checkComplete(passwd)) {
       setAlertType("incomplete");
       setIsWaiting(false);
       return;
     }
 
+    // Explicitly waiting for 1 second
     await timer(1000);
     const loginResult = await login(account, passwd);
     switch (loginResult) {
       case "response error":
         setAlertType("response error");
         break;
+      case "wrong":
+        setAlertType("login error");
+        break;
+      case "forbidden":
+        setAlertType("forbidden user");
+        break;
+      /** Login successfully */
       case "ok":
         setAlertType("success");
         await timer(1000);
+        /** Store the account in the app context, i.e. authorized */
         authorize(account);
         break;
-      case "wrong":
-        setAlertType("login error");
+      case "super":
+        setAlertType("super user");
+        await timer(1000);
+        authorize(account, true);
+        break;
     }
 
     setIsWaiting(false);
@@ -264,8 +282,9 @@ export default function LoginPageLab() {
         </div>
       </div>
       <AlertSnackBar alertType={alertType} endAlertError={endAlertError} />
-      <Backdrop open={isWaiting}
-      // sx={{color: "rgba(0, 0, 0, 0.4)"}}
+      <Backdrop
+        open={isWaiting}
+        // sx={{color: "rgba(0, 0, 0, 0.4)"}}
       >
         <CircularProgress size={80} className="login-page__process" />
       </Backdrop>

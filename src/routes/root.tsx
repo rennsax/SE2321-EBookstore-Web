@@ -1,13 +1,15 @@
 import RequireAuthorized from "components/RequireAuthorized";
-import { Navigate } from "react-router-dom";
-import homePageElement from "routes/main";
+import { Navigate, RouteObject } from "react-router-dom";
+import mainRoutes from "routes/main";
+import AdminHomePage from "view/Admin/HomePage";
 import HomePage from "view/HomePage";
-import LoginPageLab from "view/LoginPage";
+import LoginPage from "view/LoginPage";
+import adminRoutes from "./admin";
 
-export default [
+const routeObjectList: RouteObject[] = [
   {
     path: "/login",
-    element: <LoginPageLab />,
+    element: <LoginPage />,
   },
   {
     path: "/home",
@@ -16,11 +18,22 @@ export default [
         <HomePage />
       </RequireAuthorized>
     ),
-    children: homePageElement,
+    children: mainRoutes,
+  },
+  {
+    path: "/admin",
+    element: (
+      <RequireAuthorized super>
+        <AdminHomePage />
+      </RequireAuthorized>
+    ),
+    children: adminRoutes
   },
   // TODO do it on your server (probably the best solution)
   {
     path: "/",
-    element: <Navigate to="/home" />,
+    element: <Navigate to="/login" replace/>,
   },
 ];
+
+export default routeObjectList;

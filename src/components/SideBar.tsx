@@ -1,9 +1,6 @@
-import { memo } from "react";
+import React from "react";
 // UI
-import ImportContactsIcon from "@mui/icons-material/ImportContacts";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -15,9 +12,21 @@ import "css/SideBar.css";
 import useAuth from "utils/useAuth";
 import Box from "@mui/material/Box";
 
-const SideBar = memo(function SideBar() {
+export interface NavigateBar {
+  className?: string;
+  to: string;
+  primary: string;
+  children?: React.ReactNode;
+}
+
+interface SideBarProps {
+  barInfoList: NavigateBar[];
+}
+
+const SideBar: React.FC<SideBarProps> = function SideBar({ barInfoList }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
+
   return (
     <div className="sidebar">
       <List
@@ -29,32 +38,17 @@ const SideBar = memo(function SideBar() {
         component="nav"
         aria-labelledby="nested-list-subheader"
       >
-        <Link className="to-page-book" to="books">
-          <ListItemButton>
-            <ListItemIcon>
-              <ImportContactsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Books" />
-          </ListItemButton>
-        </Link>
-
-        <Link className="to-page-cart" to="cart">
-          <ListItemButton>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="My Cart" />
-          </ListItemButton>
-        </Link>
-
-        <Link className="to-page-order" to="orders">
-          <ListItemButton>
-            <ListItemIcon>
-              <ListAltIcon />
-            </ListItemIcon>
-            <ListItemText primary="My Orders" />
-          </ListItemButton>
-        </Link>
+        {barInfoList.map((barInfo, index) => {
+          const { className, to, primary, children } = barInfo;
+          return (
+            <Link className={className} to={to} key={`sidebar${index}`}>
+              <ListItemButton>
+                <ListItemIcon>{children}</ListItemIcon>
+                <ListItemText primary={primary} />
+              </ListItemButton>
+            </Link>
+          );
+        })}
 
         <Box className="to-page-login">
           <ListItemButton
@@ -72,6 +66,6 @@ const SideBar = memo(function SideBar() {
       </List>
     </div>
   );
-});
+};
 
 export default SideBar;

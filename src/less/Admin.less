@@ -1,0 +1,32 @@
+.admin {
+  &__user-card {
+    max-height: 100px;
+    max-width: 400px;
+    & + & {
+      margin-top: 40px;
+    }
+    &__avatar {
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+
+      & img {
+        height: 100%;
+      }
+    }
+
+    &__name {
+      font-size: 28px;
+      font-weight: bold;
+      width: 100px;
+    }
+    &__type {
+      font-size: 18px;
+    }
+
+    &__btn {
+      max-height: 40px;
+    }
+  }
+}

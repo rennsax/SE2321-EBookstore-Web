@@ -1,0 +1,27 @@
+.admin__user-card {
+  max-height: 100px;
+  max-width: 400px;
+}
+.admin__user-card + .admin__user-card {
+  margin-top: 40px;
+}
+.admin__user-card__avatar {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.admin__user-card__avatar img {
+  height: 100%;
+}
+.admin__user-card__name {
+  font-size: 28px;
+  font-weight: bold;
+  width: 100px;
+}
+.admin__user-card__type {
+  font-size: 18px;
+}
+.admin__user-card__btn {
+  max-height: 40px;
+}

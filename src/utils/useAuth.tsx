@@ -6,11 +6,12 @@ export default function useAuth() {
 
   return {
     ...authInfo,
-    login(account: string) {
+    login(account: string, isSuper = false) {
       dispatch({
         authInfo: (authInfo) => {
           authInfo.authed = true;
           authInfo.account = account;
+          authInfo.isSuper = isSuper;
           return authInfo;
         },
       });
@@ -20,6 +21,7 @@ export default function useAuth() {
         authInfo: (authInfo) => {
           authInfo.authed = false;
           authInfo.account = "";
+          authInfo.isSuper = false;
           return authInfo;
         },
       });

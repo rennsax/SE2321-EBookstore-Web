@@ -7,5 +7,8 @@
   "user": "http://localhost:8080/user",
   "order": "http://localhost:8080/order",
   "order.submit": "http://localhost:8080/order/submit",
-  "user.avatar": "http://localhost:8080/avatar"
+  "user.avatar": "http://localhost:8080/avatar",
+  "user.ban": "http://localhost:8080/user/ban",
+  "user.unlock": "http://localhost:8080/user/unlock",
+  "user.setPasswd": "http://localhost:8080/user/passwd"
 }

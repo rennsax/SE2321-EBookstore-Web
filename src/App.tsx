@@ -6,11 +6,8 @@ import { useReducer } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import rootRoutes from "routes/root";
-import {
-  AppContext,
-  globalReducer,
-  globalState
-} from "utils/useAppContext";
+import { AppContext, globalReducer, globalState } from "utils/useAppContext";
+
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -22,10 +19,10 @@ export default function App() {
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
-        <QueryClientProvider client={queryClient}>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-          <RouterProvider router={router} />
-        </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AppContext.Provider>
   );
 }

@@ -3,7 +3,7 @@ import api from "./api.json";
 
 export async function getUserInfo(account: string): Promise<UserInfo> {
   const props: FetchProps = {
-    url: `${api.user}?account=${account}`,
+    url: `${api.user}/by?account=${account}`,
     method: "GET",
   };
   const data: UserInfo = await myFetch(props).then((res) => {

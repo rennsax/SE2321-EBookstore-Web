@@ -1,9 +1,11 @@
+type UserType = "SUPER" | "NORMAL" | "FORBIDDEN";
+
 type UserInfo = {
   readonly id: number;
   readonly orderId: number;
   readonly avatarId: number;
   readonly name: string;
-}
+};
 
 type OrderState = "PENDING" | "TRANSPORTING" | "COMPLETE";
 
@@ -13,9 +15,18 @@ type OrderInfo = {
   readonly sumBudget: string;
   readonly state: OrderState;
   readonly bookOrderedList: BookOrdered[];
-}
+};
 
 type BookOrdered = {
   readonly uuid: string;
   quantity: number;
+};
+
+interface UserInfoForAdmin {
+  id: number;
+  name: string;
+  userType: UserType;
+  avatarId: string;
+  account: string;
+  passwd: string;
 }

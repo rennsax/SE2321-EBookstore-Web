@@ -5,7 +5,7 @@ import CartPage from "view/CartPage";
 import OrderPage from "view/OrderPage";
 import ProfilePage from "view/ProfilePage";
 
-const routeElements: RouteObject[] = [
+const mainRoutes: RouteObject[] = [
   {
     path: "books",
     element: <BookPage />,
@@ -32,4 +32,4 @@ const routeElements: RouteObject[] = [
   },
 ];
 
-export default routeElements;
+export default mainRoutes;

@@ -1,5 +1,7 @@
 import React from "react";
 import MySnackBar from "components/MySnackBar";
+import { AlertColor } from "@mui/material";
+import { ReactElement } from "react";
 
 export type AlertType =
   | "success"
@@ -8,7 +10,9 @@ export type AlertType =
   | "response error"
   | "incomplete"
   | "invalid email"
-  | "repeat error";
+  | "repeat error"
+  | "forbidden user"
+  | "super user";
 
 type LoginPageSnackBarProps = {
   alertType: AlertType;
@@ -19,46 +23,43 @@ const AlertSnackBar: React.FC<LoginPageSnackBarProps> = ({
   alertType,
   endAlertError, // set alert type to "no"
 }) => {
-
   const handleOnClose: () => void = () => {
     setTimeout(() => {
       endAlertError();
-    }, 1000)
-  }
+    }, 1000);
+  };
+
+  const generateAlert: (
+    alertType: AlertColor,
+    message: string | null
+  ) => ReactElement = (alertType, message) => {
+    return (
+      <MySnackBar onClose={handleOnClose} alertType={alertType}>
+        {message}
+      </MySnackBar>
+    );
+  };
 
   switch (alertType) {
     case "success":
-      return <MySnackBar>Login successfully!</MySnackBar>;
+      return generateAlert("success", "Login successfully!");
     case "login error":
-      return (
-        <MySnackBar onClose={handleOnClose} alertType="error">
-          Wrong account/password!
-        </MySnackBar>
-      );
+      return generateAlert("error", "Wrong account/password!");
     case "response error":
-      return (
-        <MySnackBar onClose={handleOnClose} alertType="error">
-          Server response error!
-        </MySnackBar>
-      );
+      return generateAlert("error", "Server response error!");
     case "incomplete":
-      return (
-        <MySnackBar onClose={handleOnClose} alertType="warning">
-          Please fill all information first!
-        </MySnackBar>
-      );
+      return generateAlert("warning", "Please fill all information first!");
     case "invalid email":
-      return (
-        <MySnackBar onClose={handleOnClose} alertType="warning">
-          Please input a valid email address!
-        </MySnackBar>
-      );
+      return generateAlert("warning", "Please input a valid email address!");
     case "repeat error":
-      return (
-        <MySnackBar onClose={handleOnClose} alertType="warning">
-          Passwords are not identical!
-        </MySnackBar>
-      )
+      return generateAlert("warning", "Passwords are not identical!");
+    case "forbidden user":
+      return generateAlert(
+        "error",
+        "Your account has been banned! Try to contact with the administrator."
+      );
+    case "super user":
+      return generateAlert("success", "Welcome, administrator!");
   }
   // assert(alertType == "no")
   return null;

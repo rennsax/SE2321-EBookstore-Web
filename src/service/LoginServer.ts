@@ -1,7 +1,7 @@
 import config from "./api.json";
 import myFetch from "utils/ajax";
 
-type LoginResult = "response error" | "ok" | "wrong";
+type LoginResult = "response error" | "ok" | "wrong" | "super" | "forbidden";
 
 export default async function login(
   account: string,
@@ -18,7 +18,17 @@ export default async function login(
   try {
     const response = await myFetch(loginProps);
     if (response.status >= 200 && response.status < 300) {
-      return "ok";
+      // Check if the user is an administrator.
+      const data: { userType: "NORMAL" | "SUPER" | "FORBIDDEN" } =
+        await response.json();
+      switch (data.userType) {
+        case "NORMAL":
+          return "ok";
+        case "SUPER":
+          return "super";
+        case "FORBIDDEN":
+          return "forbidden";
+      }
     }
     return "wrong";
   } catch (err) {
