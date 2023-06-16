@@ -8,7 +8,7 @@ export async function getBookListForDisplay(
   offset?: number
 ): Promise<Book[]> {
   const props: FetchProps = {
-    url: `${api["book.info"]}?limit=${limit}&offset=${offset ?? 0}`,
+    url: `${api["book"]}?limit=${limit}&offset=${offset ?? 0}`,
     method: "GET",
   };
   const data: Book[] = await myFetch(props).then((res) => {
@@ -19,7 +19,7 @@ export async function getBookListForDisplay(
 
 export async function getBookByUuid(uuid: string): Promise<Book> {
   const props: FetchProps = {
-    url: `${api["book.info"]}/${uuid}`,
+    url: `${api["book"]}/${uuid}`,
     method: "GET",
   };
   const data: Book = await myFetch(props).then((res) => {

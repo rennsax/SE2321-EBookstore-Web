@@ -44,7 +44,7 @@ export default function HeaderInfo({
 }: HeaderInfoProps) {
   const navigate = useNavigate();
   const { avatarId } = useUserInfo();
-  const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
+  const avatar = `${api["avatar"]}/${avatarId}.jpg`;
 
   return (
     <div className="header-container flex-space-between">

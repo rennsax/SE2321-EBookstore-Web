@@ -10,7 +10,7 @@ import timer from "utils/timer";
 import config from "config/front.json";
 import { useEffect, useState } from "react";
 import { getBookListForDisplay } from "service/BookService";
-import { defaultQueryOptions } from "service/queryOptions";
+import { defaultQueryOptions } from "service/defaultQueryOptions";
 import useAppContext from "utils/useAppContext";
 
 export default function BookPage() {

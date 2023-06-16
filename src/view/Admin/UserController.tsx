@@ -14,17 +14,16 @@ import {
   unlockUser,
 } from "service/Admin/UserServer";
 import api from "service/api.json";
-import { defaultQueryOptions } from "service/queryOptions";
+import { defaultQueryOptions } from "service/defaultQueryOptions";
 
 const UserCard: React.FC<{
   userInfo: UserInfoForAdmin;
   refetch: () => void;
 }> = ({ userInfo, refetch }) => {
-  const { id, name, avatarId, account, userType } = userInfo;
-  const [passwd, setPasswd] = useState(userInfo.passwd);
+  const { id, name, avatarId, account, userType, passwd } = userInfo;
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [passwdNew, setPasswdNew] = useState<string>("");
-  const avatarSrc = `${api["user.avatar"]}/${avatarId}.jpg`;
+  const avatarSrc = `${api["avatar"]}/${avatarId}.jpg`;
   const typeColor = (() => {
     switch (userType) {
       case "SUPER":
@@ -46,14 +45,13 @@ const UserCard: React.FC<{
   };
 
   const handlePasswdChange = async () => {
-    console.log(passwdNew);
     if (passwd === passwdNew) {
       return;
     }
     await setUserPasswd(id, passwdNew);
-    setPasswd(passwdNew);
     setIsDialogOpen(false);
     setPasswdNew("");
+    refetch();
   };
 
   return (

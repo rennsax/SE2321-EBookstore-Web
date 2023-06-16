@@ -10,7 +10,7 @@ export default async function login(
   const loginProps: FetchProps = {
     method: "POST",
     url: config.login,
-    params: {
+    body: {
       account,
       passwd,
     },

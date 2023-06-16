@@ -32,7 +32,7 @@ export async function setUserPasswd(id: number, passwd: string): Promise<void> {
   const props: FetchProps = {
     url: `${api["user.setPasswd"]}/${id}`,
     method: "PATCH",
-    params: {
+    body: {
       passwd,
     },
   };

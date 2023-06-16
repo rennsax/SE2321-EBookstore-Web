@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import "css/OrderPage.css";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { getAllOrderInfo } from "service/OrderService";
-import { defaultQueryOptions } from "service/queryOptions";
+import { defaultQueryOptions } from "service/defaultQueryOptions";
 import useUserInfo from "utils/useUserInfo";
 import OrderCard from "./OrderCard";
 import OrderInfo from "./OrderInfo";

@@ -2,13 +2,11 @@
   "login": "http://localhost:8080/login",
   "carousel.picture": "http://localhost:8080/carousel",
   "book.picture": "http://localhost:8080/images",
-  "book.info": "http://localhost:8080/book",
-  "checkout": "http://localhost:8080/order/submit",
-  "user": "http://localhost:8080/user",
-  "order": "http://localhost:8080/order",
-  "order.submit": "http://localhost:8080/order/submit",
-  "user.avatar": "http://localhost:8080/avatar",
-  "user.ban": "http://localhost:8080/user/ban",
-  "user.unlock": "http://localhost:8080/user/unlock",
-  "user.setPasswd": "http://localhost:8080/user/passwd"
+  "book": "http://localhost:8080/books",
+  "user": "http://localhost:8080/users/dev",
+  "order": "http://localhost:8080/orders",
+  "avatar": "http://localhost:8080/avatars",
+  "user.ban": "http://localhost:8080/users/dev/ban",
+  "user.unlock": "http://localhost:8080/users/dev/unlock",
+  "user.setPasswd": "http://localhost:8080/users/dev/passwd"
 }

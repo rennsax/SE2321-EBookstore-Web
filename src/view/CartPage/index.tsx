@@ -16,7 +16,7 @@ export default function CartPage() {
   let bookCountSum = 0;
   const queries: UseQueryOptions<Book>[] = [];
   const { avatarId, orderId } = useUserInfo();
-  const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
+  const avatar = `${api["avatar"]}/${avatarId}.jpg`;
 
   const {
     data: orderInfo,

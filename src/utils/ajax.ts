@@ -4,7 +4,7 @@
  * @returns response
  */
 const myFetch = async function myFetch(props: FetchProps) {
-  const { url, method, params } = props;
+  const { url, method, body: params } = props;
   let { headers } = props;
   if (params) {
     headers = { ...headers, "Content-Type": "application/json" };

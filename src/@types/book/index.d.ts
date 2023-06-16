@@ -1,21 +1,18 @@
-type BookOrdered = {
+interface BookOrdered {
   readonly uuid: string;
   readonly quantity: number;
-  // TODO represent on front-end
   readonly totalBudget: string;
 }
 
-type Book = {
+interface Book {
   readonly uuid: string; // primary key
-  title: string;
-  author: string;
-  price: string;
-  picId: string;
-  date: string;
-  isbn: string;
-  description: string;
-  // TODO add intro
-  intro?: string;
+  readonly title: string;
+  readonly author: string;
+  readonly price: string;
+  readonly picId: string;
+  readonly date: string;
+  readonly isbn: string;
+  readonly description: string;
 }
 
 type ButtonEvent = React.SyntheticEvent | Event;

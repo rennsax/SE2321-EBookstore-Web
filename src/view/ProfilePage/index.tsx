@@ -7,7 +7,7 @@ import "css/ProfilePage.css";
 
 export default function ProfilePage() {
   const { avatarId, name } = useUserInfo();
-  const avatar = `${api["user.avatar"]}/${avatarId}.jpg`;
+  const avatar = `${api["avatar"]}/${avatarId}.jpg`;
 
   return (
     <div className="profile-page">

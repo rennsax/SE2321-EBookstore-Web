@@ -13,7 +13,6 @@ export default function BookInfo({
   author,
   price,
   isbn,
-  intro,
 }: BookInfoProps) {
   const bnt2Ref = useRef<HTMLButtonElement>(null);
   const {orderId} = useUserInfo();
@@ -81,7 +80,7 @@ export default function BookInfo({
         <p className="book-details__isbn">ISBN: {isbn}</p>
         <p className="book-details__intro">
           <FlagFill />
-          {intro}
+          {/* {intro} */}
         </p>
       </div>
       <div className="flex-space-between">

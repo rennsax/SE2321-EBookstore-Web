@@ -3,9 +3,7 @@ import api from "./api.json";
 import { checkResponse } from "utils/ajax";
 
 /** Get all ordered books of an order. */
-export async function getOrderInfo(
-  orderId: number
-): Promise<OrderInfo> {
+export async function getOrderInfo(orderId: number): Promise<OrderInfo> {
   const props: FetchProps = {
     url: `${api.order}/${orderId}`,
     method: "GET",
@@ -28,7 +26,7 @@ export async function getAllOrderInfo(userId: number): Promise<OrderInfo[]> {
   // eslint-disable-next-line
   data.forEach((orderInfo: any) => {
     orderInfo.time = new Date(orderInfo.time);
-  })
+  });
   return data;
 }
 
@@ -41,9 +39,12 @@ export async function updateOrderItem(
   const props: FetchProps = {
     url: `${api.order}/${orderId}`,
     method: "PATCH",
-    params: {
-      uuid,
-      quantity,
+    body: {
+      op: "update items",
+      bookOrdered: {
+        uuid,
+        quantity,
+      },
     },
   };
   await myFetch(props);
@@ -52,10 +53,10 @@ export async function updateOrderItem(
 /** Submit a "pending" order */
 export async function checkoutOrder(orderId: number): Promise<void> {
   const props: FetchProps = {
-    url: `${api["order.submit"]}`,
-    method: "POST",
-    params: {
-      orderId
+    url: `${api["order"]}/${orderId}`,
+    method: "PATCH",
+    body: {
+      op: "checkout",
     },
   };
   await myFetch(props);
