@@ -1,10 +1,9 @@
-export default function InfoRow({
+import React from "react";
+
+const InfoRow: React.FC<{ infoType: string; info: string }> = ({
   infoType,
   info,
-}: {
-  infoType: string;
-  info: string;
-}) {
+}) => {
   const inputBox = (
     <label>
       {infoType === "Bio" ? (
@@ -29,11 +28,9 @@ export default function InfoRow({
   return (
     <div className="info-row">
       <p className="info-row__type">{infoType}</p>
-      {/* <p className="info-row__content">
-          {info}
-        </p> */}
-      {/* <input type="text" defaultValue={info} className="info-row__content" /> */}
       {inputBox}
     </div>
   );
-}
+};
+
+export default InfoRow;

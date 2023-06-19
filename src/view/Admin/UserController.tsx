@@ -18,7 +18,7 @@ import { defaultQueryOptions } from "service/defaultQueryOptions";
 
 const UserCard: React.FC<{
   userInfo: UserInfoForAdmin;
-  refetch: () => void;
+  refetch: () => Promise<void>;
 }> = ({ userInfo, refetch }) => {
   const { id, name, avatarId, account, userType, passwd } = userInfo;
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -41,7 +41,7 @@ const UserCard: React.FC<{
     } else if (userType === "NORMAL") {
       await banUser(id);
     }
-    refetch();
+    await refetch();
   };
 
   const handlePasswdChange = async () => {
@@ -51,7 +51,7 @@ const UserCard: React.FC<{
     await setUserPasswd(id, passwdNew);
     setIsDialogOpen(false);
     setPasswdNew("");
-    refetch();
+    await refetch();
   };
 
   return (
@@ -156,7 +156,9 @@ export default function UserController() {
           <UserCard
             userInfo={user}
             key={`admin_user${index}`}
-            refetch={() => refetch()}
+            refetch={async () => {
+              await refetch();
+            }}
           />
         );
       })}

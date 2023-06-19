@@ -1,5 +1,5 @@
 import { Cart4, FlagFill } from "assets/icons";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { updateOrderItem } from "service/OrderService";
 import timer from "utils/timer";
 import useUserInfo from "utils/useUserInfo";
@@ -25,7 +25,7 @@ export default function BookInfo({
     return true;
   };
 
-  const handleClick = async (e: React.SyntheticEvent | Event) => {
+  const handleClick = async (e: ButtonEvent) => {
     e.preventDefault();
 
     const btn = bnt2Ref.current as HTMLButtonElement;

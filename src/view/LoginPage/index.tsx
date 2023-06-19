@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import timer from "utils/timer";
 
@@ -10,6 +10,17 @@ import login from "service/LoginServer";
 import useAppContext from "utils/useAppContext";
 import useAuth from "utils/useAuth";
 import AlertSnackBar, { AlertType } from "./AlertSnackBar";
+import { register } from "service/UserServer";
+
+const checkEmail = function (email: string): boolean {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+};
+
+const checkComplete = function (s: string): boolean {
+  return s.trim().length !== 0;
+};
 
 export default function LoginPage() {
   // whether the window is on the right
@@ -22,6 +33,7 @@ export default function LoginPage() {
   const loginAccountRef = useRef<HTMLInputElement>(null);
   const loginPasswdRef = useRef<HTMLInputElement>(null);
 
+  const regNameRef = useRef<HTMLInputElement>(null);
   const regAccountRef = useRef<HTMLInputElement>(null);
   const regPasswdRef = useRef<HTMLInputElement>(null);
   const regPasswdRepeatRef = useRef<HTMLInputElement>(null);
@@ -29,6 +41,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Set the book navigated page to 1
     dispatch({
       bookPage: () => 1,
     });
@@ -41,6 +54,7 @@ export default function LoginPage() {
     }
   });
 
+  // Switch login and register.
   const handleSwitch: ReactEventHandler = (e) => {
     e.preventDefault();
     setIsRight((f) => !f);
@@ -50,33 +64,31 @@ export default function LoginPage() {
     setAlertType("no");
   };
 
-  const checkEmail = useCallback(function (email: string): boolean {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }, []);
+  const buttonEventWrapper = (
+    doFunction: () => Promise<void>
+  ): ReactEventHandler => {
+    return async (e) => {
+      e.preventDefault();
+      // Lock
+      if (isWaiting) {
+        return;
+      }
+      setIsWaiting(true);
 
-  const checkComplete = useCallback(function (s: string): boolean {
-    return s.trim().length !== 0;
-  }, []);
+      await doFunction();
 
-  const handleLogin: React.MouseEventHandler = async (e) => {
-    if (isWaiting) {
-      return;
-    }
+      // Unlock
+      setIsWaiting(false);
+    };
+  };
 
-    e.preventDefault();
-
-    // Lock login server
-    setIsWaiting(true);
-
+  const handleLogin: () => Promise<void> = async () => {
     const account = loginAccountRef.current?.value as string;
     const passwd = loginPasswdRef.current?.value as string;
 
     // Complete?
     if (!checkComplete(account) || !checkComplete(passwd)) {
       setAlertType("incomplete");
-      setIsWaiting(false);
       return;
     }
 
@@ -84,65 +96,65 @@ export default function LoginPage() {
     await timer(1000);
     const loginResult = await login(account, passwd);
     switch (loginResult) {
-      case "response error":
-        setAlertType("response error");
-        break;
-      case "wrong":
-        setAlertType("login error");
-        break;
-      case "forbidden":
-        setAlertType("forbidden user");
-        break;
       /** Login successfully */
-      case "ok":
-        setAlertType("success");
+      case "login success":
+        setAlertType("login success");
         await timer(1000);
         /** Store the account in the app context, i.e. authorized */
         authorize(account);
         break;
-      case "super":
+      case "super user":
         setAlertType("super user");
         await timer(1000);
         authorize(account, true);
         break;
+      // Other cases: errors and warnings
+      default:
+        setAlertType(loginResult);
+        break;
     }
-
-    setIsWaiting(false);
   };
 
-  const handleRegister: React.MouseEventHandler = async (e) => {
-    e.preventDefault();
-    if (isWaiting) {
-      return;
-    }
-    setIsWaiting(true);
-
+  const handleRegister: () => Promise<void> = async () => {
+    const userName = regNameRef.current?.value as string;
     const account = regAccountRef.current?.value as string;
     const passwd1 = regPasswdRef.current?.value as string;
     const passwd2 = regPasswdRepeatRef.current?.value as string;
 
-    // check mistakes
+    // check frontend mistakes
     if (
+      !checkComplete(userName) ||
       !checkComplete(account) ||
       !checkComplete(passwd1) ||
       !checkComplete(passwd2)
     ) {
       setAlertType("incomplete");
-      setIsWaiting(false);
       return;
     }
     if (!checkEmail(account)) {
       setAlertType("invalid email");
-      setIsWaiting(false);
       return;
     }
     if (passwd1 !== passwd2) {
       setAlertType("repeat error");
-      setIsWaiting(false);
       return;
     }
 
-    // TODO register server
+    // Explicitly waiting for 1 second
+    await timer(1000);
+
+    const registerRes = await register(userName, account, passwd1);
+    switch (registerRes) {
+      case "register success":
+        setAlertType("register success");
+        await timer(1000);
+        /** Store the account in the app context, i.e. authorized */
+        authorize(account);
+        break;
+      default:
+        setAlertType(registerRes);
+        break;
+    }
   };
 
   return (
@@ -182,7 +194,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className="login-box__form__btn"
-                onClick={handleLogin}
+                onClick={buttonEventWrapper(handleLogin)}
               >
                 SIGN IN
               </button>
@@ -198,6 +210,13 @@ export default function LoginPage() {
               <h2 className="login-box__form__title">Register</h2>
               <p className="login-box__form__motto">Books = life</p>
               <div className="login-box__form__main">
+                <input
+                  type="text"
+                  className="login-box__form__input"
+                  placeholder="Name"
+                  autoComplete="off"
+                  ref={regNameRef}
+                />
                 <input
                   type="email"
                   className="login-box__form__input"
@@ -225,7 +244,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 className="login-box__form__btn"
-                onClick={handleRegister}
+                onClick={buttonEventWrapper(handleRegister)}
               >
                 SIGN UP
               </button>
@@ -284,7 +303,6 @@ export default function LoginPage() {
       <AlertSnackBar alertType={alertType} endAlertError={endAlertError} />
       <Backdrop
         open={isWaiting}
-        // sx={{color: "rgba(0, 0, 0, 0.4)"}}
       >
         <CircularProgress size={80} className="login-page__process" />
       </Backdrop>

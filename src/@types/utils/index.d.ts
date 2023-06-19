@@ -1,4 +1,4 @@
-type Method = "GET" | "POST" | "PATCH" | "DELETE";
+type Method = "GET" | "POST" | "PATCH" | "DELETE" | "PUT";
 
 interface FetchProps {
   url: string;

@@ -4,15 +4,13 @@ import { AlertColor } from "@mui/material";
 import { ReactElement } from "react";
 
 export type AlertType =
-  | "success"
-  | "login error"
-  | "no"
-  | "response error"
+  | "no" // Initial state
+  | "response error" // The server didn't response
   | "incomplete"
   | "invalid email"
   | "repeat error"
-  | "forbidden user"
-  | "super user";
+  | LoginResult
+  | RegisterResult;
 
 type LoginPageSnackBarProps = {
   alertType: AlertType;
@@ -24,9 +22,9 @@ const AlertSnackBar: React.FC<LoginPageSnackBarProps> = ({
   endAlertError, // set alert type to "no"
 }) => {
   const handleOnClose: () => void = () => {
-    setTimeout(() => {
+    // setTimeout(() => {
       endAlertError();
-    }, 1000);
+    // }, 1000);
   };
 
   const generateAlert: (
@@ -41,7 +39,7 @@ const AlertSnackBar: React.FC<LoginPageSnackBarProps> = ({
   };
 
   switch (alertType) {
-    case "success":
+    case "login success":
       return generateAlert("success", "Login successfully!");
     case "login error":
       return generateAlert("error", "Wrong account/password!");
@@ -60,6 +58,10 @@ const AlertSnackBar: React.FC<LoginPageSnackBarProps> = ({
       );
     case "super user":
       return generateAlert("success", "Welcome, administrator!");
+    case "account conflict":
+      return generateAlert("error", "The account already exists! Try another.");
+    case "register success":
+      return generateAlert("success", "Successfully register!");
   }
   // assert(alertType == "no")
   return null;

@@ -62,8 +62,8 @@ function HomePage() {
     <UserInfoContext.Provider
       value={[
         userInfo,
-        () => {
-          refetchUserInfo();
+        async () => {
+          await refetchUserInfo();
         },
       ]}
     >

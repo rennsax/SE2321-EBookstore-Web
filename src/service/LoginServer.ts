@@ -1,8 +1,6 @@
 import config from "./api.json";
 import myFetch from "utils/ajax";
 
-type LoginResult = "response error" | "ok" | "wrong" | "super" | "forbidden";
-
 export default async function login(
   account: string,
   passwd: string
@@ -23,14 +21,14 @@ export default async function login(
         await response.json();
       switch (data.userType) {
         case "NORMAL":
-          return "ok";
+          return "login success";
         case "SUPER":
-          return "super";
+          return "super user";
         case "FORBIDDEN":
-          return "forbidden";
+          return "forbidden user";
       }
     }
-    return "wrong";
+    return "login error";
   } catch (err) {
     console.error(err);
   }

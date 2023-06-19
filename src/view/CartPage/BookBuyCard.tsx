@@ -11,7 +11,7 @@ interface BookBuyInfo {
 }
 
 export type BookBuyProps = BookBuyInfo & {
-  refetch: () => void;
+  refetch: () => Promise<void>;
 };
 
 export default function BookBuyCard({ quantity, book, refetch }: BookBuyProps) {
@@ -21,21 +21,15 @@ export default function BookBuyCard({ quantity, book, refetch }: BookBuyProps) {
 
   const handleDelete = (e: ButtonEvent): void => {
     e.preventDefault();
-    updateOrderItem(orderId, uuid, -quantity).then(() => {
-      refetch();
-    });
+    updateOrderItem(orderId, uuid, -quantity).then(refetch);
   };
 
   const handleIncrease = (): void => {
-    updateOrderItem(orderId, uuid, 1).then(() => {
-      refetch();
-    });
+    updateOrderItem(orderId, uuid, 1).then(refetch);
   };
 
   const handleDecrease = (): void => {
-    updateOrderItem(orderId, uuid, -1).then(() => {
-      refetch();
-    });
+    updateOrderItem(orderId, uuid, -1).then(refetch);
   };
 
   return (

@@ -59,8 +59,8 @@ export default function CartPage() {
           book={data}
           quantity={bookOrderedList[i].quantity}
           key={`bookCartCard${i}`}
-          refetch={() => {
-            refetchOrder();
+          refetch={async () => {
+            await refetchOrder();
           }}
         />
       );

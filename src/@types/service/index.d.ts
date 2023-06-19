@@ -30,3 +30,12 @@ interface UserInfoForAdmin {
   account: string;
   passwd: string;
 }
+
+type LoginResult =
+  | "response error"
+  | "login success"
+  | "login error"
+  | "super user"
+  | "forbidden user";
+
+type RegisterResult = "account conflict" | "register success" | "response error";

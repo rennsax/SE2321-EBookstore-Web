@@ -3,7 +3,7 @@ import api from "../api.json";
 
 export async function getAllUsers(): Promise<UserInfoForAdmin[]> {
   const props: FetchProps = {
-    url: `${api.user}`,
+    url: `${api["user.dev"]}`,
     method: "GET",
   };
   const data: UserInfoForAdmin[] = await myFetch(props).then((res) => {

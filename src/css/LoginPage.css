@@ -168,10 +168,10 @@ body:has(.login-box) {
 }
 .login-box__form__input {
   width: 350px;
-  height: 60px;
+  height: 50px;
   margin: 6px 0;
   padding-left: 24px;
-  font-size: 22px;
+  font-size: 18px;
   border: none;
   outline: none;
   transition: 0.25s ease;

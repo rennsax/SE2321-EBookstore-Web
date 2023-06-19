@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-type UserInfoContextType = [UserInfo, () => void];
+type UserInfoContextType = [UserInfo, () => Promise<void>];
 
 export const UserInfoContext = createContext<UserInfoContextType | undefined>(
   undefined
