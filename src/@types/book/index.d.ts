@@ -5,14 +5,15 @@ interface BookOrdered {
 }
 
 interface Book {
-  readonly uuid: string; // primary key
-  readonly title: string;
-  readonly author: string;
-  readonly price: string;
-  readonly picId: string;
-  readonly date: string;
-  readonly isbn: string;
-  readonly description: string;
+  uuid: string; // primary key
+  title: string;
+  author: string;
+  price: string;
+  picId: string;
+  date: string;
+  isbn: string;
+  description: string;
+  stock: number;
 }
 
 type ButtonEvent = React.SyntheticEvent | Event;

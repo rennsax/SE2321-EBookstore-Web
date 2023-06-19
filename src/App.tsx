@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "css/App.css";
+import "css/MuiCustom.css"
 import { RouterProvider } from "react-router-dom";
 
 import { useReducer } from "react";

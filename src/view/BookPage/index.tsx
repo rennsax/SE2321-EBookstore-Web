@@ -18,10 +18,9 @@ export default function BookPage() {
   const [{ bookPage }, dispatch] = useAppContext();
   const [page, setPage] = useState<number>(bookPage);
 
+  // navigating page
   useEffect(() => {
-    return () => {
-      dispatch({ bookPage: () => page });
-    };
+    dispatch({bookPage: () => page})
   });
 
   const {
