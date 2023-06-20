@@ -36,7 +36,37 @@
     width: 200px;
     height: 40px;
     padding-left: 10px;
+    padding-right: 10px;
     outline: none;
+  }
+  &__img {
+    height: 200px;
+    object-fit: scale-down;
+    &-mask {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0);
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s linear;
+      border: none;
+      &__icon {
+        position: relative;
+        top: 70px;
+        opacity: 0;
+        transition: opacity 0.15s linear !important;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+      }
+      &:hover>&__icon {
+        opacity: 100%;
+      }
+    }
   }
   &__info {
     &__row:not(:last-child) {

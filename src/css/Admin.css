@@ -29,7 +29,37 @@
   width: 200px;
   height: 40px;
   padding-left: 10px;
+  padding-right: 10px;
   outline: none;
+}
+.book-mng__img {
+  height: 200px;
+  object-fit: scale-down;
+}
+.book-mng__img-mask {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s linear;
+  border: none;
+}
+.book-mng__img-mask__icon {
+  position: relative;
+  top: 70px;
+  opacity: 0;
+  transition: opacity 0.15s linear !important;
+}
+.book-mng__img-mask:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.book-mng__img-mask:hover > .book-mng__img-mask__icon {
+  opacity: 100%;
 }
 .book-mng__info__row:not(:last-child) {
   margin-bottom: 10px;

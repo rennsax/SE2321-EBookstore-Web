@@ -16,8 +16,6 @@ export default function App() {
   const router = createBrowserRouter(rootRoutes);
   const [state, dispatch] = useReducer(globalReducer, globalState);
 
-  console.log("App rendered!");
-
   return (
     <AppContext.Provider value={[state, dispatch]}>
       <QueryClientProvider client={queryClient}>

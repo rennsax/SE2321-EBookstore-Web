@@ -9,5 +9,6 @@
   "avatar": "http://localhost:8080/avatars",
   "user.ban": "http://localhost:8080/users/dev/ban",
   "user.unlock": "http://localhost:8080/users/dev/unlock",
-  "user.setPasswd": "http://localhost:8080/users/dev/passwd"
+  "user.setPasswd": "http://localhost:8080/users/dev/passwd",
+  "book.dev.uploadPicture": "http://localhost:8080/upload"
 }
