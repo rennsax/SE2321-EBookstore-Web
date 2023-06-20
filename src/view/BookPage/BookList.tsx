@@ -3,10 +3,16 @@ import BookCard from "./BookCard";
 
 import config from "config/front.json";
 
-export default function BookList({isSuccess, bookContentList}: {isSuccess: boolean, bookContentList: Book[] | undefined }) {
-
+export default function BookList({
+  isSuccess,
+  bookContentList,
+}: {
+  isSuccess: boolean;
+  bookContentList: Book[] | undefined;
+}) {
   const perRow = config["bookPage.perRow"];
 
+  console.log(bookContentList)
   const itemList = useMemo(() => {
     const book_cnt = perRow * 2;
     const res: JSX.Element[] = [];
@@ -19,6 +25,7 @@ export default function BookList({isSuccess, bookContentList}: {isSuccess: boole
           <BookCard
             bookContent={isSuccess ? bookContentList?.at(book_i) : undefined}
             key={`bookPresented${book_i}`}
+            empty={isSuccess && book_i >= (bookContentList as Book[]).length}
           />
         );
         ++book_i;

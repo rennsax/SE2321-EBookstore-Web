@@ -42,3 +42,11 @@ export function createQueryOptionsBookOrdered(
     enabled,
   };
 }
+
+export async function searchBook(keyword: string): Promise<Book[]> {
+  const props: FetchProps = {
+    url: `${api.book}?s=${keyword}`,
+    method: "GET"
+  }
+  return await checkResponse(await myFetch(props));
+}

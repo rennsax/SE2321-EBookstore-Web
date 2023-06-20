@@ -117,3 +117,9 @@
 .order-info__date > span:first-child {
   color: gray;
 }
+.order-filter {
+  margin: 20px 0 10px 0;
+}
+.order-filter__btn {
+  text-transform: none !important;
+}

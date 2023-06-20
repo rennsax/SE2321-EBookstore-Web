@@ -1,8 +1,11 @@
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Stack, TextField } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { useQuery } from "@tanstack/react-query";
+import MyDatePicker from "components/MyDatePicker";
 import "css/OrderPage.css";
+import dayjs, { Dayjs } from "dayjs";
+import { useState } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { getAllOrderInfo } from "service/OrderService";
 import { defaultQueryOptions } from "service/defaultQueryOptions";
@@ -17,12 +20,23 @@ const getOrderIdFromLocation = (location: string): string => {
 
 export default function OrderPage() {
   const { id: userId, name } = useUserInfo();
+  const [beginDate, setBeginDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [endDate, setEndDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [keyword, setKeyword] = useState("");
+  const [isFilter, setIsFilter] = useState(false);
 
   const { data: orderInfoList, isSuccess } = useQuery({
-    queryKey: ["order", userId],
+    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+    queryKey: ["order", userId, isFilter && [beginDate, endDate, keyword]],
     queryFn: async () => {
       if (userId === undefined) throw new Error("userId isn't provided yet");
-      return await getAllOrderInfo(userId);
+      if (!isFilter) return await getAllOrderInfo(userId);
+      return await getAllOrderInfo(
+        userId,
+        keyword,
+        beginDate as Dayjs,
+        endDate as Dayjs
+      );
     },
     ...defaultQueryOptions,
   });
@@ -75,6 +89,39 @@ export default function OrderPage() {
           <h5 style={{ margin: 0 }}>{`ID ${nowOrderId}`}</h5>
         ) : null}
       </Breadcrumbs>
+      <div className="order-filter">
+        <Stack direction={"row"}>
+          <MyDatePicker
+            value={beginDate}
+            onChange={(newValue) => setBeginDate(newValue)}
+            label="Begin Day"
+            sx={{ mr: "10px" }}
+          />
+          <MyDatePicker
+            value={endDate}
+            onChange={(newValue) => setEndDate(newValue)}
+            label="End Day"
+            sx={{ mr: "20px" }}
+          />
+          <TextField
+            variant="outlined"
+            label="Book Contain"
+            sx={{ mr: "20px" }}
+            value={keyword}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setKeyword(e.target.value)
+            }
+          />
+          <Button
+            variant={isFilter ? "contained" : "outlined"}
+            onClick={() => setIsFilter((f) => !f)}
+            sx={{ width: "50px" }}
+            className="order-filter__btn"
+          >
+            {isFilter ? "Reset" : "Filter"}
+          </Button>
+        </Stack>
+      </div>
       <Routes>{routerElementList}</Routes>
     </div>
   );

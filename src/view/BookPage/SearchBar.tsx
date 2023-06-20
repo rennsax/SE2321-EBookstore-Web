@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 export default function SearchBar() {
+  const [keyword, setKeyword] = useState("");
+  const [, setSearchParams] = useSearchParams();
+
   return (
     <div className="search_bar">
       {/* <input type="text" autoComplete="off" className="input-bar" placeholder='search for books'/> */}
@@ -21,8 +27,18 @@ export default function SearchBar() {
           required
           id="search-books"
           aria-label="search-books"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setKeyword(e.target.value);
+          }}
         />
-        <button className="search_bar__button" type="submit">
+        <button
+          className="search_bar__button"
+          type="submit"
+          onClick={(e: ButtonEvent) => {
+            e.preventDefault();
+            setSearchParams(`?s=${keyword}`);
+          }}
+        >
           Search
         </button>
       </form>

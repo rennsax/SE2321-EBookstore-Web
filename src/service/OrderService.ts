@@ -1,6 +1,6 @@
-import myFetch from "utils/ajax";
+import { Dayjs } from "dayjs";
+import myFetch, { checkResponse } from "utils/ajax";
 import api from "./api.json";
-import { checkResponse } from "utils/ajax";
 
 /** Get all ordered books of an order. */
 export async function getOrderInfo(orderId: number): Promise<OrderInfo> {
@@ -15,9 +15,20 @@ export async function getOrderInfo(orderId: number): Promise<OrderInfo> {
 }
 
 /** Get all order information of an user */
-export async function getAllOrderInfo(userId: number): Promise<OrderInfo[]> {
+export async function getAllOrderInfo(
+  userId: number,
+  keyword?: string,
+  beginDate?: Dayjs,
+  endDate?: Dayjs
+): Promise<OrderInfo[]> {
+  const searchParams = {
+    userId: userId.toString(),
+    ...(beginDate && { beginDate: beginDate.format("YYYY-MM-DD") }),
+    ...(endDate && { endDate: endDate.format("YYYY-MM-DD") }),
+    ...(keyword && keyword.length !== 0 && { keyword: keyword }),
+  };
   const props: FetchProps = {
-    url: `${api.order}?userId=${userId}`,
+    url: `${api.order}?${new URLSearchParams(searchParams)}`,
     method: "GET",
   };
   const data = await myFetch(props).then((res) => {

@@ -1,5 +1,5 @@
 import api from "service/api.json";
-import myFetch, { checkResponse } from "utils/ajax";
+import myFetch from "utils/ajax";
 
 export async function getAllBooksForAdmin(): Promise<Book[]> {
   const props: FetchProps = {
