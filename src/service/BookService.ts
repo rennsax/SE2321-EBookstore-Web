@@ -50,3 +50,15 @@ export async function searchBook(keyword: string): Promise<Book[]> {
   }
   return await checkResponse(await myFetch(props));
 }
+
+export async function addBook(book: BookAdded): Promise<void> {
+  const props: FetchProps = {
+    url: `${api.book}`,
+    method: "PUT",
+    body: book
+  }
+  const res = await myFetch(props)
+  if (res.status < 200 || res.status >= 300) {
+    throw "response error!";
+  }
+}

@@ -15,7 +15,7 @@ export async function getOrderInfo(orderId: number): Promise<OrderInfo> {
 }
 
 /** Get all order information of an user */
-export async function getAllOrderInfo(
+export async function getOrderInfoByUserId(
   userId: number,
   keyword?: string,
   beginDate?: Dayjs,
@@ -29,6 +29,30 @@ export async function getAllOrderInfo(
   };
   const props: FetchProps = {
     url: `${api.order}?${new URLSearchParams(searchParams)}`,
+    method: "GET",
+  };
+  const data = await myFetch(props).then((res) => {
+    return res.json();
+  });
+  // eslint-disable-next-line
+  data.forEach((orderInfo: any) => {
+    orderInfo.time = new Date(orderInfo.time);
+  });
+  return data;
+}
+
+export async function getAllOrderInfo(
+  keyword?: string,
+  beginDate?: Dayjs,
+  endDate?: Dayjs
+): Promise<OrderInfo[]> {
+  const searchParams = {
+    ...(beginDate && { beginDate: beginDate.format("YYYY-MM-DD") }),
+    ...(endDate && { endDate: endDate.format("YYYY-MM-DD") }),
+    ...(keyword && keyword.length !== 0 && { keyword: keyword }),
+  };
+  const props: FetchProps = {
+    url: `${api.order}/all?${new URLSearchParams(searchParams)}`,
     method: "GET",
   };
   const data = await myFetch(props).then((res) => {

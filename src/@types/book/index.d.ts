@@ -16,6 +16,14 @@ interface Book {
   stock: number;
 }
 
+interface BookAdded {
+  title?: string;
+  picId?: string;
+  isbn?: string;
+  stock?: number;
+  author?: string;
+}
+
 type ButtonEvent = React.SyntheticEvent | Event;
 
 interface CheckoutInfo {

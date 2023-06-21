@@ -15,6 +15,7 @@ type OrderInfo = {
   readonly sumBudget: string;
   readonly state: OrderState;
   readonly bookOrderedList: BookOrdered[];
+  readonly userId: number;
 };
 
 type BookOrdered = {

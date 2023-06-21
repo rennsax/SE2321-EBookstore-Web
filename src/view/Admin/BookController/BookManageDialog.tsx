@@ -100,7 +100,7 @@ const BookManageDialog: React.FC<BookManageDialogProps> = ({
           <input
             type="text"
             defaultValue={(book as Book)[field]}
-            name={"title"}
+            name={prompt}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setBook({
                 ...(book as Book),
