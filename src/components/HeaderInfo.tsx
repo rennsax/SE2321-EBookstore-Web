@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 
 import logo from "assets/bookstore-logo.png";
 import "css/HeaderInfo.css";
-import ProfileBar from "./ProfileBar";
-import useUserInfo from "utils/useUserInfo";
 import api from "service/api.json";
+import useUserInfo from "utils/useUserInfo";
+import ProfileBar from "./ProfileBar";
 
 type HeaderInfoProps = {
   showProfile: boolean;
@@ -66,7 +66,6 @@ export default function HeaderInfo({
           }}
           src={avatar}
           alt="user-avatar"
-          id="active-profile"
         />
         {showProfile ? <ProfileBar setShowProfile={setShowProfile} /> : null}
       </div>

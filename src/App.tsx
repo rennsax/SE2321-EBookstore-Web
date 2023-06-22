@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "css/App.css";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import "css/MuiCustom.css"
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import "css/MuiCustom.css";
 import { RouterProvider } from "react-router-dom";
 
 import { useReducer } from "react";
@@ -20,7 +20,7 @@ export default function App() {
   return (
     <AppContext.Provider value={[state, dispatch]}>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <RouterProvider router={router} />
       </QueryClientProvider>
     </AppContext.Provider>

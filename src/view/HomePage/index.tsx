@@ -48,10 +48,6 @@ function HomePage() {
   });
 
   const [showProfile, setShowProfile] = useState<boolean>(false);
-  const headerInfoProps = {
-    showProfile,
-    setShowProfile,
-  };
 
   /** Still fetching user info... */
   if (!isSuccess) {
@@ -74,7 +70,7 @@ function HomePage() {
         }}
       >
         <div className="header">
-          <HeaderInfo {...headerInfoProps} />
+          <HeaderInfo {...{ showProfile, setShowProfile }} />
         </div>
         <div className="main">
           <div className="main-container">

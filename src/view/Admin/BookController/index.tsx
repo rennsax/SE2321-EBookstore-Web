@@ -1,3 +1,4 @@
+import React from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
@@ -24,7 +25,7 @@ import { defaultQueryOptions } from "service/defaultQueryOptions";
 import BookDeleteDialog from "./BookDeleteDialog";
 import BookManageDialog from "./BookManageDialog";
 
-const BookAddManage: React.FC = () => {
+const BookAddManage: React.FC<{ refetch: () => void }> = ({ refetch }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageList, setImageList] = useState<ImageListType>([]);
   const [book, setBook] = useState<BookAdded>({});
@@ -79,12 +80,15 @@ const BookAddManage: React.FC = () => {
       return str.substring(0, str.indexOf("."));
     })(file.name);
     pendingPromise.push(addBook(newBook));
-    Promise.all(pendingPromise).then(() => {
-      setIsDialogOpen(false);
-      setBook({});
-    }).catch(() => {
-      alert("Title conflict!")
-    })
+    Promise.all(pendingPromise)
+      .then(() => {
+        setIsDialogOpen(false);
+        setBook({});
+        refetch();
+      })
+      .catch(() => {
+        alert("Title conflict!");
+      });
   };
 
   return (
@@ -252,7 +256,11 @@ export default function BookController() {
           disableRowSelectionOnClick
         />
       </Box>
-      <BookAddManage />
+      <BookAddManage
+        refetch={() => {
+          refetch();
+        }}
+      />
       <BookManageDialog
         bookSelected={
           selectedBookUuid === undefined
