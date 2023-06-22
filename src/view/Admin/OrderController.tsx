@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import OrderFilter from "components/OrderFilter";
+import TimeFilter from "components/TimeFilter";
 import dayjs, { Dayjs } from "dayjs";
 import { useState } from "react";
 import { getAllOrderInfo } from "service/OrderService";
@@ -29,7 +29,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
     {
       field: "userId",
       headerName: "User Id",
-      width: 100
+      width: 100,
     },
     {
       field: "time",
@@ -43,7 +43,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
 
   const { data: orderInfoList, isSuccess } = useQuery({
     // eslint-disable-next-line @tanstack/query/exhaustive-deps
-    queryKey: ["order", isFilter && [beginDate, endDate, keyword]],
+    queryKey: ["order admin", ...(isFilter ? [isFilter, beginDate, endDate, keyword] : [isFilter])],
     queryFn: async () => {
       if (!isFilter) return await getAllOrderInfo();
       return await getAllOrderInfo(
@@ -53,7 +53,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
       );
     },
     ...defaultQueryOptions,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 
   if (!isSuccess) return null;
@@ -76,7 +76,7 @@ export default function OrderController() {
   const [isFilter, setIsFilter] = useState(false);
   return (
     <>
-      <OrderFilter
+      <TimeFilter
         {...{
           beginDate,
           endDate,

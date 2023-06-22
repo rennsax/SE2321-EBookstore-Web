@@ -64,3 +64,9 @@
 .book-mng__info__row:not(:last-child) {
   margin-bottom: 10px;
 }
+.stat__graph__title {
+  font-family: "Apple Chancery";
+  font-weight: bolder;
+  font-size: 40px;
+  margin: 15px auto;
+}

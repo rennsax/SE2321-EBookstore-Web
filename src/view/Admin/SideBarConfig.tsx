@@ -2,6 +2,7 @@ import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { NavigateBar } from "components/SideBar";
+import BarChartIcon from '@mui/icons-material/BarChart';
 
 const adminSideBars: NavigateBar[] = [
   {
@@ -19,6 +20,11 @@ const adminSideBars: NavigateBar[] = [
     to: "orders",
     children: <ListAltIcon />,
   },
+  {
+    primary: "Statistic",
+    to: "statistic",
+    children: <BarChartIcon />
+  }
 ];
 
 export default adminSideBars;

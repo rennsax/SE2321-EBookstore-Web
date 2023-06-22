@@ -40,3 +40,11 @@ type LoginResult =
   | "forbidden user";
 
 type RegisterResult = "account conflict" | "register success" | "response error";
+
+interface UserStatistic {
+  userId: number;
+  beginTimestamp: number;
+  endTimestamp: number;
+  bookOrderedList: Array<BookOrdered>;
+  totalCost: string;
+}

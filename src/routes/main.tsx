@@ -2,6 +2,7 @@ import { Navigate, RouteObject } from "react-router-dom";
 import BookDetailPage from "view/BookDetailPage";
 import BookPage from "view/BookPage";
 import CartPage from "view/CartPage";
+import FavoritePage from "view/FavoritePage";
 import OrderPage from "view/OrderPage";
 import ProfilePage from "view/ProfilePage";
 
@@ -25,6 +26,10 @@ const mainRoutes: RouteObject[] = [
   {
     path: "bd/:uuid",
     element: <BookDetailPage />,
+  },
+  {
+    path: "fav",
+    element: <FavoritePage />,
   },
   {
     path: "",

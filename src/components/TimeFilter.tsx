@@ -1,31 +1,33 @@
 import { Button, Stack, TextField } from "@mui/material";
 import MyDatePicker from "components/MyDatePicker";
 import { Dayjs } from "dayjs";
-import { ChangeEvent } from "react";
+import { CSSProperties, ChangeEvent } from "react";
 
 interface OrderFilterProps {
   beginDate: Dayjs | null;
   endDate: Dayjs | null;
-  keyword: string;
   isFilter: boolean;
+  onIsFilterReverse: () => void;
   onBeginDateChange: (date: Dayjs | null) => void;
   onEndDateChange: (date: Dayjs | null) => void;
-  onKeywordChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onIsFilterReverse: () => void;
+  keyword?: string;
+  onKeywordChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  style?: CSSProperties
 }
 
-export default function OrderFilter({
+export default function TimeFilter({
   beginDate,
   endDate,
   onBeginDateChange,
   onEndDateChange,
-  keyword,
-  onKeywordChange,
   isFilter,
   onIsFilterReverse,
+  keyword,
+  onKeywordChange,
+  style
 }: OrderFilterProps) {
   return (
-    <div className="order-filter">
+    <div className="order-filter" style={style}>
       <Stack direction={"row"}>
         <MyDatePicker
           value={beginDate}
@@ -39,13 +41,15 @@ export default function OrderFilter({
           label="End Day"
           sx={{ mr: "20px" }}
         />
-        <TextField
-          variant="outlined"
-          label="Book Contain"
-          sx={{ mr: "20px" }}
-          value={keyword}
-          onChange={onKeywordChange}
-        />
+        {keyword !== undefined ? (
+          <TextField
+            variant="outlined"
+            label="Book Contain"
+            sx={{ mr: "20px" }}
+            value={keyword}
+            onChange={onKeywordChange}
+          />
+        ) : null}
         <Button
           variant={isFilter ? "contained" : "outlined"}
           onClick={onIsFilterReverse}

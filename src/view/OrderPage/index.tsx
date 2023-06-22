@@ -2,7 +2,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { CircularProgress } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import { useQuery } from "@tanstack/react-query";
-import OrderFilter from "components/OrderFilter";
+import TimeFilter from "components/TimeFilter";
 import "css/OrderPage.css";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useState } from "react";
@@ -110,7 +110,7 @@ export default function OrderPage() {
         <Route
           path=""
           element={
-            <OrderFilter
+            <TimeFilter
               {...{
                 beginDate,
                 endDate,

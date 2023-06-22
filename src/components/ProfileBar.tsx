@@ -57,9 +57,11 @@ export default function ProfileBar({
               <FaceRetouchingNaturalIcon />
             </SelectorButton>
           </Link>
-          <SelectorButton text="My Favorite">
-            <FavoriteIcon />
-          </SelectorButton>
+          <Link className="to-page-favorite" to="fav">
+            <SelectorButton text="My Favorite">
+              <FavoriteIcon />
+            </SelectorButton>
+          </Link>
           <SelectorButton text="Edit Address">
             <AlternateEmailIcon />
           </SelectorButton>

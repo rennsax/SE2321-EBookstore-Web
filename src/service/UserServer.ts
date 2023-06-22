@@ -1,5 +1,6 @@
-import myFetch from "utils/ajax";
+import myFetch, { checkResponse } from "utils/ajax";
 import api from "./api.json";
+import { Dayjs } from "dayjs";
 
 export async function getUserInfo(account: string): Promise<UserInfo> {
   const props: FetchProps = {
@@ -49,4 +50,19 @@ export async function changeInfo(id: number, newName: string) {
     },
   };
   await myFetch(props);
+}
+
+export async function getUserStatistic(
+  id: number,
+  beginDate?: Dayjs,
+  endDate?: Dayjs
+): Promise<UserStatistic> {
+  const props: FetchProps = {
+    url: `${api.user}/${id}/stat?${new URLSearchParams({
+      ...(beginDate && { beginDate: beginDate.format("YYYY-MM-DD") }),
+      ...(endDate && { endDate: endDate.format("YYYY-MM-DD") }),
+    })}`,
+    method: "GET",
+  };
+  return await checkResponse(await myFetch(props));
 }

@@ -63,7 +63,7 @@
       &:hover {
         background-color: rgba(0, 0, 0, 0.15);
       }
-      &:hover>&__icon {
+      &:hover > &__icon {
         opacity: 100%;
       }
     }
@@ -71,6 +71,17 @@
   &__info {
     &__row:not(:last-child) {
       margin-bottom: 10px;
+    }
+  }
+}
+
+.stat {
+  &__graph {
+    &__title {
+      font-family: "Apple Chancery";
+      font-weight: bolder;
+      font-size: 40px;
+      margin: 15px auto;
     }
   }
 }

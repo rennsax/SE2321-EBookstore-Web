@@ -62,3 +62,22 @@ export async function addBook(book: BookAdded): Promise<void> {
     throw "response error!";
   }
 }
+
+export const getBookRank = async(orderInfoList: OrderInfo[]): Promise<Array<[Book, number]>> => {
+  const count = new Map<string, number>();
+  for (const orderInfo of orderInfoList) {
+    for (const bookOrdered of orderInfo.bookOrderedList) {
+      if (count.has(bookOrdered.uuid))
+        count.set(
+          bookOrdered.uuid,
+          (count.get(bookOrdered.uuid) as number) + bookOrdered.quantity
+        );
+      else count.set(bookOrdered.uuid, bookOrdered.quantity);
+    }
+  }
+  const result: Array<[Book, number]> = [];
+  for (const [uuid, cnt] of count.entries()) {
+    result.push([await getBookByUuid(uuid), cnt]);
+  }
+  return result;
+}
