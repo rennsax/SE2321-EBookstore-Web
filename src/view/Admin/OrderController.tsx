@@ -26,6 +26,7 @@ const OrderTable: React.FC<OrderTableProps> = ({
       headerName: "ID",
       width: 100,
     },
+    // TODO: show the user's avatar
     {
       field: "userId",
       headerName: "User Id",
