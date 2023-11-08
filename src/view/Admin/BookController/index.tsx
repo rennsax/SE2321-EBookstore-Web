@@ -1,4 +1,3 @@
-import React from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
@@ -12,7 +11,7 @@ import {
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import {
   deleteBook,
@@ -57,9 +56,9 @@ const BookAddManage: React.FC<{ refetch: () => void }> = ({ refetch }) => {
     );
   }
 
-  useEffect(() => {
-    console.log(book);
-  }, [book]);
+  // React.useEffect(() => {
+  //   console.log(book);
+  // }, [book]);
 
   const handleCloseDialog = () => setIsDialogOpen(false);
   const handleAddBook: () => void = () => {

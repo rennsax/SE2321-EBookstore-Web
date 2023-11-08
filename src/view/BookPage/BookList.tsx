@@ -12,7 +12,7 @@ export default function BookList({
 }) {
   const perRow = config["bookPage.perRow"];
 
-  console.log(bookContentList)
+  // console.log(bookContentList)
   const itemList = useMemo(() => {
     const book_cnt = perRow * 2;
     const res: JSX.Element[] = [];
