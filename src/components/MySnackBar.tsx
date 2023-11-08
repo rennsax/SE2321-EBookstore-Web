@@ -1,5 +1,4 @@
-import { Alert, AlertColor } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
+import { Alert, AlertColor, Snackbar } from "@mui/material";
 import { useState } from "react";
 
 type MySnackBarProps = {

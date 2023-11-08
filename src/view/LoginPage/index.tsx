@@ -2,15 +2,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import timer from "utils/timer";
 
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Backdrop, CircularProgress } from "@mui/material";
 import "css/LoginPage.css";
 import { ReactEventHandler, useRef, useState } from "react";
 import login from "service/LoginServer";
+import { register } from "service/UserServer";
 import useAppContext from "utils/useAppContext";
 import useAuth from "utils/useAuth";
 import AlertSnackBar, { AlertType } from "./AlertSnackBar";
-import { register } from "service/UserServer";
 
 const checkEmail = function (email: string): boolean {
   const re =
@@ -301,9 +300,7 @@ export default function LoginPage() {
         </div>
       </div>
       <AlertSnackBar alertType={alertType} endAlertError={endAlertError} />
-      <Backdrop
-        open={isWaiting}
-      >
+      <Backdrop open={isWaiting}>
         <CircularProgress size={80} className="login-page__process" />
       </Backdrop>
     </>

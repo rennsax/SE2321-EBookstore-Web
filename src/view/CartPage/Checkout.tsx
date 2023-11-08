@@ -1,11 +1,13 @@
-import Alert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Snackbar from "@mui/material/Snackbar";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
 import { cardTypes } from "assets/card-type";
 import { RightArrow } from "assets/icons";
 import { memo, useEffect, useRef, useState } from "react";

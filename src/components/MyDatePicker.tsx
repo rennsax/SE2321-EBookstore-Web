@@ -15,7 +15,7 @@ export default function MyDatePicker({
   label,
   value,
   onChange,
-  sx
+  sx,
 }: DataPickerProps) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

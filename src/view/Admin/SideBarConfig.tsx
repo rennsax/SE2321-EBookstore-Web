@@ -1,30 +1,32 @@
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import {
+  BarChart,
+  LibraryBooks,
+  ListAlt,
+  SupervisedUserCircle,
+} from "@mui/icons-material";
 import { NavigateBar } from "components/SideBar";
-import BarChartIcon from '@mui/icons-material/BarChart';
 
 const adminSideBars: NavigateBar[] = [
   {
     primary: "Users",
     to: "users",
-    children: <SupervisedUserCircleIcon />,
+    children: <SupervisedUserCircle />,
   },
   {
     primary: "Books",
     to: "books",
-    children: <LibraryBooksIcon />,
+    children: <LibraryBooks />,
   },
   {
     primary: "Orders",
     to: "orders",
-    children: <ListAltIcon />,
+    children: <ListAlt />,
   },
   {
     primary: "Statistic",
     to: "statistic",
-    children: <BarChartIcon />
-  }
+    children: <BarChart />,
+  },
 ];
 
 export default adminSideBars;

@@ -1,16 +1,18 @@
 import React from "react";
 // UI
 import LogoutIcon from "@mui/icons-material/Logout";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  Box,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 // router
 import { Link, useNavigate } from "react-router-dom";
 
 import "css/SideBar.css";
 import useAuth from "utils/useAuth";
-import Box from "@mui/material/Box";
 
 export interface NavigateBar {
   className?: string;

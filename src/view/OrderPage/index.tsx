@@ -1,6 +1,5 @@
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { CircularProgress } from "@mui/material";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { NavigateNext as NavigateNextIcon } from "@mui/icons-material";
+import { Breadcrumbs, CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import TimeFilter from "components/TimeFilter";
 import "css/OrderPage.css";
