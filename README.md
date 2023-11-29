@@ -15,11 +15,13 @@
 
 ### Prerequisites
 
-- [yarn](https://yarnpkg.com/)
+<!-- - [yarn](https://yarnpkg.com/) -->
+
+[pnpm](https://pnpm.io)
 
 ### How to Launch?
 
 ```sh
-yarn
-yarn start
+pnpm i
+pnpm start
 ```
